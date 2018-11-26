@@ -3,16 +3,19 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Reddit</title>
-    <link href="css/forms.css" rel="stylesheet">
+    <title>NP</title>
+    <link href="log_in_style.css" rel="stylesheet">
 </head>
 
+<header> 
+    <div class="title_container">
+        <h1 class="login-form-title">Nacional Police</h1>
+    </div>
+</header>
+
 <body>
-    <div class="login">
+    <div class="logIn">
         <form class="login_content" action="action_login.php" method="post">
-            <div class="title_container">
-                <h1 class="login-form-title">Login</h1>
-            </div>
 
             <div class="input_container">
                 <input type="text" placeholder="Enter username" name="username" required>
@@ -22,13 +25,10 @@
                 <input type="password" placeholder="Enter password" name="password" required>
             </div>
 
-            <div class="input_container">
-                <button type="submit">Login</button>
+            <div class="input_container_btn">
+                <button type="submit" class="btn">Login</button>
             </div>
             
-            <?php if (isset($_GET['error'])) {
-                echo "<p>" . $error = $_GET['error'] . "</p>";
-            } ?>
         </form>
     </div>
 
