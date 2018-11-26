@@ -3,13 +3,13 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NP</title>
+    <title>Polícia Nacional</title>
     <link href="log_in_style.css" rel="stylesheet">
 </head>
 
 <header> 
     <div class="title_container">
-        <h1 class="login-form-title">Nacional Police</h1>
+        <h1 class="login-form-title">Polícia Nacional</h1>
     </div>
 </header>
 
@@ -18,15 +18,15 @@
         <form class="login_content" action="action_login.php" method="post">
 
             <div class="input_container">
-                <input type="text" placeholder="Enter username" name="username" required>
+                <input type="text" placeholder="Utilizador" name="username" required>
             </div>
 
             <div class="input_container">
-                <input type="password" placeholder="Enter password" name="password" required>
+                <input type="password" placeholder="Senha" name="password" required>
             </div>
 
             <div class="input_container_btn">
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn">Entrar</button>
             </div>
             
         </form>
