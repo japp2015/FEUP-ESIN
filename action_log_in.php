@@ -4,6 +4,7 @@
     
     $username = htmlspecialchars($_POST["username"]);
     $password = htmlspecialchars($_POST["password"]);
+    
     if (validateLogin($username, $password)) {
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
