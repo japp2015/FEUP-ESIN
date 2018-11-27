@@ -1,23 +1,30 @@
+<?php 
+include_once('database/connection.php');
+session_start();
+$username = $_GET['username'];
+$user = getUserByUsername($username);
+?>
+
 <!DOCTYPE html>
 <html>
-<title>James Ramsey Gordon</title>
+<title><?php echo $user['position'] . $user['fullname'] ?></title>
 
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
     <div id="personal_info">
-        <h1>José Moreira Quintas</h1>
+        <h1><?php $user['fullname']?></h1>
         <img src="http://lorempixel.com/600/300/business/" alt="photo">
-        <p> Sexo: Masculino </p>
-        <p> Data de nascimento: 12/05/1987 </p>
-        <p> Naturalidade: Porto, Portugal </p>
-        <p> Em serviço desde: 12/05/2006 </p>
-        <p> Formação: Escola Prática de Polícia </p>
-        <p> Cargo: Detective </p>
+        <p> Sexo: <?php echo $user['gender'] ?></p>
+        <p> Data de nascimento: <?php echo $user['birthdate'] ?>  </p>
+        <p> Naturalidade: <?php echo $user['naturality'] ?> </p>
+        <p> Em serviço desde: <?php echo $user['star_service'] ?> </p>
+        <p> Formação: <?php echo $user['school'] ?> </p>
+        <p> Cargo: <?php echo $user['position'] ?> </p>
 
     </div>
     <div id="current_work">
-        <p>Esquadra: <a href="nypd.php">Porto Norte</a></p>
+        <p>Esquadra: <a href="nypd.php"><?php echo $user['position'] ?></a></p>
         <h3>Casos atuais</h3>
         <ul>
             <li><a href="10201.php">10201</a><p>Homicídio</p></li> 
