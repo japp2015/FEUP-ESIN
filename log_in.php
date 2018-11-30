@@ -28,8 +28,12 @@
             <div class="input_container_btn">
                 <button type="submit" class="btn">Entrar</button>
             </div>
-            
         </form>
+        <div class="error">
+            <?php if (isset($_GET['error'])) {
+                    echo "<p>" . $error = $_GET['error'] . "</p>";
+            } ?>
+        </div>
     </div>
 
 </body>
