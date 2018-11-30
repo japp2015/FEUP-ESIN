@@ -42,8 +42,9 @@ $occurrences = getOccurrencesByUsername($username);
         <h3>Últimos casos</h3>
         <ul>
             <?php foreach($occurrences as $occurrence) { ?>
-                <?php if ($occurrence['state']=='Fechado' or $occurrence['state']=='Arquivado') ?>
-                    <li><a href="10201.php"><?php echo $occurrence['id'] ?></a><p><?php echo $occurrence['title'] ?></p><p><?php echo 'Estado: ' . $occurrence['state'] ?></p></li> 
+                <?php if ($occurrence['state']=='Fechado' or $occurrence['state']=='Arquivado') { ?>
+                    <?php echo "<li><a href='occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . "</a><p>" . $occurrence['title'] . "</p></li>" ; ?>
+                <? } ?>
             <? } ?>
         </ul>
     </div>

@@ -21,6 +21,13 @@ function getOccurrencesByUsername($username) {
   return $query->fetchAll();
 }
 
+function getOccurrenceById($id) {
+  global $db;
+  $query = $db->prepare('SELECT * FROM occurrences WHERE id = ?');
+  $query->execute(array($id));
+  return $query->fetch();
+}
+
 function GetAllOcc_type(){
   global $db;
   $query = $db->prepare('SELECT * FROM occ_type');

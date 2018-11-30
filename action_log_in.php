@@ -8,9 +8,9 @@
     if (validateLogin($username, $password)) {
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
-        header('Location: main.php');
+        header('Location: main.php?username=' . $username);
     } else {
         $error = "Username or password are incorrect.";
-        header('Location: login.php?error=' . $error);
+        header('Location: log_in.php?error=' . $error);
     }
 ?>
