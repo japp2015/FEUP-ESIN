@@ -80,3 +80,23 @@ function DeleteNote($id){
   $stmt = $db->prepare('DELETE FROM notes WHERE id = ?');
   return $stmt->execute([$id]);
 }
+
+function GetAllStations(){
+  global $db;
+  $query = $db->prepare('SELECT * FROM stations ');
+  $query->execute();
+  return $query->fetchAll();
+}
+
+function AddStation($name, $city, $adress, $chief){
+  global $db;
+  $stmt = $db->prepare('INSERT INTO stations (id, name, city, adress, chief) VALUES (NULL,?,?,?,?)');
+  return $stmt->execute([$name, $city, $adress, $chief]);
+}
+
+function GetAllSchools(){
+  global $db;
+  $query = $db->prepare('SELECT * FROM schools ');
+  $query->execute();
+  return $query->fetchAll();
+}
