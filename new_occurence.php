@@ -1,10 +1,10 @@
-<!-- Temos de decidir como pomos as pessoas no meio disto tudo
-Assim como os policias que trabalham na ocurrencia=>check box onde adicionamos os que queremos que trabalhem--> 
+<!-- Temos de decidir como pomos as pessoas no meio disto tudo--> 
 
 <?php 
 include_once('database/connection.php');
 session_start();
 $username = $_SESSION['username'];
+$station = (int) GetStationByUsername($username);
 ?>
 
 <!DOCTYPE html>
@@ -29,11 +29,19 @@ $username = $_SESSION['username'];
            <h3> Detetive Chefe: </h3>
            <p><select name="chief">
               <?php $personnel="Detetive";
-              $chiefs=GetPersonnel($personnel);
+              $chiefs=GetPersonnelStation($personnel,$station);
               foreach ($chiefs as $chief){?>
                 <option value= <?=$chief['username']?>> <?= $chief['fullname'] ?> </option>
               <?php } ?>          
            </select></p>
+        </div>
+        <div id="workers">
+        <h3> Polícias associados: </h3>
+              <?php $personnel="Polícia";
+              $polices=GetPersonnelStation($personnel,$station);
+              foreach ($polices as $police){?>
+                  <input type="checkbox" name=<?=$police['username']?> value= <?=$police['username']?> > <?= $police['fullname']?>
+              <?php } ?>
         </div>
         <div id="location">
            <h3> Localização: </h3>

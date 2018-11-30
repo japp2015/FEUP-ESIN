@@ -1,3 +1,6 @@
+<!-- Falta descobrir como adiciono os policias, tendo em conta que nao sei quantos são... e como adiciono pessoas,
+pela mesma razão-->
+
 <?php
     include_once('database/connection.php');  
     session_start();

@@ -28,10 +28,10 @@ function GetAllOcc_type(){
   return $query->fetchAll();
 }
 
-function GetPersonnel($positions){
+function GetPersonnelStation($positions, $station){
   global $db;
-  $query = $db->prepare('SELECT * FROM personnel WHERE position = ?');
-  $query->execute(array($positions));
+  $query = $db->prepare('SELECT * FROM personnel WHERE position = ? AND station = ?');
+  $query->execute(array($positions, (int) $station));
   return $query->fetchAll();
 }
 
@@ -39,4 +39,18 @@ function AddOcurrence($type, $title, $chief_detective, $state, $oppening_date, $
   global $db;
   $stmt = $db->prepare('INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description) VALUES (NULL,?,?,?,?,?,?,?)');
   return $stmt->execute([$type, $title, $chief_detective, $state, $oppening_date, $location, $description]);
+}
+
+function GetStationByID($id){
+  global $db;
+  $query = $db->prepare('SELECT * FROM stations WHERE id = ?');
+  $query->execute([$id]);
+  return $query->fetch();
+}
+
+function GetStationByUsername($username){
+  global $db;
+  $query = $db->prepare('SELECT station FROM personnel WHERE username= ?');
+  $query->execute([$username]);
+  return $query->fetch();
 }

@@ -1,3 +1,9 @@
+<?php 
+$username = $_SESSION['username'];
+$user = getUserByUsername($username);
+$station=GetStationByID($user['station']);
+?>
+
 <!DOCTYPE html>
 <html lang="en-US">
     <header>
@@ -9,7 +15,7 @@
                 <li><a href="notes.php">Notas</a></li>
                 <li><a href="new_occurence.php">Nova ocorrência</a></li>
                 <li><a href="occurences.php">Ocorrência</a></li>
-                <li><a href="station.php">Esquadra</a></li>
+                <li><a href="station.php?station=<?=$station['id']?>">Esquadra</a></li>
                 <li><a href="search.php">Pesquisa</a></li>
             </ul>
     </aside>

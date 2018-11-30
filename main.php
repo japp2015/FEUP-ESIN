@@ -1,3 +1,5 @@
+<!-- FAZER UM FOOTER TIPO O HEADER. QUE É COMUM-->
+
 <?php 
 include_once('database/connection.php');
 session_start();
@@ -22,18 +24,20 @@ $occurrences = getOccurrencesByUsername($username);
         <p> Em serviço desde: <?php echo $user['start_service'] ?> </p>
         <p> Formação: <?php echo $user['school'] ?> </p>
         <p> Cargo: <?php echo $user['position'] ?> </p>
-
+        <p> Esquadra: <?php echo $station['name'] ?></a></p>
+            
     </div>
+  
     <div id="current_work">
-        <p>Esquadra: <a href="nypd.php"><?php echo $user['station'] ?></a></p>
-            <h3>Casos atuais</h3>
-            <ul>
-                <?php foreach($occurrences as $occurrence) { ?>
-                    <?php if ($occurrence['state']=='Aberto') ?>
-                        <li><a href="10201.php"><?php echo $occurrence['id'] ?></a><p><?php echo $occurrence['title'] ?></p></li> 
-                <? } ?>
-            </ul>
+        <h3>Casos atuais</h3>
+        <ul>
+            <?php foreach($occurrences as $occurrence) { ?>
+                <?php if ($occurrence['state']=='Aberto') ?>
+                    <li><a href="10201.php"><?php echo $occurrence['id'] ?></a><p><?php echo $occurrence['title'] ?></p></li> 
+            <? } ?>
+        </ul>
     </div>
+
     <div id="past_work">
         <h3>Últimos casos</h3>
         <ul>
