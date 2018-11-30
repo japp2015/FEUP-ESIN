@@ -16,7 +16,9 @@ $station=GetStationByID($user['station']);
                 <li><a href="notes.php">Notas</a></li>
                 <li><a href="new_occurence.php">Nova Ocorrência</a></li>
                 <li><a href="occurences.php">Ocorrência</a></li>
-                <li><a href="station.php?station=<?=$station['id']?>">Esquadra</a></li>
+                <?php if ($user['position']!="Diretor Nacional"){?>
+                    <li><a href="station.php?station=<?=$station['id']?>">Esquadra</a></li>
+                <?php } ?>
                 <li><a href="search.php">Pesquisa</a></li>
             </ul>
     </aside>

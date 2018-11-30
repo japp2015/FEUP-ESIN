@@ -61,3 +61,22 @@ function GetStationByUsername($username){
   $query->execute([$username]);
   return $query->fetch();
 }
+
+function GetNotesByUsername($username){
+  global $db;
+  $query = $db->prepare('SELECT * FROM notes WHERE personnel_username = ? ');
+  $query->execute(array($username));
+  return $query->fetchAll();
+}
+
+function AddNote($username, $title, $text){
+  global $db;
+  $stmt = $db->prepare('INSERT INTO notes (id, personnel_username, title, text) VALUES (NULL,?,?,?)');
+  return $stmt->execute([$username, $title, $text]);
+}
+
+function DeleteNote($id){
+  global $db;
+  $stmt = $db->prepare('DELETE FROM notes WHERE id = ?');
+  return $stmt->execute([$id]);
+}

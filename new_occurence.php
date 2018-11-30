@@ -60,7 +60,7 @@ $station = (int) GetStationByUsername($username);
            <p><select name="state">
                 <option value="Arquivado"  > Arquivado </option>
                 <option value= "Resolvido" > Resolvido </option>
-                <option value= "Ativo" > Ativo </option>        
+                <option value= "Aberto" > Aberto </option>        
            </select></p>
         </div>
         <input type="submit" value="Submeter">

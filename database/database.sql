@@ -9,7 +9,7 @@ CREATE TABLE personnel (
     start_service date NOT NULL,
     school VARCHAR REFERENCES schools NOT NULL,
     position VARCHAR REFERENCES positions NOT NULL,
-    station INTEGER REFERENCES stations 
+    station INTEGER REFERENCES stations
 );
 
 CREATE TABLE person (
@@ -54,7 +54,7 @@ CREATE TABLE updates (
 
 CREATE TABLE notes (
     id INTEGER PRIMARY KEY,
-    personnel_id VARCHAR REFERENCES personnel NOT NULL,
+    personnel_username VARCHAR REFERENCES personnel NOT NULL,
     title VARCHAR NOT NULL,
     text VARCHAR  
 );
@@ -134,4 +134,4 @@ INSERT INTO stations (id, name, city, adress, chief) VALUES (NULL, 'Valongo', 'P
 
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description) VALUES (NULL, 'Homicídio', 'Morreu em Salgueiros' ,'patricia', 'Aberto', '2017-02-11','Salgueiro','Ontem morreu um homem em Salgueiros');
 
-INSERT INTO works (username_personnel, id_occurrence) VALUES ('japp', 1);
+INSERT INTO works (username_personnel, id_occurrence) VALUES ('patricia', 1);

@@ -24,7 +24,9 @@ $occurrences = getOccurrencesByUsername($username);
         <p> Em serviço desde: <?php echo $user['start_service'] ?> </p>
         <p> Formação: <?php echo $user['school'] ?> </p>
         <p> Cargo: <?php echo $user['position'] ?> </p>
-        <p> Esquadra: <?php echo $station['name'] ?></a></p>
+        <?php if ($user['position']!="Diretor Nacional"){?>
+            <p> Esquadra: <?php echo $station['name'] ?></a></p>
+        <?php } ?>
             
     </div>
   
