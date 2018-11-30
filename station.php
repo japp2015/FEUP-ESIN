@@ -2,7 +2,6 @@
 include_once('database/connection.php');
 session_start();
 $station = GetStationByID($_GET['station']);
-
 ?>
 
 <!DOCTYPE html>
@@ -15,18 +14,13 @@ $station = GetStationByID($_GET['station']);
     <div id="station_info">
         <h1> <?php echo $station['name']?> </h1>
         <p> Morada: <?php echo $station['adress'] ?> </p>
+        <p> Cidade: <?php echo $station['city'] ?> </p>
         <?php $chief=getUserByUsername($station['chief']) ?>
         <p> Chefe de Esquadra: <?php echo $chief['fullname'] ?> </p>
     </div>
   
     <div id="personnel">
         <h2>Equipa: </h2>
-        
-        <?php $position="Chefe de Esquadra";
-        $Chief=GetPersonnelStation($position,$station["id"])?>
-        <h3> Chefe de Esquadra: 
-            <?php foreach($Chief as $Chief){ 
-                   echo $Chief['fullname']; }?> </h3>
         
         <?php $position="Detetive";
         $detectives=GetPersonnelStation($position,$station["id"])?>

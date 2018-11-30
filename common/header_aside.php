@@ -1,7 +1,9 @@
 <?php 
 $username = $_SESSION['username'];
 $user = getUserByUsername($username);
-$station=GetStationByID($user['station']);
+if (!isset($station)){
+    $station=GetStationByID($user['station']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +20,9 @@ $station=GetStationByID($user['station']);
                 <li><a href="occurences.php">Ocorrência</a></li>
                 <?php if ($user['position']!="Diretor Nacional"){?>
                     <li><a href="station.php?station=<?=$station['id']?>">Esquadra</a></li>
+                <?php } ?>
+                <?php if ($user['position']=="Diretor Nacional"){?>
+                    <li><a href="create_station.php"> Criar Esquadra</a></li>
                 <?php } ?>
                 <li><a href="search.php">Pesquisa</a></li>
             </ul>

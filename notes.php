@@ -26,8 +26,8 @@ $notes = getNotesByUsername($username);
         <section class = "add_notes">
             <h2> Adicionar Nova Nota: </h2>
                 <form action="action_notes.php" method="post">
-                    <div><input type="text" placeholder="Título da Nota" name="title"></div>
-                    <div><input type="text" placeholder="Texto" name="note"></div>
+                    <div><input type="text" placeholder="Título da Nota" name="title"></div> <br>
+                    <div><textarea name="nota" >Texto da Nota... </textarea></div>
                     <div><input type="submit" value="Adicionar"></div>
                 </form>
         </section>
