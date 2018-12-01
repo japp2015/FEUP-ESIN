@@ -19,7 +19,7 @@ CREATE TABLE person (
     birthdate date NOT NULL,
     naturality VARCHAR NOT NULL,
     adress VARCHAR,
-    physical description VARCHAR,
+    physical_description VARCHAR,
     weight INTEGER,
     height INTEGER
 );
@@ -32,7 +32,8 @@ CREATE TABLE occurrences (
     state VARCHAR NOT NULL,
     oppening_date date NOT NULL,
     location VARCHAR NOT NULL,
-    description VARCHAR NOT NULL 
+    description VARCHAR NOT NULL,
+    station VARCHAR REFERENCES stations NOT NULL
 );
 
 CREATE TABLE stations (
@@ -78,15 +79,24 @@ CREATE TABLE works (
     PRIMARY KEY (username_personnel, id_occurrence)
 );
 
-CREATE TABLE referenced (
-    id_person INTEGER REFERENCES personnel,
-    id_occurrence INTEGER REFERENCES occurence,
-    PRIMARY KEY (id_person, id_occurrence)
-);
-
 CREATE TABLE referenced_type (
     name VARCHAR NOT NULL
 
+);
+
+CREATE TABLE referenced (
+    id_person INTEGER REFERENCES person,
+    id_occurrence INTEGER REFERENCES occurrence,
+    type VARCHAR REFERENCES referenced_type NOT NULL,
+    PRIMARY KEY (id_person, id_occurrence)
+);
+
+CREATE TABLE news (
+    id INTEGER PRIMARY KEY,
+    title VARCHAR NOT NULL,
+    text VARCHAR NOT NULL,
+    date DATE NOT NULL,
+    id_occurrence INTEGER REFERENCES occurence
 );
 
 INSERT INTO occ_type VALUES ('Homicídio');
@@ -127,11 +137,22 @@ INSERT INTO personnel (username, password, email, fullname, gender, birthdate, n
 INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, station) VALUES ('hugo', 'feup2015', 'maria@gmail.com', 'Hugo Almeida Ribeiro', 'Masculino', '1997-11-02', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Chefe de Esquadra',3);
 INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, station) VALUES ('carlos', 'feup2015', 'maria@gmail.com', 'Carlos Almeida Ribeiro', 'Masculino', '1997-11-02', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Chefe de Esquadra',4);
 
-INSERT INTO stations (id, name, city, adress, chief) VALUES (NULL, 'Porto Norte', 'Porto', 'Rua do Pinheiral', 'maria');
-INSERT INTO stations (id, name, city, adress, chief) VALUES (NULL, 'Porto Sul', 'Porto', 'Rua do Penedo', 'pedro');
-INSERT INTO stations (id, name, city, adress, chief) VALUES (NULL, 'Espinho', 'Porto', 'Rua do Caco', 'hugo');
-INSERT INTO stations (id, name, city, adress, chief) VALUES (NULL, 'Valongo', 'Porto', 'Rua da Estufa', 'carlos');
+INSERT INTO stations (id, name, city, adress, chief) VALUES (1, 'Porto Norte', 'Porto', 'Rua do Pinheiral', 'maria');
+INSERT INTO stations (id, name, city, adress, chief) VALUES (2, 'Porto Sul', 'Porto', 'Rua do Penedo', 'pedro');
+INSERT INTO stations (id, name, city, adress, chief) VALUES (3, 'Espinho', 'Porto', 'Rua do Caco', 'hugo');
+INSERT INTO stations (id, name, city, adress, chief) VALUES (4, 'Valongo', 'Porto', 'Rua da Estufa', 'carlos');
 
-INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description) VALUES (NULL, 'Homicídio', 'Morreu em Salgueiros' ,'patricia', 'Aberto', '2017-02-11','Salgueiro','Ontem morreu um homem em Salgueiros');
+INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (1, 'Homicídio', 'Homicídio em Salgueiros' ,'patricia', 'Aberto', '2017-02-11','Salgueiros','Ontem morreu um homem em Salgueiros', 1);
+INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (2, 'Desaparecimento', 'Desaparecimento na Maia' ,'amilcar', 'Aberto', '2017-02-20','Maia','Mulher desaparecida na Maia', 1);
+INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (3, 'Homicídio', 'Homicídio em Matosinhos' ,'patricia', 'Fechado', '2017-02-11','Matosinhos','Ontem morreu um homem em Matosinhos', 3);
+INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (4, 'Homicídio', 'Homicídio em Gaia' ,'patricia', 'Arquivado', '2017-02-11','Gaia','Ontem morreu um homem em Gaia', 4);
 
 INSERT INTO works (username_personnel, id_occurrence) VALUES ('patricia', 1);
+
+INSERT INTO person (id, name, gender, birthdate, naturality, adress, physical_description, weight, height) VALUES (1, 'Rita Hugo', 'Feminino', '1987-05-23', 'Porto', 'Rua Costa Cabral','Cabelo loiro, pele clara, olhos azuis', '55', '165');
+
+INSERT INTO referenced (id_person, id_occurrence, type) VALUES (1, 2, 'Vítima');
+
+INSERT INTO news (id, title, text, date, id_occurrence) VALUES (1, 'Homicídio em Matosinhos resolvido', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis diam ipsum, varius luctus metus quis, ornare faucibus tellus. Praesent at tellus quis felis tincidunt viverra. Cras egestas vitae elit in posuere. Etiam sed tellus ipsum. Proin sagittis ligula sed velit venenatis feugiat. Nunc placerat laoreet arcu, a volutpat odio tincidunt in. Aenean finibus, tortor id aliquet auctor, magna metus consectetur augue, gravida elementum nisl augue luctus mauris. Sed et odio vitae est sollicitudin fringilla. Suspendisse ante tortor, condimentum at placerat nec, vestibulum vel nibh.
+
+Curabitur in iaculis nibh. Curabitur vitae urna purus. Suspendisse nec ipsum et ex finibus sodales in id nisi. Praesent diam nulla, mattis non accumsan id, tristique at libero. Praesent tempor porta risus, sit amet iaculis nibh tristique sit amet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras egestas elit et odio rutrum viverra. Morbi faucibus at mauris eget sollicitudin.', '2018-09-13', 3);

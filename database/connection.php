@@ -100,3 +100,53 @@ function GetAllSchools(){
   $query->execute();
   return $query->fetchAll();
 }
+
+function getUserStation($username) {
+  global $db;
+  $query = $db->prepare('SELECT stations.* FROM stations JOIN personnel ON stations.id=station WHERE username = ? ');
+  $query->execute(array($username));
+  return $query->fetch();
+}
+
+function getMissingPeople() {
+  global $db;
+  $query = $db->prepare('SELECT person.* FROM person JOIN referenced ON person.id=id_person JOIN occurrences ON id_occurrence=occurrences.id WHERE occurrences.state=? AND occurrences.type=? AND referenced.type=?');
+  $query->execute(array('Aberto', 'Desaparecimento', 'Vítima'));
+  return $query->fetchAll();
+}
+
+function getOccByMissingPerson($missing) {
+  global $db;
+  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN referenced ON occurrences.id=id_occurrence JOIN person ON id_person=person.id WHERE occurrences.state=? AND occurrences.type=? AND referenced.type=?');
+  $query->execute(array('Aberto', 'Desaparecimento', 'Vítima'));
+  return $query->fetch();
+}
+
+function GetStations() {
+  global $db;
+  $query = $db->prepare('SELECT * FROM stations ');
+  $query->execute();
+  return $query->fetchAll();
+}
+
+function CountOccurrencesByStateAndStation($state, $station) {
+  global $db;
+  $id=$station['id'];
+  $query = $db->prepare('SELECT count(occurrences.id) FROM occurrences JOIN stations ON station=stations.id WHERE state=? AND stations.id=?');
+  $query->execute([$state,$id]);
+  return $query->fetch();
+}
+
+function CountOccurrencesByState($state) {
+  global $db;
+  $query = $db->prepare('SELECT count(occurrences.id) FROM occurrences WHERE state=?');
+  $query->execute([$state]);
+  return $query->fetch();
+}
+
+function GetNews() {
+  global $db;
+  $query = $db->prepare('SELECT * FROM news');
+  $query->execute();
+  return $query->fetchAll();
+}
