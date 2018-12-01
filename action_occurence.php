@@ -12,7 +12,11 @@ pela mesma razão-->
     $description=$_POST['description'];
     $state=$_POST['state'];
     $date=date("Y-m-d");
+
+    $username = $_SESSION['username'];
+    $user = getUserByUsername($username);
+    $station = getUserStation($username);
           
-    AddOcurrence($occ_type, $title, $chief, $state, $date, $location, $description);
+    AddOcurrence($occ_type, $title, $chief, $state, $date, $location, $description, $station);
     header('Location: main.php');  
 ?>  

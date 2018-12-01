@@ -3,5 +3,5 @@
   session_unset();
   session_destroy();
   
-  header('Location: log_in.php');
+  header('Location: public.php');
 ?>

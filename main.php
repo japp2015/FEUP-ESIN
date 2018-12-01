@@ -29,27 +29,31 @@ $occurrences = getOccurrencesByUsername($username);
         <?php } ?>
             
     </div>
-  
-    <div id="current_work">
-        <h3>Casos atuais</h3>
-        <ul>
-            <?php foreach($occurrences as $occurrence) { ?>
-                <?php if ($occurrence['state']=='Aberto') {?> 
-                    <?php echo "<li><a href='occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . "</a><p>" . $occurrence['title'] . "</p></li>" ; ?> 
-                <? } ?> 
-            <? } ?>
-        </ul>
-    </div>
+    
+    <?php if (!empty($occurrences)) { ?>
 
-    <div id="past_work">
-        <h3>Últimos casos</h3>
-        <ul>
-            <?php foreach($occurrences as $occurrence) { ?>
-                <?php if ($occurrence['state']=='Fechado' or $occurrence['state']=='Arquivado') { ?> 
-                    <?php echo "<li><a href='occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . "</a><p>" . $occurrence['title'] . "</p></li>" ; ?> 
-                <? } ?> 
-            <? } ?>
-        </ul>
-    </div>
+        <div id="current_work">
+            <h3>Casos atuais</h3>
+            <ul>
+                <?php foreach($occurrences as $occurrence) { ?>
+                    <?php if ($occurrence['state']=='Aberto') {?> 
+                        <?php echo "<li><a href='occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . "</a><p>" . $occurrence['title'] . "</p></li>" ; ?> 
+                    <? } ?> 
+                <? } ?>
+            </ul>
+        </div>
+
+        <div id="past_work">
+            <h3>Últimos casos</h3>
+            <ul>
+                <?php foreach($occurrences as $occurrence) { ?>
+                    <?php if ($occurrence['state']=='Fechado' or $occurrence['state']=='Arquivado') { ?> 
+                        <?php echo "<li><a href='occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . "</a><p>" . $occurrence['title'] . "</p></li>" ; ?> 
+                    <? } ?> 
+                <? } ?>
+            </ul>
+        </div>
+
+    <? } ?>
 </body>
 </html>
