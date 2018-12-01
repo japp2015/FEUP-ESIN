@@ -88,10 +88,10 @@ function GetAllStations(){
   return $query->fetchAll();
 }
 
-function AddStation($name, $city, $adress, $chief){
+function AddStation($name, $city, $adress){
   global $db;
-  $stmt = $db->prepare('INSERT INTO stations (id, name, city, adress, chief) VALUES (NULL,?,?,?,?)');
-  return $stmt->execute([$name, $city, $adress, $chief]);
+  $stmt = $db->prepare('INSERT INTO stations (id, name, city, adress) VALUES (NULL,?,?,?)');
+  return $stmt->execute([$name, $city, $adress]);
 }
 
 function GetAllSchools(){
@@ -99,6 +99,12 @@ function GetAllSchools(){
   $query = $db->prepare('SELECT * FROM schools ');
   $query->execute();
   return $query->fetchAll();
+}
+
+function AddPersonnel($username, $password, $email, $fullname, $gender, $birthdate, $naturality, $start_service, $school, $position, $station){
+  global $db;
+  $stmt = $db->prepare('INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, station) VALUES (?,?,?,?,?,?,?,?,?,?,?)');
+  return $stmt->execute([$username, $password, $email, $fullname, $gender, $birthdate, $naturality, $start_service, $school, $position, $station]);
 }
 
 function getUserStation($username) {
@@ -149,4 +155,11 @@ function GetNews() {
   $query = $db->prepare('SELECT * FROM news');
   $query->execute();
   return $query->fetchAll();
+}
+
+function SetStationChief($username, $station){
+  global $db;
+  $stmt = $db->prepare('UPDATE stations SET chief = ? WHERE id = ? ');
+  return $stmt->execute([$username, $station]);
+  
 }

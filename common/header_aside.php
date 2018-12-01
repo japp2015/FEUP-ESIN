@@ -18,11 +18,22 @@ if (!isset($station)){
                 <li><a href="notes.php">Notas</a></li>
                 <li><a href="new_occurence.php">Nova Ocorrência</a></li>
                 <li><a href="occurences.php">Ocorrência</a></li>
-                <?php if ($user['position']!="Diretor Nacional"){?>
-                    <li><a href="station.php?station=<?=$station['id']?>">Esquadra</a></li>
+                <?php if ($user['position']=="Diretor Nacional" || $user['position']=="Chefe de Esquadra" ){?>
+                    <li><a> Criar Colaborador: </a></li>
+                        <ul>
+                            <?php if ($user['position']=="Diretor Nacional"){?>
+                                <li><a href="create_personnel.php?position=Chefe de Esquadra"> Chefe de Esquadra </a></li>
+                            <?php } ?>
+                                <li><a href="create_personnel.php?position=Detetive"> Detetive </a></li>
+                                <li><a href="create_personnel.php?position=Polícia"> Polícia </a></li>
+                        </ul>   
                 <?php } ?>
                 <?php if ($user['position']=="Diretor Nacional"){?>
+                    <li><a href="view_station.php"> Esquadras Nacionais </a></li>
                     <li><a href="create_station.php"> Criar Esquadra</a></li>
+                <?php } ?>
+                <?php if ($user['position']!="Diretor Nacional"){?>
+                    <li><a href="station.php?station=<?=$station['id']?>">Esquadra</a></li>
                 <?php } ?>
                 <li><a href="search.php">Pesquisa</a></li>
             </ul>

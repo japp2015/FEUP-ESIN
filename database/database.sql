@@ -2,7 +2,7 @@ CREATE TABLE personnel (
     username VARCHAR PRIMARY KEY,
     password VARCHAR NOT NULL,
     email VARCHAR(320) NOT NULL, -- 64 characters for local part + @ + 255 for domain name
-    fullname VARCHAR(128),
+    fullname VARCHAR(128) NOT NULL,
     gender VARCHAR NOT NULL,
     birthdate date NOT NULL,
     naturality VARCHAR NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE stations (
     name VARCHAR NOT NULL,
     city VARCHAR NOT NULL,
     adress VARCHAR NOT NULL,
-    chief VARCHAR REFERENCES personnel NOT NULL
+    chief VARCHAR REFERENCES personnel
 );
 
 CREATE TABLE updates (
@@ -61,16 +61,16 @@ CREATE TABLE notes (
 );
 
 CREATE TABLE occ_type (
-    name VARCHAR NOT NULL
+    name VARCHAR PRIMARY KEY
 );
 
 CREATE TABLE positions (
-    name VARCHAR NOT NULL
+    name VARCHAR PRIMARY KEY
 );
 
 
 CREATE TABLE schools (
-    name VARCHAR NOT NULL
+    name VARCHAR PRIMARY KEY
 );
 
 CREATE TABLE works (
@@ -80,7 +80,7 @@ CREATE TABLE works (
 );
 
 CREATE TABLE referenced_type (
-    name VARCHAR NOT NULL
+    name VARCHAR PRYMARY KEY
 
 );
 
