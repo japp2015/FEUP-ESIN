@@ -17,7 +17,6 @@ $occurrences = getOccurrencesByUsername($username);
 <body>
     <div id="personal_info">
         <h1><?php echo $user['fullname']?></h1>
-        <img src="http://lorempixel.com/600/300/business/" alt="photo">
         <p> Sexo: <?php echo $user['gender'] ?></p>
         <p> Data de nascimento: <?php echo $user['birthdate'] ?>  </p>
         <p> Naturalidade: <?php echo $user['naturality'] ?> </p>

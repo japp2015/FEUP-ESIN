@@ -19,7 +19,7 @@ if (!isset($station)){
                 <li><a href="new_occurence.php">Nova Ocorrência</a></li>
                 <li><a href="occurences.php">Ocorrência</a></li>
                 <?php if ($user['position']=="Diretor Nacional" || $user['position']=="Chefe de Esquadra" ){?>
-                    <li><a> Criar Colaborador: </a></li>
+                    <li><a> Criar Colaborador </a></li>
                         <ul>
                             <?php if ($user['position']=="Diretor Nacional"){?>
                                 <li><a href="create_personnel.php?position=Chefe de Esquadra"> Chefe de Esquadra </a></li>
