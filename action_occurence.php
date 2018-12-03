@@ -20,6 +20,7 @@
 
     if (!isset($chief)){
         AddOccurrence1($occ_type, $title, $state, $date, $location, $description, $station);
+        
         header('Location: main.php'); 
     } elseif (isset($chief)){
         AddOccurrence2($occ_type, $title, $chief, $state, $date, $location, $description, $station);

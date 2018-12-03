@@ -1,4 +1,5 @@
-<?php 
+<?php
+include_once('database/connection.php');
 $username = $_SESSION['username'];
 $user = getUserByUsername($username);
 if (!isset($station)){

@@ -1,7 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en-US">
 
 <head>
+<?php session_start(); ?>
 </head>
 
 <?php include_once('common/header_aside.php'); ?>
