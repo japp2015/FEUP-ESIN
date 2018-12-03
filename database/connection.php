@@ -14,10 +14,78 @@ function getUserByUsername($username) {
   return $query->fetch();
 }
 
-function getOccurrencesByUsername($username) {
+function GetStates() {
   global $db;
-  $query = $db->prepare('SELECT * FROM occurrences JOIN works ON username_personnel = ?');
+  $query = $db->prepare('SELECT * FROM states');
+  $query->execute();
+  return $query->fetchAll();
+}
+function UpdateState($state, $occurrence){
+  global $db;
+  $stmt = $db->prepare('UPDATE occurrences SET state = ? WHERE id = ? ');
+  return $stmt->execute([$state, $occurrence]);
+}
+
+function GetAllOccurrences() {
+  global $db;
+  $query = $db->prepare('SELECT * FROM occurrences');
+  $query->execute();
+  return $query->fetchAll();
+}
+
+function GetAllUpdates() {
+  global $db;
+  $query = $db->prepare('SELECT * FROM updates');
+  $query->execute();
+  return $query->fetchAll();
+}
+
+function GetOccurrencesByStation($station) {
+  global $db;
+  $query = $db->prepare('SELECT * FROM occurrences WHERE station=? ');
+  $query->execute(array($station));
+  return $query->fetchAll();
+}
+
+function GetUpdatesByStation($station) {
+  global $db;
+  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id WHERE station=? ');
+  $query->execute(array($station));
+  return $query->fetchAll();
+}
+
+function GetOccurrencesByChiefAndMinorOccurrences($username,$station) {
+  global $db;
+  $query = $db->prepare('SELECT * FROM occurrences JOIN occ_type ON type = name WHERE (chief_detective=? OR (station=? AND relevance=1)) ');
+  $query->execute([$username,$station]);
+  return $query->fetchAll();
+}
+
+function GetUpdatesByChiefAndMinorOccurrences($username,$station) {
+  global $db;
+  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN occ_type ON occurrences.type = occ_type.name WHERE (chief_detective=? OR (station=? AND relevance=1)) ');
+  $query->execute([$username, $station]);
+  return $query->fetchAll();
+}
+
+function GetOccurrencesByUsername($username) {
+  global $db;
+  $query = $db->prepare('SELECT * FROM occurrences JOIN works ON id = id_occurrence WHERE username_personnel=? ');
   $query->execute(array($username));
+  return $query->fetchAll();
+}
+
+function GetUpdatesByUsername($username) {
+  global $db;
+  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN works ON occurrences.id = works.id_occurrence WHERE username_personnel=? ');
+  $query->execute(array($username));
+  return $query->fetchAll();
+}
+
+function GetOccurrencePersonnel($id){
+  global $db;
+  $query = $db->prepare('SELECT * FROM personnel JOIN works ON username = username_personnel WHERE id_occurrence=? ');
+  $query->execute(array($id));
   return $query->fetchAll();
 }
 
@@ -28,10 +96,17 @@ function getOccurrenceById($id) {
   return $query->fetch();
 }
 
-function GetAllOcc_type(){
+function getUpdatesByOccurrenceId($id){
   global $db;
-  $query = $db->prepare('SELECT * FROM occ_type');
-  $query->execute();
+  $query = $db->prepare('SELECT * FROM updates WHERE id_occurrence = ?');
+  $query->execute([$id]);
+  return $query->fetchAll();
+}
+
+function GetOcc_type($relevance){
+  global $db;
+  $query = $db->prepare('SELECT * FROM occ_type WHERE relevance=?');
+  $query->execute([$relevance]);
   return $query->fetchAll();
 }
 
@@ -42,10 +117,36 @@ function GetPersonnelStation($positions, $station){
   return $query->fetchAll();
 }
 
-function AddOcurrence($type, $title, $chief_detective, $state, $oppening_date, $location, $description){
+function GetPolicesAvailable($position,$station,$id){
   global $db;
-  $stmt = $db->prepare('INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description) VALUES (NULL,?,?,?,?,?,?,?)');
-  return $stmt->execute([$type, $title, $chief_detective, $state, $oppening_date, $location, $description]);
+  $query = $db->prepare('SELECT * FROM personnel WHERE position = ? AND station= ? AND personnel.username NOT IN (SELECT username FROM personnel JOIN works ON username=username_personnel AND station=?)');
+  $query->execute([$position,$station,$id]);
+  return $query->fetchAll();
+}
+
+
+function AddWorksPolice($police_username,$occurrence){
+  global $db;
+  $stmt = $db->prepare('INSERT INTO works (username_personnel, id_occurrence) VALUES (?,?)');
+  return $stmt->execute([$police_username,$occurrence]);
+}
+
+function AddOccurrence1($type, $title, $state, $oppening_date, $location, $description, $station){
+  global $db;
+  $stmt = $db->prepare('INSERT INTO occurrences (id, type, title, state, oppening_date, location, description, station) VALUES (NULL,?,?,?,?,?,?,?)');
+  return $stmt->execute([$type, $title, $state, $oppening_date, $location, $description, $station]);
+}
+
+function AddOccurrence2($type, $title, $chief_detective, $state, $oppening_date, $location, $description, $station){
+  global $db;
+  $stmt = $db->prepare('INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (NULL,?,?,?,?,?,?,?,?)');
+  return $stmt->execute([$type, $title, $chief_detective, $state, $oppening_date, $location, $description, $station]);
+}
+
+function AddUpdate($title, $text, $username, $id_occurrence, $date_hour){
+  global $db;
+  $stmt = $db->prepare('INSERT INTO updates (id, title, text, username_personnel, id_occurrence, date_hour) VALUES (NULL,?,?,?,?,?)');
+  return $stmt->execute([$title, $text, $username, $id_occurrence, $date_hour]);
 }
 
 function GetStationByID($id){
@@ -161,5 +262,4 @@ function SetStationChief($username, $station){
   global $db;
   $stmt = $db->prepare('UPDATE stations SET chief = ? WHERE id = ? ');
   return $stmt->execute([$username, $station]);
-  
 }

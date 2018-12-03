@@ -14,10 +14,15 @@ if (!isset($station)){
     <aside id="right_bar">
             <ul>
                 <li><a href="log_out.php">Terminar Sessão</a></li> 
-                <li><a href="news.php">Atualizações</a></li> 
+                <li><a href="updates.php">Atualizações</a></li> 
                 <li><a href="notes.php">Notas</a></li>
-                <li><a href="new_occurence.php">Nova Ocorrência</a></li>
-                <li><a href="occurences.php">Ocorrência</a></li>
+                <li><a> Nova Ocorrência</a></li>
+                    <ul>
+                        <?php if ($user['position']!="Polícia"){?>
+                            <li><a href="new_occurrence.php?relevance=2"> Delito Grave </a></li>
+                        <?php } ?>
+                            <li><a href="new_occurrence.php?relevance=1"> Delito Leve </a></li>
+                    </ul>   
                 <?php if ($user['position']=="Diretor Nacional" || $user['position']=="Chefe de Esquadra" ){?>
                     <li><a> Criar Colaborador </a></li>
                         <ul>

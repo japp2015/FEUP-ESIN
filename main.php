@@ -5,7 +5,6 @@ include_once('database/connection.php');
 session_start();
 $username = $_SESSION['username'];
 $user = getUserByUsername($username);
-$occurrences = getOccurrencesByUsername($username);
 ?>
 
 <!DOCTYPE html>
@@ -29,14 +28,24 @@ $occurrences = getOccurrencesByUsername($username);
             
     </div>
     
-    <?php if (!empty($occurrences)) { ?>
+    <?php if ($user['position']=='Diretor Nacional'){
+        $occurrences=GetAllOccurrences();
+    }elseif ($user['position']=='Chefe de Esquadra'){
+        $occurrences=GetOccurrencesByStation($station['id']);
+    }elseif ($user['position']=='Detetive'){
+        $occurrences=GetOccurrencesByChiefAndMinorOccurrences($username,$station['id']);
+    }elseif ($user['position']=='Polícia'){
+        $occurrences=GetOccurrencesByUsername($username);
+    }
+    
+    if (!empty($occurrences)) { ?>
 
         <div id="current_work">
             <h3>Casos atuais</h3>
             <ul>
                 <?php foreach($occurrences as $occurrence) { ?>
                     <?php if ($occurrence['state']=='Aberto') {?> 
-                        <?php echo "<li><a href='occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . "</a><p>" . $occurrence['title'] . "</p></li>" ; ?> 
+                        <?php echo "<li><a href='single_occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . " | " . $occurrence['title'] . "</a></li>" ; ?> 
                     <? } ?> 
                 <? } ?>
             </ul>
@@ -47,7 +56,7 @@ $occurrences = getOccurrencesByUsername($username);
             <ul>
                 <?php foreach($occurrences as $occurrence) { ?>
                     <?php if ($occurrence['state']=='Fechado' or $occurrence['state']=='Arquivado') { ?> 
-                        <?php echo "<li><a href='occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . "</a><p>" . $occurrence['title'] . "</p></li>" ; ?> 
+                        <?php echo "<li><a href='single_occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . " | " . $occurrence['title'] . "</a></li>" ; ?> 
                     <? } ?> 
                 <? } ?>
             </ul>

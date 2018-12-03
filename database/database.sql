@@ -29,7 +29,7 @@ CREATE TABLE occurrences (
     type VARCHAR REFERENCES occ_type NOT NULL,
     title VARCHAR NOT NULL,
     chief_detective VARCHAR REFERENCES personnel,
-    state VARCHAR NOT NULL,
+    state VARCHAR REFERENCES states NOT NULL ,
     oppening_date date NOT NULL,
     location VARCHAR NOT NULL,
     description VARCHAR NOT NULL,
@@ -48,8 +48,8 @@ CREATE TABLE updates (
     id INTEGER PRIMARY KEY,
     title VARCHAR NOT NULL,
     text VARCHAR NOT NULL,
-    id_personnel VARCHAR REFERENCES personnel NOT NULL,
-    id_occurrence VARCHAR REFERENCES occurrence NOT NULL,
+    username_personnel VARCHAR REFERENCES personnel NOT NULL,
+    id_occurrence INTEGER REFERENCES occurrence NOT NULL,
     date_hour datetime NOT NULL
 );
 
@@ -61,13 +61,17 @@ CREATE TABLE notes (
 );
 
 CREATE TABLE occ_type (
-    name VARCHAR PRIMARY KEY
+    name VARCHAR PRIMARY KEY,
+    relevance INTEGER NOT NULL
 );
 
 CREATE TABLE positions (
     name VARCHAR PRIMARY KEY
 );
 
+CREATE TABLE states (
+    name VARCHAR PRIMARY KEY
+);
 
 CREATE TABLE schools (
     name VARCHAR PRIMARY KEY
@@ -99,23 +103,27 @@ CREATE TABLE news (
     id_occurrence INTEGER REFERENCES occurence
 );
 
-INSERT INTO occ_type VALUES ('Homicídio');
-INSERT INTO occ_type VALUES ('Abuso Físico');
-INSERT INTO occ_type VALUES ('Ofensa à Integridade Psicológica');
-INSERT INTO occ_type VALUES ('Furto');
-INSERT INTO occ_type VALUES ('Vandalismo');
-INSERT INTO occ_type VALUES ('Extorção');
-INSERT INTO occ_type VALUES ('Abuso Sexual');
-INSERT INTO occ_type VALUES ('Fraude');
-INSERT INTO occ_type VALUES ('Sequestro');
-INSERT INTO occ_type VALUES ('Sinistro Rodoviário');
-INSERT INTO occ_type VALUES ('Crime Ambiental');
-INSERT INTO occ_type VALUES ('Desaparecimento');
+INSERT INTO occ_type VALUES ('Homicídio',2);
+INSERT INTO occ_type VALUES ('Abuso Físico', 1);
+INSERT INTO occ_type VALUES ('Ofensa à Integridade Psicológica', 1);
+INSERT INTO occ_type VALUES ('Furto', 1);
+INSERT INTO occ_type VALUES ('Vandalismo', 1);
+INSERT INTO occ_type VALUES ('Extorção',2);
+INSERT INTO occ_type VALUES ('Abuso Sexual',2);
+INSERT INTO occ_type VALUES ('Fraude',2);
+INSERT INTO occ_type VALUES ('Sequestro',2);
+INSERT INTO occ_type VALUES ('Sinistro Rodoviário',1);
+INSERT INTO occ_type VALUES ('Crime Ambiental',1);
+INSERT INTO occ_type VALUES ('Desaparecimento',2);
 
 INSERT INTO positions VALUES ('Polícia');
 INSERT INTO positions VALUES ('Detetive');
 INSERT INTO positions VALUES ('Chefe de Esquadra');
 INSERT INTO positions VALUES ('Diretor Nacional');
+
+INSERT INTO states VALUES ('Aberto');
+INSERT INTO states VALUES ('Fechado');
+INSERT INTO states VALUES ('Arquivado');
 
 INSERT INTO schools VALUES ('Escola Prática de Polícia');
 
@@ -144,10 +152,8 @@ INSERT INTO stations (id, name, city, adress, chief) VALUES (4, 'Valongo', 'Port
 
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (1, 'Homicídio', 'Homicídio em Salgueiros' ,'patricia', 'Aberto', '2017-02-11','Salgueiros','Ontem morreu um homem em Salgueiros', 1);
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (2, 'Desaparecimento', 'Desaparecimento na Maia' ,'amilcar', 'Aberto', '2017-02-20','Maia','Mulher desaparecida na Maia', 1);
-INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (3, 'Homicídio', 'Homicídio em Matosinhos' ,'patricia', 'Fechado', '2017-02-11','Matosinhos','Ontem morreu um homem em Matosinhos', 3);
-INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (4, 'Homicídio', 'Homicídio em Gaia' ,'patricia', 'Arquivado', '2017-02-11','Gaia','Ontem morreu um homem em Gaia', 4);
-
-INSERT INTO works (username_personnel, id_occurrence) VALUES ('patricia', 1);
+INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (3, 'Homicídio', 'Homicídio em Matosinhos' ,'gaspar', 'Fechado', '2017-02-11','Matosinhos','Ontem morreu um homem em Matosinhos', 2);
+INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (4, 'Homicídio', 'Homicídio em Gaia' ,'gaspar', 'Arquivado', '2017-02-11','Gaia','Ontem morreu um homem em Gaia', 2);
 
 INSERT INTO person (id, name, gender, birthdate, naturality, adress, physical_description, weight, height) VALUES (1, 'Rita Hugo', 'Feminino', '1987-05-23', 'Porto', 'Rua Costa Cabral','Cabelo loiro, pele clara, olhos azuis', '55', '165');
 

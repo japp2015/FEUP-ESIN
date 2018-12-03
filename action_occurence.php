@@ -1,10 +1,11 @@
-<!-- Falta descobrir como adiciono os policias, tendo em conta que nao sei quantos são... e como adiciono pessoas,
-pela mesma razão-->
-
 <?php
     include_once('database/connection.php');  
     session_start();
-
+    $username = $_SESSION['username'];
+    $user = getUserByUsername($username);
+    $station = getUserStation($username);
+    $station = $station['id'];
+          
     $occ_type=$_POST['occ_type'];
     $chief=$_POST['chief'];
     $location=$_POST['location'];
@@ -13,10 +14,16 @@ pela mesma razão-->
     $state=$_POST['state'];
     $date=date("Y-m-d");
 
-    $username = $_SESSION['username'];
-    $user = getUserByUsername($username);
-    $station = getUserStation($username);
-          
-    AddOcurrence($occ_type, $title, $chief, $state, $date, $location, $description, $station);
-    header('Location: main.php');  
+    if ($user['position']=="Diretor Nacional"){
+        $station=$_POST['station'];
+    }
+
+    if (!isset($chief)){
+        AddOccurrence1($occ_type, $title, $state, $date, $location, $description, $station);
+        header('Location: main.php'); 
+    } elseif (isset($chief)){
+        AddOccurrence2($occ_type, $title, $chief, $state, $date, $location, $description, $station);
+        header('Location: main.php'); 
+    }
+    
 ?>  
