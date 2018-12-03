@@ -8,6 +8,9 @@
           
     $occ_type=$_POST['occ_type'];
     $chief=$_POST['chief'];
+    if ($user['position']=="Detetive"){
+        $chief=$username;
+    }
     $location=$_POST['location'];
     $title=$_POST['title'];
     $description=$_POST['description'];

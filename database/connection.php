@@ -56,23 +56,30 @@ function GetUpdatesByStation($station) {
 
 function GetOccurrencesByChiefAndMinorOccurrences($username,$station) {
   global $db;
-  $query = $db->prepare('SELECT * FROM occurrences JOIN occ_type ON type = name WHERE (chief_detective=? OR (station=? AND relevance=1)) ');
+  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN occ_type ON type = occ_type.id WHERE (chief_detective=? OR (station=? AND relevance=1)) ');
   $query->execute([$username,$station]);
   return $query->fetchAll();
 }
 
 function GetUpdatesByChiefAndMinorOccurrences($username,$station) {
   global $db;
-  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN occ_type ON occurrences.type = occ_type.name WHERE (chief_detective=? OR (station=? AND relevance=1)) ');
+  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN occ_type ON occurrences.type = occ_type.id WHERE (chief_detective=? OR (station=? AND relevance=1)) ');
   $query->execute([$username, $station]);
   return $query->fetchAll();
 }
 
 function GetOccurrencesByUsername($username) {
   global $db;
-  $query = $db->prepare('SELECT * FROM occurrences JOIN works ON id = id_occurrence WHERE username_personnel=? ');
+  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN works ON id = id_occurrence WHERE username_personnel=? ');
   $query->execute(array($username));
   return $query->fetchAll();
+}
+
+function getOcc_TypeById($occurrence) {
+  global $db;
+  $query = $db->prepare('SELECT * FROM occ_type WHERE id=? ');
+  $query->execute(array($occurrence));
+  return $query->fetch();
 }
 
 function GetUpdatesByUsername($username) {
@@ -84,7 +91,7 @@ function GetUpdatesByUsername($username) {
 
 function GetOccurrencePersonnel($id){
   global $db;
-  $query = $db->prepare('SELECT * FROM personnel JOIN works ON username = username_personnel WHERE id_occurrence=? ');
+  $query = $db->prepare('SELECT personnel.* FROM personnel JOIN works ON username = username_personnel WHERE id_occurrence=? ');
   $query->execute(array($id));
   return $query->fetchAll();
 }
@@ -179,6 +186,12 @@ function AddNote($username, $title, $text){
 function DeleteNote($id){
   global $db;
   $stmt = $db->prepare('DELETE FROM notes WHERE id = ?');
+  return $stmt->execute([$id]);
+}
+
+function DeleteUpdate($id){
+  global $db;
+  $stmt = $db->prepare('DELETE FROM updates WHERE id = ?');
   return $stmt->execute([$id]);
 }
 

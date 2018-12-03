@@ -1,5 +1,3 @@
-<!-- Temos de decidir como pomos as pessoas no meio disto tudo--> 
-
 <?php 
 include_once('database/connection.php');
 session_start();
@@ -24,12 +22,12 @@ $station = (int) GetStationByUsername($username);
          <p> <select name="occ_type">
          <?php $occ_types=GetOcc_type($relevance);
          foreach ($occ_types as $occ_type){?>
-            <option value=<?=$occ_type['name']?>> <?= $occ_type['name'] ?> </option>
+            <option value=<?=$occ_type['id']?>> <?= $occ_type['name'] ?> </option>
          <?php } ?> 
          </select></p>
       </div>
 
-      <?php if ($relevance==2){?>
+      <?php if ($relevance==2 && $user['position']!="Detetive"){?>
         <div id="chief">
            <h3> Detetive Chefe: </h3>
            <p> <select name="chief">

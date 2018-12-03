@@ -5,6 +5,7 @@ $username = $_SESSION['username'];
 $user = getUserByUsername($username);
 $id = $_GET['id'];
 $occurrence = getOccurrenceById($id);
+$occurrence_type=getOcc_TypeById($occurrence['type']);
 $updates= getUpdatesByOccurrenceId($id);
 $chief=getUserByUsername($occurrence['chief_detective'])
 ?>
@@ -18,7 +19,7 @@ $chief=getUserByUsername($occurrence['chief_detective'])
 <body>
 <div id="occurence">
     <div id='id'> <h1> <?php echo $occurrence['title'] ?></h1></div>
-    <div id='title'> <h3> Tipo de Ocorrência: <?php echo $occurrence['type'] ?></h3></div>
+    <div id='title'> <h3> Tipo de Ocorrência: <?php echo $occurrence_type['name'] ?></h3></div>
     <div id='description'> Descrição da Ocurrência: <p> <?php echo $occurrence['description'] ?></p></div>
     <?php if (isset($occurrence['chief_detective'])){
        $chief=getUserByUsername($occurrence['chief_detective'])?>
@@ -67,7 +68,10 @@ $chief=getUserByUsername($occurrence['chief_detective'])
             <p class="title"> <?=$update['title']?> </p>
             <p class="text"> <?=$update['text']?> </p>
             <p class="date_hour"> <?=$update['date_hour']?> </p>
-        <?php } ?>
+            <?php if ($update['username_personnel']==$username){?>
+                <button type="button" class="delete" onclick="location.href='delete_update.php?id=<?=$id?>&id_update=<?=$update['id']?>';">Eliminar Update</button>
+            <?php } 
+        }?>
     </div>
 
     <div id = "add_update">
