@@ -21,7 +21,8 @@ $news = GetNews();
             echo '<li><h5>' . $missing['name'] . '</h5><p>' . $missing['birthdate'] . ' - ' . $missing['physical_description'] . '</p><p>' . $occurrence['location'] . '</p>';
         } ?>
     </ul>
-    <p>Tem alguma pista? Contacte-nos!</p>
+    <p>Tem alguma pista? <a href="contact.php">Contacte-nos!</a></p>
+    <p>Reporte um desaparecimento <a href="missing_person_submition.php">aqui</a>.</p>
 </aside>
 
 <body id="header_body">
@@ -59,7 +60,7 @@ $news = GetNews();
         <?php
         $i = 0;
         foreach($news as $new) {
-            echo '<h4>' . $new['title'] . '</h4>';
+            echo "<a href='news.php?id=" . $new['id'] . "'>" . "<h4>" . $new['title'] . "</h4></a>";
             echo '<footer>' . $new['date'] . '</footer>';
             if(++$i > 5) break;
         }

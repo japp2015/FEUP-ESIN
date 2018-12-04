@@ -231,14 +231,14 @@ function getUserStation($username) {
 function getMissingPeople() {
   global $db;
   $query = $db->prepare('SELECT person.* FROM person JOIN referenced ON person.id=id_person JOIN occurrences ON id_occurrence=occurrences.id WHERE occurrences.state=? AND occurrences.type=? AND referenced.type=?');
-  $query->execute(array('Aberto', 'Desaparecimento', 'Vítima'));
+  $query->execute(array('Aberto', 12, 'Vítima'));
   return $query->fetchAll();
 }
 
 function getOccByMissingPerson($missing) {
   global $db;
   $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN referenced ON occurrences.id=id_occurrence JOIN person ON id_person=person.id WHERE occurrences.state=? AND occurrences.type=? AND referenced.type=?');
-  $query->execute(array('Aberto', 'Desaparecimento', 'Vítima'));
+  $query->execute(array('Aberto', 12, 'Vítima'));
   return $query->fetch();
 }
 
@@ -275,4 +275,11 @@ function SetStationChief($username, $station){
   global $db;
   $stmt = $db->prepare('UPDATE stations SET chief = ? WHERE id = ? ');
   return $stmt->execute([$username, $station]);
+}
+
+function GetNewById($id) {
+  global $db;
+  $query = $db->prepare('SELECT * FROM news WHERE id=?');
+  $query->execute(array($id));
+  return $query->fetch();
 }
