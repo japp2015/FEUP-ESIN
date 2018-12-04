@@ -19,6 +19,7 @@ $chief=getUserByUsername($occurrence['chief_detective'])
 <body>
 <div id="occurence">
     <div id='id'> <h1> <?php echo $occurrence['title'] ?></h1></div>
+    <button type="button" onclick="location.href='news_release.php?id=<?=$id?>'"> Libertar notícia </button>
     <div id='title'> <h3> Tipo de Ocorrência: <?php echo $occurrence_type['name'] ?></h3></div>
     <div id='description'> Descrição da Ocurrência: <p> <?php echo $occurrence['description'] ?></p></div>
     <?php if (isset($occurrence['chief_detective'])){
@@ -69,7 +70,7 @@ $chief=getUserByUsername($occurrence['chief_detective'])
             <p class="text"> <?=$update['text']?> </p>
             <p class="date_hour"> <?=$update['date_hour']?> </p>
             <?php if ($update['username_personnel']==$username){?>
-                <button type="button" class="delete" onclick="location.href='delete_update.php?id=<?=$id?>&id_update=<?=$update['id']?>';">Eliminar Update</button>
+                <button type="button" class="delete" onclick="location.href='delete_update.php?id=<?=$id?>&id_update=<?=$update['id']?>';">Eliminar Atualização</button>
             <?php } 
         }?>
     </div>
@@ -78,7 +79,7 @@ $chief=getUserByUsername($occurrence['chief_detective'])
         <p> Nova Atualização: </p>
         <form action="action_update.php?id_occurrence=<?=$id?>" method="post">
             <div><input type="text" placeholder="Título" name="title"></div>
-            <div><input type="text" placeholder="Atualização" name="text"></div>
+            <textarea name="text" cols="40" rows="5" placeholder="Atualização"></textarea>
             <div><input type="submit" value="Submeter"></div>
         </form>
     </div>
