@@ -9,7 +9,7 @@ if ($user['position']=='Diretor Nacional'){
 }elseif ($user['position']=='Chefe de Esquadra'){
     $updates=GetUpdatesByStation($user['station']);
 }elseif ($user['position']=='Detetive'){
-    $updates=GetUpdatesByChiefAndMinorOccurrences($username,$user['station']);
+    $updates=GetUpdatesByUsernameAndMinorOccurrences($username,$user['station']);
 }elseif ($user['position']=='Polícia'){
     $updates=GetUpdatesByUsername($username);
 }
@@ -29,7 +29,7 @@ if ($user['position']=='Diretor Nacional'){
             <h3 class="title"> <?=$update['title']?> </h3>
             <p class="text"> <?=$update['text']?> </p>
             <?php $author=getUserByUsername($update['username_personnel']);?>
-                <p class="author"><?=$author['fullname']?> </p>
+                <p class="author"><?=$author['position']." ".$author['fullname']?> </p>
     <?php } ?>
     </div>
   

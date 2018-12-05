@@ -19,9 +19,13 @@ $chief=getUserByUsername($occurrence['chief_detective'])
 <body>
 <div id="occurence">
     <div id='id'> <h1> <?php echo $occurrence['title'] ?></h1></div>
+    
     <button type="button" onclick="location.href='news_release.php?id=<?=$id?>'"> Libertar notícia </button>
+    
     <div id='title'> <h3> Tipo de Ocorrência: <?php echo $occurrence_type['name'] ?></h3></div>
+    
     <div id='description'> Descrição da Ocurrência: <p> <?php echo $occurrence['description'] ?></p></div>
+    
     <?php if (isset($occurrence['chief_detective'])){
        $chief=getUserByUsername($occurrence['chief_detective'])?>
        <div id='chief'> <p> Detetive Chefe: <?php echo $chief['fullname'] ?></p></div>
@@ -48,16 +52,38 @@ $chief=getUserByUsername($occurrence['chief_detective'])
 
     <div id='location'> <p> Localização: <?php echo $occurrence['location'] ?></p></div>
     
-    <div id='polices'> Polícias Alocados:
+    <?php $personnels=GetOccurrencePersonnel($occurrence['id'])?>
+
+    <?php if ($occurrence_type['relevance']==2){?>
+        <div id='detectives'> Detetives Alocados:
+        <?php $position="Detetive"?>
         <ul>
-        <?php $polices=GetOccurrencePersonnel($occurrence['id']);
-        foreach ($polices as $police){
-            echo "<li> " . $police['fullname'] . "</li>";
+        <?php foreach ($personnels as $personnel){
+            if ($personnel['position']==$position){
+                 echo "<li> " . $personnel['fullname'] . "</li>";
+            }
         }?>
         </ul>
         <?php if  ($occurrence['state'] =="Aberto"){
-            if ($user['position']!="Police"){?>
-                <button type="button" onclick="location.href='add_police.php?occurrence_id=<?=$occurrence['id']?>'"> Alocar polícia à Investigação </button>
+            if ($user['position']!="Polícia"){?>
+                <button type="button" onclick="location.href='add_personnel.php?occurrence_id=<?=$occurrence['id']?>&type=<?=$position?>'"> Alocar detetive à Investigação </button>
+            <?php }
+        }?> </div>
+    <?}?>
+
+
+    <div id='polices'> Polícias Alocados:
+        <?php $position="Polícia"?>
+        <ul>
+        <?php foreach ($personnels as $personnel){
+            if ($personnel['position']=="Polícia"){
+                 echo "<li> " . $personnel['fullname'] . "</li>";
+            }
+        }?>
+        </ul>
+        <?php if  ($occurrence['state'] =="Aberto"){
+            if ($user['position']!="Polícia" || $occurrence_type['relevance']==1){?>
+                <button type="button" onclick="location.href='add_personnel.php?occurrence_id=<?=$occurrence['id']?>&type=<?=$position?>'"> Alocar polícia à Investigação </button>
             <?php }
         }?>
     </div>
@@ -65,7 +91,7 @@ $chief=getUserByUsername($occurrence['chief_detective'])
     <div id="updates">
         <p> Atualizações: </p>
         <?php foreach ($updates as $update) { ?>
-            <span class="user"><?=getUserByUsername($update['username_personnel'])['fullname']?></span>
+            <span class="user"><?=getUserByUsername($update['username_personnel'])['position']." ". getUserByUsername($update['username_personnel'])['fullname']?></span>
             <p class="title"> <?=$update['title']?> </p>
             <p class="text"> <?=$update['text']?> </p>
             <p class="date_hour"> <?=$update['date_hour']?> </p>

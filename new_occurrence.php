@@ -15,7 +15,7 @@ $station = (int) GetStationByUsername($username);
 
 <body>
    <h1> Registo de uma Nova Ocorrência </h1>
-   <form action="action_occurence.php" method=post>
+   <form action="action_occurence.php?relevance=<?=$relevance?>" method=post>
        
        <div id="occ_type">
          <h3> Tipo de ocorrência: </h3>
@@ -52,7 +52,7 @@ $station = (int) GetStationByUsername($username);
 
       <div id="description">
            <h3> Descrição: </h3>
-           <textarea rows="4" cols="50" name="description" > Descreva sumariamente a ocorrência... </textarea>
+           <textarea rows="4" cols="50" name="description"  placeholder="Descreva sumariamente a ocorrência..."></textarea>
       </div> 
 
       <div id="state">

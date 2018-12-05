@@ -156,6 +156,11 @@ INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date,
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (3, 1, 'Homicídio em Matosinhos' ,'gaspar', 'Fechado', '2017-02-11','Matosinhos','Ontem morreu um homem em Matosinhos', 2);
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (4, 1, 'Homicídio em Gaia' ,'gaspar', 'Arquivado', '2017-02-11','Gaia','Ontem morreu um homem em Gaia', 2);
 
+INSERT INTO works (username_personnel, id_occurrence) VALUES ('patricia',1);
+INSERT INTO works (username_personnel, id_occurrence) VALUES ('amilcar',2);
+INSERT INTO works (username_personnel, id_occurrence) VALUES ('gaspar',3);
+INSERT INTO works (username_personnel, id_occurrence) VALUES ('gaspar',4);
+
 INSERT INTO person (id, name, gender, birthdate, naturality, adress, physical_description, weight, height) VALUES (1, 'Rita Hugo', 'Feminino', '1987-05-23', 'Porto', 'Rua Costa Cabral','Cabelo loiro, pele clara, olhos azuis', '55', '165');
 
 INSERT INTO referenced (id_person, id_occurrence, type) VALUES (1, 2, 'Vítima');

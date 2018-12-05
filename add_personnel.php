@@ -4,25 +4,25 @@ session_start();
 $username = $_SESSION['username'];
 $user = getUserByUsername($username);
 $id = $_GET['occurrence_id'];
+$type= $_GET['type'];
 $occurrence = getOccurrenceById($id);
 $station=$occurrence['station'];
-$position="Polícia";
-$polices=GetPolicesAvailable($position,$station,$id);
+$personnels=GetPersonnelAvailable($type,$station,$id);
 ?>
 
 <!DOCTYPE html>
 <html>
-<title><?php echo "Alocar Polícias" ?></title>
+<title><?php echo "Alocar ". $type ?></title>
 
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
-<form action="action_police.php?occurrence=<?=$id?>" method=post>     
-    <div id="add_police">
-        <h3> Polícias Disponiveis: </h3>
-        <p><select name="add_police">
-        <?php foreach ($polices as $police){?>
-            <option value=<?=$police['username']?>> <?= $police['fullname'] ?> </option>
+<form action="action_personnel_to_occ.php?occurrence=<?=$id?>" method=post>     
+    <div id="add_personnel">
+        <h3> <?=$type . "s"?> Disponiveis: </h3>
+        <p><select name="add_personnel">
+        <?php foreach ($personnels as $personnel){?>
+            <option value=<?=$personnel['username']?>> <?= $personnel['fullname'] ?> </option>
         <?php } ?> 
         </select></p>
     </div>

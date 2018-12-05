@@ -33,7 +33,7 @@ $user = getUserByUsername($username);
     }elseif ($user['position']=='Chefe de Esquadra'){
         $occurrences=GetOccurrencesByStation($station['id']);
     }elseif ($user['position']=='Detetive'){
-        $occurrences=GetOccurrencesByChiefAndMinorOccurrences($username,$station['id']);
+        $occurrences=GetOccurrencesByUsernameAndMinorOccurrences($username,$station['id']);
     }elseif ($user['position']=='Polícia'){
         $occurrences=GetOccurrencesByUsername($username);
     }

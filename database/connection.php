@@ -54,16 +54,16 @@ function GetUpdatesByStation($station) {
   return $query->fetchAll();
 }
 
-function GetOccurrencesByChiefAndMinorOccurrences($username,$station) {
+function GetOccurrencesByUsernameAndMinorOccurrences($username,$station) {
   global $db;
-  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN occ_type ON type = occ_type.id WHERE (chief_detective=? OR (station=? AND relevance=1)) ');
+  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN occ_type ON type = occ_type.id JOIN works ON occurrences.id = id_occurrence WHERE (username_personnel=? OR (station=? AND relevance=1)) ');
   $query->execute([$username,$station]);
   return $query->fetchAll();
 }
 
-function GetUpdatesByChiefAndMinorOccurrences($username,$station) {
+function GetUpdatesByUsernameAndMinorOccurrences($username,$station) {
   global $db;
-  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN occ_type ON occurrences.type = occ_type.id WHERE (chief_detective=? OR (station=? AND relevance=1)) ');
+  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN occ_type ON occurrences.type = occ_type.id JOIN works ON occurrences.id = works.id_occurrence WHERE (works.username_personnel=? OR (station=? AND relevance=1)) ');
   $query->execute([$username, $station]);
   return $query->fetchAll();
 }
@@ -124,18 +124,18 @@ function GetPersonnelStation($positions, $station){
   return $query->fetchAll();
 }
 
-function GetPolicesAvailable($position,$station,$id){
+function GetPersonnelAvailable($position,$station,$id){
   global $db;
-  $query = $db->prepare('SELECT * FROM personnel WHERE position = ? AND station= ? AND personnel.username NOT IN (SELECT username FROM personnel JOIN works ON username=username_personnel AND station=?)');
+  $query = $db->prepare('SELECT * FROM personnel WHERE position = ? AND station= ? AND personnel.username NOT IN (SELECT username FROM personnel JOIN works ON username=username_personnel AND id_occurrence=?)');
   $query->execute([$position,$station,$id]);
   return $query->fetchAll();
 }
 
 
-function AddWorksPolice($police_username,$occurrence){
+function AddWorksPersonnel($personnel_username,$occurrence){
   global $db;
   $stmt = $db->prepare('INSERT INTO works (username_personnel, id_occurrence) VALUES (?,?)');
-  return $stmt->execute([$police_username,$occurrence]);
+  return $stmt->execute([$personnel_username,$occurrence]);
 }
 
 function AddOccurrence1($type, $title, $state, $oppening_date, $location, $description, $station){
