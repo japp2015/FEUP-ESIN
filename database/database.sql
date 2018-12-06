@@ -85,7 +85,7 @@ CREATE TABLE works (
 );
 
 CREATE TABLE referenced_type (
-    name VARCHAR PRYMARY KEY
+    name VARCHAR PRIMARY KEY
 
 );
 
@@ -102,6 +102,17 @@ CREATE TABLE news (
     text VARCHAR NOT NULL,
     date DATE NOT NULL,
     id_occurrence INTEGER REFERENCES occurence
+);
+
+CREATE TABLE missing_person (
+    id INTEGER PRIMARY KEY,
+    gender VARCHAR NOT NULL,
+    name VARCHAR NOT NULL,
+    adress VARCHAR NOT NULL,
+    description VARCHAR NOT NULL,
+    local VARCHAR NOT NULL,
+    date VARCHAR NOT NULL,
+    id_station INTEGER REFERENCES stations
 );
 
 INSERT INTO occ_type VALUES (1,'Homicídio',2);

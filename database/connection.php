@@ -244,7 +244,7 @@ function getOccByMissingPerson($missing) {
 
 function GetStations() {
   global $db;
-  $query = $db->prepare('SELECT * FROM stations ');
+  $query = $db->prepare('SELECT * FROM stations');
   $query->execute();
   return $query->fetchAll();
 }
@@ -282,4 +282,10 @@ function GetNewById($id) {
   $query = $db->prepare('SELECT * FROM news WHERE id=?');
   $query->execute(array($id));
   return $query->fetch();
+}
+
+function AddMissingPerson($gender, $name, $adress, $physical_description, $local, $date, $station){
+  global $db;
+  $stmt = $db->prepare('INSERT INTO missing_person (id, gender, name, adress, description, local, date, id_station) VALUES (NULL,?,?,?,?,?,?,?)');
+  return $stmt->execute([$gender, $name, $adress, $physical_description, $local, $date, $station]);
 }

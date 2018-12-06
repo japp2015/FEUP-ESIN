@@ -1,3 +1,7 @@
+<?php 
+include_once('database/connection.php');
+?>
+
 <!DOCTYPE html>
 <html>
 <title>Polícia Nacional</title>
@@ -28,6 +32,15 @@
             <textarea name="physical_description" cols="40" rows="5"></textarea>
             <p>Dica: Use palavras ou frases chave separadas por ponto e vírgula.</p>
             <label>Local do desaparecimento:<input type="text" name="local"></label><br>
+            <label>Data do desaparecimento:<input type="date" name="date"></label><br>
+            <label>Associar esquadra:</label>
+            <p><select name="station">
+                    <?php
+                    $stations=GetStations();
+                    foreach ($stations as $station){?>
+                        <option value= <?=$station['id']?>> <?= $station['name'] ?> </option>
+                    <?php } ?>          
+            </select></p>
             <input type="submit" value="Submeter">
         </form>
     </div>
