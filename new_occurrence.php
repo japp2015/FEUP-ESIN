@@ -1,9 +1,15 @@
 <?php 
 include_once('database/connection.php');
 session_start();
+if (!isset($_SESSION['username'])){
+   die("Página Privada");
+}
 $username = $_SESSION['username'];
 $user = getUserByUsername($username);
 $relevance = $_GET['relevance'];
+if ($user['position']=='Diretor Nacional' || ($relevance==2 && $user['position']=='Polícia')){
+   die('Página não disponível para as atuais permissões');
+}
 $station = (int) GetStationByUsername($username);
 ?>
 
@@ -16,7 +22,7 @@ $station = (int) GetStationByUsername($username);
 <body>
    <h1> Registo de uma Nova Ocorrência </h1>
    <form action="action_occurence.php?relevance=<?=$relevance?>" method=post>
-       
+       <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
        <div id="occ_type">
          <h3> Tipo de ocorrência: </h3>
          <p> <select name="occ_type">
@@ -64,18 +70,6 @@ $station = (int) GetStationByUsername($username);
                <?php } ?>        
            </select></p>
       </div>
-
-       <?php if ($user['position']=="Diretor Nacional"){?>
-        <div id="station">
-           <h3> Esquadra: </h3>
-           <p> <select name="station">
-              <?php $stations=GetAllStations();
-              foreach ($stations as $station){?>
-                <option value= <?=$station['id']?>> <?= $station['name'] ?> </option>
-              <?php } ?>          
-           </select> </p>
-        </div>
-      <?php }?>
 
       <div><input type="submit" value="Submeter"></div>
     </form>

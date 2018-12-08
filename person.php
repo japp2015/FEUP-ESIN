@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if (!isset($_SESSION['username'])){
+    die("Página Privada");
+}
+?>
+
 <!-- PÁGINA GERAL DE PESSOA -->
 <!DOCTYPE html>
 <html>

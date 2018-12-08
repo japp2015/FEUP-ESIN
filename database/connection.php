@@ -1,10 +1,22 @@
 <?php $db = new PDO('sqlite:database/database.db'); 
 
+function generate_random_token() {
+  return bin2hex(openssl_random_pseudo_bytes(32));
+}
+
+function userExists($username) {
+  global $db;
+  $stmt = $db->prepare('SELECT * FROM personnel WHERE username = ? ');
+  $stmt->execute([$username]);
+  return $stmt->fetch();
+}
+
 function validateLogin($username, $password) {
   global $db;
-  $stmt = $db->prepare('SELECT * FROM personnel WHERE username = ? AND password = ? ');
-  $stmt->execute([$username, $password]);
-  return $stmt->fetch();
+  $stmt = $db->prepare('SELECT * FROM personnel WHERE username = ? ');
+  $stmt->execute([$username]);
+  $user = $stmt->fetch();
+  return password_verify($password , $user['password']);
 }
 
 function getUserByUsername($username) {
@@ -84,7 +96,7 @@ function getOcc_TypeById($occurrence) {
 
 function GetUpdatesByUsername($username) {
   global $db;
-  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN works ON occurrences.id = works.id_occurrence WHERE username_personnel=? ');
+  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN works ON occurrences.id = works.id_occurrence WHERE works.username_personnel=? ');
   $query->execute(array($username));
   return $query->fetchAll();
 }
@@ -218,7 +230,7 @@ function GetAllSchools(){
 function AddPersonnel($username, $password, $email, $fullname, $gender, $birthdate, $naturality, $start_service, $school, $position, $station){
   global $db;
   $stmt = $db->prepare('INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, station) VALUES (?,?,?,?,?,?,?,?,?,?,?)');
-  return $stmt->execute([$username, $password, $email, $fullname, $gender, $birthdate, $naturality, $start_service, $school, $position, $station]);
+  return $stmt->execute([$username, password_hash($password, PASSWORD_BCRYPT), $email, $fullname, $gender, $birthdate, $naturality, $start_service, $school, $position, $station]);
 }
 
 function getUserStation($username) {

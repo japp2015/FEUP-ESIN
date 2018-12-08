@@ -1,6 +1,14 @@
 <?php 
 include_once('database/connection.php');
 session_start();
+if (!isset($_SESSION['username'])){
+    die("Página Privada");
+}
+$username=$_SESSION['username'];
+$user = getUserByUsername($username);
+if (!isset($_GET['station']) || ($user['position']!='Diretor Nacional' && $user['station']!=$_GET['station']) ){
+    die("Não Autorizado");
+}
 $station = GetStationByID($_GET['station']);
 ?>
 

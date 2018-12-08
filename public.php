@@ -4,6 +4,8 @@ $missings = getMissingPeople();
 $news = GetNews();
 ?>
 
+
+
 <!DOCTYPE html>
 <html>
 <title>Polícia Nacional</title>

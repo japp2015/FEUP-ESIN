@@ -1,7 +1,14 @@
 <?php 
 include_once('database/connection.php');
 session_start();
+if (!isset($_SESSION['username'])){
+    die("Página Privada");
+}
 $username = $_SESSION['username'];
+$user = getUserByUsername($username);
+if ($user['position']!='Diretor Nacional'){
+   die('Página não disponível para as atuais permissões');
+}
 $stations = GetAllStations();
 ?>
 
@@ -15,6 +22,7 @@ $stations = GetAllStations();
     <section class = "add_station">
         <h2> Adicionar Nova Esquadra: </h2>
             <form action="action_station.php" method="post">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <div> Nome da Esquadra: <input type="text" placeholder="Nome da Esquadra" name="name"></div>
                 <div> Cidade: <input type="text" placeholder="Cidade" name="city"></div>
                 <div> Morada: <input type="text" placeholder="Morada" name="adress"></div>

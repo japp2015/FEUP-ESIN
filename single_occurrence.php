@@ -1,9 +1,52 @@
 <?php 
 include_once('database/connection.php');
 session_start();
+if (!isset($_SESSION['username'])){
+    die("Página Privada");
+} 
 $username = $_SESSION['username'];
 $user = getUserByUsername($username);
+
+if (!isset($_GET['id'])){
+    die("Não Autorizado");
+}
 $id = $_GET['id'];
+
+$validation=false;
+if ($user['position']=='Diretor Nacional'){
+    $user_occurrences=GetAllOccurrences();
+    foreach ($user_occurrences as $user_occurrence){
+        if ($id==$user_occurrence['id']){
+            $validation=true;
+        }
+    }
+}
+elseif($user['position']=='Chefe de Esquadra'){
+    $user_occurrences=GetOccurrencesByStation($user['station']);
+    foreach ($user_occurrences as $user_occurrence){
+        if ($id==$user_occurrence['id']){
+            $validation=true;
+        }
+    }
+}elseif ($user['position']=='Detetive'){
+    $user_occurrences=GetOccurrencesByUsernameAndMinorOccurrences($username,$station['id']);
+    foreach ($user_occurrences as $user_occurrence){
+        if ($id==$user_occurrence['id']){
+            $validation=true;
+        }
+    }
+}elseif ($user['position']=='Polícia'){
+    $user_occurrences=GetOccurrencesByUsername($username);
+    foreach ($user_occurrences as $user_occurrence){
+        if ($id==$user_occurrence['id']){
+            $validation=true;
+        }
+    }
+}
+if ($validation==false){
+    die("Não autorizado");
+}
+
 $occurrence = getOccurrenceById($id);
 $occurrence_type=getOcc_TypeById($occurrence['type']);
 $updates= getUpdatesByOccurrenceId($id);
@@ -37,6 +80,7 @@ $chief=getUserByUsername($occurrence['chief_detective'])
         <?php }
         if(isset($_GET['change'])){?>
             <form action="change_state.php?id=<?=$id?>" method=post>
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <p><select name="change_state">
                 <?php $states=GetStates();
                     foreach ($states as $state){
@@ -101,14 +145,17 @@ $chief=getUserByUsername($occurrence['chief_detective'])
         }?>
     </div>
 
+    <?php if ($user['position']!="Diretor Nacional" && $user['position']!="Chefe de Esquadra" ){?>
     <div id = "add_update">
         <p> Nova Atualização: </p>
         <form action="action_update.php?id_occurrence=<?=$id?>" method="post">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <div><input type="text" placeholder="Título" name="title"></div>
             <textarea name="text" cols="40" rows="5" placeholder="Atualização"></textarea>
             <div><input type="submit" value="Submeter"></div>
         </form>
     </div>
+    <?php } ?>
 
 </body>
 

@@ -3,6 +3,9 @@
 <?php 
 include_once('database/connection.php');
 session_start();
+if (!isset($_SESSION['username'])){
+    die("Página Privada");
+}
 $username = $_SESSION['username'];
 $user = getUserByUsername($username);
 ?>

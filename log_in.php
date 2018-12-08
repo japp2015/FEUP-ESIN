@@ -16,6 +16,7 @@
 <body>
     <div class="logIn">
         <form class="login_content" action="action_log_in.php" method="post">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
             <div class="input_container">
                 <input type="text" placeholder="Utilizador" name="username" required>

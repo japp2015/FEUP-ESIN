@@ -1,6 +1,9 @@
 <?php 
 include_once('database/connection.php');
 session_start();
+if (!isset($_SESSION['username'])){
+    die("Página Privada");
+}
 $username = $_SESSION['username'];
 $user = getUserByUsername($username);
 $notes = getNotesByUsername($username);
@@ -26,6 +29,7 @@ $notes = getNotesByUsername($username);
         <section class = "add_notes">
             <h2> Adicionar Nova Nota: </h2>
                 <form action="action_notes.php" method="post">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <div><input type="text" placeholder="Título da Nota" name="title"></div> <br>
                     <div><textarea rows="4" cols="50" name="note" placeholder="Texto da Nota..." > </textarea></div>
                     <div><input type="submit" value="Adicionar"></div>

@@ -1,6 +1,9 @@
 <?php
     include_once('database/connection.php'); 
-    
+    session_start();
+    if (!isset($_POST['csrf']) || $_SESSION['csrf'] !== $_POST['csrf']) {
+        die("Não autorizado.");
+    }
     $gender=$_POST['gender'];
     $name=$_POST['name'];
     $adress=$_POST['adress'];
