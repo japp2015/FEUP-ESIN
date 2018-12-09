@@ -301,3 +301,22 @@ function AddMissingPerson($gender, $name, $adress, $physical_description, $local
   $stmt = $db->prepare('INSERT INTO missing_person (id, gender, name, adress, description, local, date, id_station) VALUES (NULL,?,?,?,?,?,?,?)');
   return $stmt->execute([$gender, $name, $adress, $physical_description, $local, $date, $station]);
 }
+
+function AddNews($title, $text, $date){
+  global $db;
+  $stmt = $db->prepare('INSERT INTO news (id, title, text, date) VALUES (NULL,?,?,?)');
+  return $stmt->execute([$title, $text, $date]);
+}
+
+function GetMissingPeopleByUserStation($username) {
+  global $db;
+  $query = $db->prepare('SELECT * FROM missing_person JOIN personnel ON id_station=station WHERE username=?');
+  $query->execute(array($username));
+  return $query->fetchAll();
+}
+
+function DeleteMissingPersonById($missing) {
+  global $db;
+  $stmt = $db->prepare('DELETE FROM missing_person WHERE id = ?');
+  return $stmt->execute([$missing]);
+}

@@ -11,7 +11,12 @@
     $relevance= $_GET['relevance'];
     $occ_type=$_POST['occ_type'];
     $chief=$_POST['chief'];
-    
+
+    $missing=$_GET['missing'];
+    if ($missing!==-1) {
+        DeleteMissingPersonById($missing);
+    }
+
     if ($user['position']=="Detetive"){
         $chief=$username;
     }

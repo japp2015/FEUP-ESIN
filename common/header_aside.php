@@ -42,6 +42,9 @@ if (!isset($station)){
                 <?php if ($user['position']!="Diretor Nacional"){?>
                     <li><a href="station.php?station=<?=$station['id']?>">Esquadra</a></li>
                 <?php } ?>
+                <?php if ($user['position']=="Chefe de Esquadra"){?>
+                    <li><a href="missing_people.php">Pessoas desaparecidas</a></li>
+                <?php } ?>
                 <li><a href="search.php">Pesquisa</a></li>
             </ul>
     </aside>

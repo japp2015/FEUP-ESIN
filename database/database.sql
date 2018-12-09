@@ -100,8 +100,7 @@ CREATE TABLE news (
     id INTEGER PRIMARY KEY,
     title VARCHAR NOT NULL,
     text VARCHAR NOT NULL,
-    date DATE NOT NULL,
-    id_occurrence INTEGER REFERENCES occurence
+    date DATE NOT NULL
 );
 
 CREATE TABLE missing_person (
@@ -111,7 +110,7 @@ CREATE TABLE missing_person (
     adress VARCHAR NOT NULL,
     description VARCHAR NOT NULL,
     local VARCHAR NOT NULL,
-    date VARCHAR NOT NULL,
+    date DATE NOT NULL,
     id_station INTEGER REFERENCES stations
 );
 
@@ -176,6 +175,8 @@ INSERT INTO person (id, name, gender, birthdate, naturality, adress, physical_de
 
 INSERT INTO referenced (id_person, id_occurrence, type) VALUES (1, 2, 'Vítima');
 
-INSERT INTO news (id, title, text, date, id_occurrence) VALUES (1, 'Homicídio em Matosinhos resolvido', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis diam ipsum, varius luctus metus quis, ornare faucibus tellus. Praesent at tellus quis felis tincidunt viverra. Cras egestas vitae elit in posuere. Etiam sed tellus ipsum. Proin sagittis ligula sed velit venenatis feugiat. Nunc placerat laoreet arcu, a volutpat odio tincidunt in. Aenean finibus, tortor id aliquet auctor, magna metus consectetur augue, gravida elementum nisl augue luctus mauris. Sed et odio vitae est sollicitudin fringilla. Suspendisse ante tortor, condimentum at placerat nec, vestibulum vel nibh.
+INSERT INTO news (id, title, text, date) VALUES (1, 'Homicídio em Matosinhos resolvido', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis diam ipsum, varius luctus metus quis, ornare faucibus tellus. Praesent at tellus quis felis tincidunt viverra. Cras egestas vitae elit in posuere. Etiam sed tellus ipsum. Proin sagittis ligula sed velit venenatis feugiat. Nunc placerat laoreet arcu, a volutpat odio tincidunt in. Aenean finibus, tortor id aliquet auctor, magna metus consectetur augue, gravida elementum nisl augue luctus mauris. Sed et odio vitae est sollicitudin fringilla. Suspendisse ante tortor, condimentum at placerat nec, vestibulum vel nibh.
 
-Curabitur in iaculis nibh. Curabitur vitae urna purus. Suspendisse nec ipsum et ex finibus sodales in id nisi. Praesent diam nulla, mattis non accumsan id, tristique at libero. Praesent tempor porta risus, sit amet iaculis nibh tristique sit amet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras egestas elit et odio rutrum viverra. Morbi faucibus at mauris eget sollicitudin.', '2018-09-13', 3);
+Curabitur in iaculis nibh. Curabitur vitae urna purus. Suspendisse nec ipsum et ex finibus sodales in id nisi. Praesent diam nulla, mattis non accumsan id, tristique at libero. Praesent tempor porta risus, sit amet iaculis nibh tristique sit amet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras egestas elit et odio rutrum viverra. Morbi faucibus at mauris eget sollicitudin.', '2018-09-13');
+
+INSERT INTO missing_person (id, gender, name, adress, description, local, date, id_station) VALUES (1, 'male', 'João Meneses', 'Rua X', 'Óculos', 'Porto', 2018-12-04, 1);

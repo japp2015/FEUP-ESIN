@@ -1,5 +1,6 @@
 <?php 
 include_once('database/connection.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,7 @@ include_once('database/connection.php');
     <h1>Submeter pessoa desaparecida</h1>
     <div class="image_container">
         <form class="edit_image" action="action_upload.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+        <!--<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">-->
         <h3>Imagem</h3>
         <label>Escolha um ficheiro</label>
             <input type="file" name="image">
@@ -24,7 +25,7 @@ include_once('database/connection.php');
     </div>
     <div class="person_info">
         <form id="missing_person" action="missing_person_action.php" method="post">
-            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+            <!--<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">-->
             <label>Sexo:</label>
             <label><input type="radio" name="gender" value="male">Masculino</label>
             <label><input type="radio" name="gender" value="female">Feminino</label><br>
