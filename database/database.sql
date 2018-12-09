@@ -9,7 +9,8 @@ CREATE TABLE personnel (
     start_service date NOT NULL,
     school VARCHAR REFERENCES schools NOT NULL,
     position VARCHAR REFERENCES positions NOT NULL,
-    station INTEGER REFERENCES stations
+    station INTEGER REFERENCES stations,
+    profile_pic VARCHAR
 );
 
 CREATE TABLE person (

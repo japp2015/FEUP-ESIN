@@ -1,5 +1,5 @@
 <!-- FAZER UM FOOTER TIPO O HEADER. QUE É COMUM-->
-
+ 
 <?php 
 include_once('database/connection.php');
 session_start();
@@ -19,6 +19,9 @@ $user = getUserByUsername($username);
 <body>
     <div id="personal_info">
         <h1><?php echo $user['fullname']?></h1>
+        <p> <?php if (isset($user['profile_pic'])) { ?>
+            <img src="profile_pic/<?=$username?>.jpg">
+        <?php }?></p>
         <p> Sexo: <?php echo $user['gender'] ?></p>
         <p> Data de nascimento: <?php echo $user['birthdate'] ?>  </p>
         <p> Naturalidade: <?php echo $user['naturality'] ?> </p>

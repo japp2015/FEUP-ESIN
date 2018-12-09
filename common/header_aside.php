@@ -46,6 +46,13 @@ if (!isset($station)){
                     <li><a href="missing_people.php">Pessoas desaparecidas</a></li>
                 <?php } ?>
                 <li><a href="search.php">Pesquisa</a></li>
+                <li> <a href="main.php?definitions=1"> Definições </a> 
+                <?php if(isset($_GET['definitions'])){?>
+                    <ul>
+                    <li><a href="change_password.php">Mudar Password</a></li>
+                    <li><a href="UpdateProfileImage.php">Atualizar Foto Pessoal</a></li>
+                    </ul>
+                <?php } ?> </li>
             </ul>
     </aside>
 </html>

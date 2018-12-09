@@ -15,7 +15,7 @@ session_start();
 <body>
     <h1>Submeter pessoa desaparecida</h1>
     <div class="image_container">
-        <form class="edit_image" action="action_upload.php" method="post" enctype="multipart/form-data">
+        <form class="edit_image" action="action_upload_person_pic.php" method="post" enctype="multipart/form-data">
         <!--<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">-->
         <h3>Imagem</h3>
         <label>Escolha um ficheiro</label>
@@ -24,7 +24,7 @@ session_start();
         </form>
     </div>
     <div class="person_info">
-        <form id="missing_person" action="missing_person_action.php" method="post">
+        <form id="missing_person" action="action_missing_person.php" method="post">
             <!--<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">-->
             <label>Sexo:</label>
             <label><input type="radio" name="gender" value="male">Masculino</label>

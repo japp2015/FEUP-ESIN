@@ -19,6 +19,18 @@ function validateLogin($username, $password) {
   return password_verify($password , $user['password']);
 }
 
+function changePassword($new_password, $username) {
+  global $db;
+  $stmt = $db->prepare('UPDATE personnel SET password = ? WHERE username = ? ');
+  return $stmt->execute([password_hash($new_password, PASSWORD_BCRYPT), $username]);
+}
+
+function UploadProfilePicture($pic, $username) {
+  global $db;
+  $stmt = $db->prepare('UPDATE personnel SET profile_pic = ? WHERE username = ?  ');
+  return $stmt->execute([$pic, $username]);
+}
+
 function getUserByUsername($username) {
   global $db;
   $query = $db->prepare('SELECT * FROM personnel WHERE username = ?');
