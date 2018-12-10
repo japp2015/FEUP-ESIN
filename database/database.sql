@@ -14,7 +14,7 @@ CREATE TABLE personnel (
 );
 
 CREATE TABLE person (
-    id INTEGER PRIMARY KEY,
+    nif INTEGER PRIMARY KEY,
     name VARCHAR NOT NULL,
     gender VARCHAR NOT NULL,
     birthdate date NOT NULL,
@@ -91,10 +91,10 @@ CREATE TABLE referenced_type (
 );
 
 CREATE TABLE referenced (
-    id_person INTEGER REFERENCES person,
+    nif_person INTEGER REFERENCES person,
     id_occurrence INTEGER REFERENCES occurrence,
     type VARCHAR REFERENCES referenced_type NOT NULL,
-    PRIMARY KEY (id_person, id_occurrence)
+    PRIMARY KEY (nif_person, id_occurrence)
 );
 
 CREATE TABLE news (
@@ -139,11 +139,8 @@ INSERT INTO states VALUES ('Arquivado');
 
 INSERT INTO schools VALUES ('Escola Prática de Polícia');
 
-INSERT INTO referenced_type VALUES ('Testemunha');
 INSERT INTO referenced_type VALUES ('Vítima');
-INSERT INTO referenced_type VALUES ('Suspeito');
-INSERT INTO referenced_type VALUES ('Queixoso');
-INSERT INTO referenced_type VALUES ('Acusado');
+INSERT INTO referenced_type VALUES ('Culpado');
 
 INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position) VALUES ('japp', '$2y$10$FsFF32jKd0dUvlCLVCICM.ZhMtOOeCXArg3FSt1WfY2sqRR9AccHW', 'joao@gmail.com', 'João Afonso Pereira', 'Masculino', '1997-12-06', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Diretor Nacional');
 INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, station) VALUES ('maria', '$2y$10$LJpkGpC/Eldt6UjQyPJv3uXxvHyosNyOvKzFram7IJgA1lFFmbs2W', 'maria@gmail.com', 'Maria João Ribeiro', 'Feminino', '1997-11-02', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Chefe de Esquadra',1);
@@ -172,9 +169,9 @@ INSERT INTO works (username_personnel, id_occurrence) VALUES ('amilcar',2);
 INSERT INTO works (username_personnel, id_occurrence) VALUES ('gaspar',3);
 INSERT INTO works (username_personnel, id_occurrence) VALUES ('gaspar',4);
 
-INSERT INTO person (id, name, gender, birthdate, naturality, adress, physical_description, weight, height) VALUES (1, 'Rita Hugo', 'Feminino', '1987-05-23', 'Porto', 'Rua Costa Cabral','Cabelo loiro, pele clara, olhos azuis', '55', '165');
+INSERT INTO person (nif, name, gender, birthdate, naturality, adress, physical_description, weight, height) VALUES (245769142, 'Rita Hugo', 'Feminino', '1987-05-23', 'Porto', 'Rua Costa Cabral','Cabelo loiro, pele clara, olhos azuis', '55', '165');
 
-INSERT INTO referenced (id_person, id_occurrence, type) VALUES (1, 2, 'Vítima');
+INSERT INTO referenced (nif_person, id_occurrence, type) VALUES (245769142, 2, 'Vítima');
 
 INSERT INTO news (id, title, text, date) VALUES (1, 'Homicídio em Matosinhos resolvido', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis diam ipsum, varius luctus metus quis, ornare faucibus tellus. Praesent at tellus quis felis tincidunt viverra. Cras egestas vitae elit in posuere. Etiam sed tellus ipsum. Proin sagittis ligula sed velit venenatis feugiat. Nunc placerat laoreet arcu, a volutpat odio tincidunt in. Aenean finibus, tortor id aliquet auctor, magna metus consectetur augue, gravida elementum nisl augue luctus mauris. Sed et odio vitae est sollicitudin fringilla. Suspendisse ante tortor, condimentum at placerat nec, vestibulum vel nibh.
 

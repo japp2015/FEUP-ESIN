@@ -25,7 +25,7 @@ $people = GetMissingPeopleByUserStation($username);
             echo '<p>' . $person['description'] . '</p>';
             echo '<p>' . $person['local'] . '</p>';
             echo '<p>' . $person['date'] . '</p>'; ?>
-            <button type="button" onclick="location.href='new_occurrence.php?id=<?=$person['id']?>&local=<?=$person['local']?>&name=<?=$person['name']?>&date=<?=$person['date']?>&local=<?=$person['local']?>'">Criar ocorrência</button>
+            <button type="button" onclick="location.href='new_occurrence.php?id=<?=$person['id']?>&adress=<?=$person['adress']?>&name=<?=$person['name']?>&date=<?=$person['date']?>&local=<?=$person['local']?>&description=<?=$person['description']?>'">Criar ocorrência</button>
         <?}?>
     </ul>
 </body>

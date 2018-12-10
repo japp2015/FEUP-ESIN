@@ -156,10 +156,10 @@ function GetPersonnelAvailable($position,$station,$id){
 }
 
 
-function AddWorksPersonnel($personnel_username,$occurrence){
+function AddWorksPersonnel($personnel_username, $occurrence){
   global $db;
   $stmt = $db->prepare('INSERT INTO works (username_personnel, id_occurrence) VALUES (?,?)');
-  return $stmt->execute([$personnel_username,$occurrence]);
+  return $stmt->execute([$personnel_username, $occurrence]);
 }
 
 function AddOccurrence1($type, $title, $state, $oppening_date, $location, $description, $station){
@@ -254,14 +254,14 @@ function getUserStation($username) {
 
 function getMissingPeople() {
   global $db;
-  $query = $db->prepare('SELECT person.* FROM person JOIN referenced ON person.id=id_person JOIN occurrences ON id_occurrence=occurrences.id WHERE occurrences.state=? AND occurrences.type=? AND referenced.type=?');
+  $query = $db->prepare('SELECT person.* FROM person JOIN referenced ON person.nif=nif_person JOIN occurrences ON id_occurrence=occurrences.id WHERE occurrences.state=? AND occurrences.type=? AND referenced.type=?');
   $query->execute(array('Aberto', 12, 'Vítima'));
   return $query->fetchAll();
 }
 
 function getOccByMissingPerson($missing) {
   global $db;
-  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN referenced ON occurrences.id=id_occurrence JOIN person ON id_person=person.id WHERE occurrences.state=? AND occurrences.type=? AND referenced.type=?');
+  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN referenced ON occurrences.id=id_occurrence JOIN person ON nif_person=person.nif WHERE occurrences.state=? AND occurrences.type=? AND referenced.type=?');
   $query->execute(array('Aberto', 12, 'Vítima'));
   return $query->fetch();
 }
@@ -322,7 +322,7 @@ function AddNews($title, $text, $date){
 
 function GetMissingPeopleByUserStation($username) {
   global $db;
-  $query = $db->prepare('SELECT * FROM missing_person JOIN personnel ON id_station=station WHERE username=?');
+  $query = $db->prepare('SELECT missing_person.* FROM missing_person JOIN personnel ON id_station=station WHERE username=?');
   $query->execute(array($username));
   return $query->fetchAll();
 }
@@ -340,4 +340,16 @@ function FindPerson($gender,$name,$adress) {
   SELECT * FROM person WHERE adress LIKE '%$adress%' ORDER BY id DESc");
   $stmt->execute();
   return $stmt->fetchAll();
+}
+
+function AddPerson($victim_nif, $victim_name, $victim_gender, $victim_birthdate, $victim_naturality, $victim_adress, $victim_description, $victim_weight, $victim_height) {
+  global $db;
+  $stmt = $db->prepare('INSERT INTO person (nif, name, gender, birthdate, naturality, adress, physical_description, weight, height) VALUES (?,?,?,?,?,?,?,?,?)');
+  return $stmt->execute([$victim_nif, $victim_name, $victim_gender, $victim_birthdate, $victim_naturality, $victim_adress, $victim_description, $victim_weight, $victim_height]);
+}
+
+function AddReference($victim_nif, $occurrence_id, $type) {
+  global $db;
+  $stmt = $db->prepare('INSERT INTO referenced (nif_person, id_occurrence, type) VALUES (?,?,?)');
+  return $stmt->execute([$victim_nif, $occurrence_id, $type]);
 }

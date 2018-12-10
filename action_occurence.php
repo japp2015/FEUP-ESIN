@@ -27,15 +27,32 @@
     $state=$_POST['state'];
     $date=date("Y-m-d");
 
+    $victim_nif=$_POST['victim_nif'];
+    $victim_name=$_POST['victim_name'];
+    $victim_gender=$_POST['victim_gender'];
+    $victim_birthdate=$_POST['victim_birthdate'];
+    $victim_naturality=$_POST['victim_naturality'];
+    $victim_adress=$_POST['victim_adress'];
+    $victim_description=$_POST['victim_description'];
+    $victim_height=$_POST['victim_height'];
+    $victim_weight=$_POST['victim_weight'];
+    $type="Vítima";
+
+    AddPerson($victim_nif, $victim_name, $victim_gender, $victim_birthdate, $victim_naturality, $victim_adress, $victim_description, $victim_height, $victim_weight);
+
     if ($relevance==1){
         AddOccurrence1($occ_type, $title, $state, $date, $location, $description, $station);
         $last_occurrence_id = $db->lastInsertId();
         AddWorksPersonnel($username,$last_occurrence_id );
-        header('Location: main.php'); 
+        AddReference($victim_nif, $last_occurrence_id, $type);
+
 
     } elseif ($relevance==2){
         AddOccurrence2($occ_type, $title, $chief, $state, $date, $location, $description, $station);
-        header('Location: main.php'); 
+        $last_occurrence_id = $db->lastInsertId();
+        AddReference($victim_nif, $last_occurrence_id, $type);
     }
-    
+
+
+    header('Location: main.php'); 
 ?>  

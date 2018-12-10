@@ -27,13 +27,12 @@ session_start();
         <form id="missing_person" action="action_missing_person.php" method="post">
             <!--<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">-->
             <label>Sexo:</label>
-            <label><input type="radio" name="gender" value="male">Masculino</label>
-            <label><input type="radio" name="gender" value="female">Feminino</label><br>
+            <label><input type="radio" name="gender" value="Masculino">Masculino</label>
+            <label><input type="radio" name="gender" value="Feminino">Feminino</label><br>
             <label>Nome:<input type="text" name="name"></label><br>
             <label>Morada:<input type="text" name="adress"></label><br>
             <label>Descrição física:</label><br>
-            <textarea name="physical_description" cols="40" rows="5"></textarea>
-            <p>Dica: Use palavras ou frases chave separadas por ponto e vírgula.</p>
+            <textarea name="physical_description" cols="40" rows="5" placeholder="Descrição física"></textarea><br>
             <label>Local do desaparecimento:<input type="text" name="local"></label><br>
             <label>Data do desaparecimento:<input type="date" name="date"></label><br>
             <label>Associar esquadra:</label>
