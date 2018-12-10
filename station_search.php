@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])){
 </head>
 
 <?php include_once('common/header_aside.php'); ?>
-
+<body>
 <h1>Pesquisa de Esquadra</h1>
 
 <form action="occurence_search_result.php" method="post">
@@ -20,4 +20,7 @@ if (!isset($_SESSION['username'])){
     <label>Cidade:<input type="text" name="age"></label><br>
     <input type="submit" value="Pesquisar">
 </form>
+</body>
+
+<?php include_once('common/footer.php'); ?>
 </html>

@@ -26,4 +26,6 @@ $stations = GetAllStations();
             <?php } ?>
     </section>
 </body>
+
+<?php include_once('common/header_aside.php'); ?>
 </html>

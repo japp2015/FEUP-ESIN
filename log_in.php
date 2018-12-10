@@ -36,7 +36,8 @@
             } ?>
         </div>
     </div>
-
+    
 </body>
 
+<?php include_once('common/footer.php'); ?>
 </html>

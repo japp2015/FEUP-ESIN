@@ -49,4 +49,6 @@ $station = GetStationByID($_GET['station']);
             </ul>
     </div>
 </body>
+
+<?php include_once('common/footer.php'); ?>
 </html>

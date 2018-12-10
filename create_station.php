@@ -30,8 +30,7 @@ $stations = GetAllStations();
                 <div> <input type="submit" value="Adicionar"></div>
             </form>
     </section>
-            
-    </section>
-  
 </body>
+
+<?php include_once('common/footer.php'); ?>
 </html>

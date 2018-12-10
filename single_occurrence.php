@@ -159,4 +159,5 @@ $chief=getUserByUsername($occurrence['chief_detective'])
 
 </body>
 
+<?php include_once('common/footer.php'); ?>
 </html>

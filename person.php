@@ -37,4 +37,6 @@ if (!isset($_SESSION['username'])){
     </div>
 
 </body>
+
+<?php include_once('common/footer.php'); ?>
 </html>

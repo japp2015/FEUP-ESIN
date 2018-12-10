@@ -9,11 +9,11 @@ if (!isset($_SESSION['username'])){
     die("Página Privada");
 }
 ?>
-
 </head>
 
 <?php include_once('common/header_aside.php'); ?>
 
+<body>
 <h1>Pesquisa de ocorrência</h1>
 
 <form action="occurence_search_result.php" method="post">
@@ -28,4 +28,7 @@ if (!isset($_SESSION['username'])){
     <p>Dica: Use palavras ou frases chave separadas por ponto e vírgula.</p>
     <input type="submit" value="Search">
 </form>
+</body>
+
+<?php include_once('common/footer.php'); ?>
 </html>

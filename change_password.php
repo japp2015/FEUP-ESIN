@@ -10,10 +10,9 @@ $username = $_SESSION['username'];
 <!DOCTYPE html>
 <title> Mudar Password</title>
 
+<?php include_once('common/header_aside.php'); ?>
+
 <body>
-
-    <?php include_once('common/header_aside.php'); ?>
-
     <div class="change_password">
         <form class="edit_content" action='action_change_password.php' method='post'>
             <div class="change-password-title">
@@ -45,6 +44,8 @@ $username = $_SESSION['username'];
 
         </form>
     </div>
+    
 </body>
 
+<?php include_once('common/footer.php'); ?>
 </html>

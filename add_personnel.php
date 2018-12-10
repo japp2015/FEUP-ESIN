@@ -37,7 +37,7 @@ $personnels=GetPersonnelAvailable($type,$station,$id);
     <div><input type="submit" value="Submeter"></div>
 
 </form>
-
 </body>
 
+<?php include_once('common/footer.php'); ?>
 </html>

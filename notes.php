@@ -37,6 +37,6 @@ $notes = getNotesByUsername($username);
         </section>
             
     </div>
-  
 </body>
+<?php include_once('common/footer.php'); ?>
 </html>

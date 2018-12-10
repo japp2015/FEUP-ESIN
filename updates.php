@@ -35,6 +35,7 @@ if ($user['position']=='Diretor Nacional'){
                 <p class="author"><?=$author['position']." ".$author['fullname']?> </p>
     <?php } ?>
     </div>
-  
 </body>
+
+<?php include_once('common/header_aside.php'); ?>
 </html>

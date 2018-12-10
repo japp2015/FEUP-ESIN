@@ -332,3 +332,12 @@ function DeleteMissingPersonById($missing) {
   $stmt = $db->prepare('DELETE FROM missing_person WHERE id = ?');
   return $stmt->execute([$missing]);
 }
+
+function FindPerson($gender,$name,$adress) {
+  global $db;
+  $stmt = $db->prepare("SELECT * FROM person WHERE gender  LIKE '%$gender%' UNION 
+  SELECT * FROM person WHERE name LIKE '%$name%' UNION
+  SELECT * FROM person WHERE adress LIKE '%$adress%' ORDER BY id DESc");
+  $stmt->execute();
+  return $stmt->fetchAll();
+}

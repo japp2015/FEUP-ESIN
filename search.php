@@ -1,20 +1,21 @@
 
 <!DOCTYPE html>
-<html lang="en-US">
+<html>
 
 <head>
 <?php session_start(); 
 if (!isset($_SESSION['username'])){
     die("Página Privada");
 }
+$username = $_SESSION['username'];
 ?>
 
 </head>
 
 <?php include_once('common/header_aside.php'); ?>
 
-<h1>Pesquisa</h1>
 <body>
+    <h1>Pesquisa</h1>
     <h3>Pesquisa Orientada</h3>
     <ul>
         <li><a href="person_search.php">Pessoa</a></li> 
@@ -32,6 +33,8 @@ if (!isset($_SESSION['username'])){
         </fieldset>
     </form>
 </body>
+
+<?php include_once('common/footer.php'); ?>
 </html>
 
 

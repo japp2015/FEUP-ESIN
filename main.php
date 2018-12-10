@@ -1,6 +1,4 @@
-<!-- FAZER UM FOOTER TIPO O HEADER. QUE É COMUM-->
- 
-<?php 
+ <?php 
 include_once('database/connection.php');
 session_start();
 if (!isset($_SESSION['username'])){
@@ -70,4 +68,6 @@ $user = getUserByUsername($username);
 
     <? } ?>
 </body>
+
+<?php include_once('common/footer.php'); ?>
 </html>

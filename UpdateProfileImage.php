@@ -9,10 +9,12 @@ $user = getUserByUsername($username);
 ?>
 
 <!DOCTYPE html>
+<html>
 <title> Atualizar Foto Pessoal </title>
 
+<?php include_once('common/header_aside.php'); ?>
+
 <body>
-    <?php include_once('common/header_aside.php'); ?>
     <div class="image_container">
         <form class="edit_image" action="action_upload_profile_pic.php" method="post" enctype="multipart/form-data" >
         <h3>Atualizar Foto Pessoal</h3>
@@ -22,9 +24,8 @@ $user = getUserByUsername($username);
             <p><input type="file" name="image" id="imageUpload" style="display: none"> </p>
             <p><input type="submit" value="Submeter Imagem"></p>
         </form>
-    </div>
-
-    
+    </div>  
 </body>
 
+<?php include_once('common/footer.php'); ?>
 </html>

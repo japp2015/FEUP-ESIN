@@ -28,4 +28,8 @@ $people = GetMissingPeopleByUserStation($username);
             <button type="button" onclick="location.href='new_occurrence.php?id=<?=$person['id']?>&local=<?=$person['local']?>&name=<?=$person['name']?>&date=<?=$person['date']?>&local=<?=$person['local']?>'">Criar ocorrência</button>
         <?}?>
     </ul>
+</body>
+
+<?php include_once('common/footer.php'); ?>
+</html>
 

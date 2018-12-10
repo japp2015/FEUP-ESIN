@@ -34,4 +34,8 @@
     <div id="news_text">
         <?php echo "<p>" . $new['text'] . "</p>"; ?>
     </div>
+
 </body>
+
+<?php include_once('common/footer.php'); ?>
+</html>

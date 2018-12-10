@@ -34,7 +34,10 @@ if ($user['position']=='Polícia' || $user['position']=='Detetive' || ($position
             <div> Confirme Password: <input type="password" placeholder="Confirme a password" pattern=".{6,}" title="Pelo menos 8 caracteres" name="confirmed_password" required> </div>
             <div> E-mail: <input type="email" placeholder="E-mail" name="email" required> </div>
             <div> Nome Completo: <input type="text" placeholder="Nome Completo" name="fullname" required> </div>
-            <div> Género: <input type="text" placeholder="Género" name="gender" required> </div>
+            <div> Género: 
+                <input type="radio" name="gender" value="Masculino" required> Masculino
+                <input type="radio" name="gender" value="Feminino"> Feminino
+            </div>
             <div> Naturalidade: <input type="text" placeholder="Naturalidade" name="naturality" required> </div>
             <div> Data de Nascimento: <input type="date"  max="2000-12-31" min="1940-12-31" name="birthdate" required> </div>
             
@@ -65,4 +68,6 @@ if ($user['position']=='Polícia' || $user['position']=='Detetive' || ($position
         </form>
     </section>
 </body>
+
+<?php include_once('common/footer.php'); ?>
 </html>

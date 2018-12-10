@@ -15,6 +15,9 @@ if (isset($_GET['relevance'])) {
 }
 else {
    $relevance=2;
+   if(!isset($_GET['relevance']){
+      die('Página Privada')
+   }
    $missing=$_GET['id'];
 }
 $station = (int) GetStationByUsername($username);
@@ -99,5 +102,8 @@ $station = (int) GetStationByUsername($username);
 
       <div><input type="submit" value="Submeter"></div>
     </form>
+   
 </body>
+
+<?php include_once('common/footer.php'); ?>
 </html>

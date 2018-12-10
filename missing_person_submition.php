@@ -47,4 +47,7 @@ session_start();
             <input type="submit" value="Submeter">
         </form>
     </div>
+    
 </body>
+<?php include_once('common/footer.php'); ?>
+</html>

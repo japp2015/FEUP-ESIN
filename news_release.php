@@ -33,3 +33,9 @@
         <textarea name="text" cols="65" rows="8" placeholder="Texto da notícia"></textarea><br>
         <input type="submit" value="Libertar">
     </form>
+</div>
+
+</body>
+<?php include_once('common/footer.php'); ?>
+</html>
+
