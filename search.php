@@ -27,8 +27,7 @@ $username = $_SESSION['username'];
         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <fieldset>
             <legend><h3>Pesquisa Geral</h3></legend>
-            <textarea name="general_search" cols="40" rows="5"></textarea>
-            <p>Dica: Use palavras ou frases chave separadas por ponto e vírgula.</p>
+            <textarea name="general_search" cols="40" rows="5"></textarea><br>
             <input type="submit" value="Pesquisar">
         </fieldset>
     </form>

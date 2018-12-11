@@ -7,26 +7,15 @@
     $username = $_SESSION['username'];
     $user = getUserByUsername($username);
  
-    $title=$type=$location=$state=$case_description=""; 
-    if(!empty($_POST["title"])){
-        $title = $_POST["title"];
-    }   
-    
-    if(!empty($_POST["type"])){
-        $type = $_POST["type"];
+    if (!isset($_POST['csrf']) || $_SESSION['csrf'] !== $_POST['csrf']) {
+        die('Não autorizado');
     } 
 
-    if(!empty($_POST["case_description"])){
-        $case_description = $_POST["case_description"];  
-    }
-
-    if(!empty($_POST["location"])){
-        $location = $_POST["location"];  
-    }
-
-    if(!empty($_POST["state"])){
-        $state = $_POST["state"];  
-    }
+    $title = $_POST["title"];
+    $type = $_POST["type"];
+    $case_description = $_POST["case_description"];  
+    $location = $_POST["location"];  
+    $state = $_POST["state"];  
     
     if ($user['position']=='Diretor Nacional'){
         $occurrences=SearchOccurrences($title, $type, $location, $state, $case_description);
@@ -42,7 +31,7 @@
 <!DOCTYPE html>
 <html>
 
-<title> Pesquisa de Pessoas </title>
+<title> Pesquisa de Ocurrência </title>
 
 <?php include_once('common/header_aside.php'); ?>
 
@@ -59,7 +48,7 @@
             <? }
         } ?>
         
-    </div>
+    </div> 
 
 </body>
 

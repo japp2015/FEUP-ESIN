@@ -6,22 +6,21 @@
     }
     $username = $_SESSION['username'];
     
-    $gender=$name=$adress=$physical_description=""; 
-    if(!empty($_POST["gender"])){
-        $gender = $_POST["gender"];
-    }   
-    
-    if(!empty($_POST["name"])){
-        $name = $_POST["name"];
+    if (!isset($_POST['csrf']) || $_SESSION['csrf'] !== $_POST['csrf']) {
+        die('Não autorizado');
     } 
-
-    if(!empty($_POST["adress"])){
-        $adress = $_POST["adress"];  
+    
+    if (isset($_POST["gender"])){
+        $gender = $_POST["gender"]; 
     }
-
-    if(!empty($_POST["physical_description"])){
-        $physical_description = $_POST["physical_description"];  
+    else {
+        $gender="";
     }
+    
+    $name = $_POST["name"];
+    $adress = $_POST["adress"];  
+    $physical_description = $_POST["physical_description"];  
+  
     $person = SearchPerson($gender, $name, $adress,$physical_description);   
     
 ?>
@@ -33,7 +32,7 @@
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
-    <div class="search_results">
+    <div class="search_results"> 
 
         <?php if (empty($person) ) {
             echo  "Não foram encontrados resultados para a sua pesquisa.";
