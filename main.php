@@ -10,11 +10,18 @@ $user = getUserByUsername($username);
 
 <!DOCTYPE html>
 <html>
-<title><?php echo $user['position'] . ' | ' . $user['fullname'] ?></title>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo $user['position'] . ' | ' . $user['fullname'] ?></title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+</head>
+
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
-<body>
+<body class="body">
     <div id="personal_info">
         <h1><?php echo $user['fullname']?></h1>
         <p> <?php if (isset($user['profile_pic'])) { ?>
@@ -68,6 +75,6 @@ $user = getUserByUsername($username);
 
     <? } ?>
 </body>
-
 <?php include_once('common/footer.php'); ?>
+</div>
 </html>

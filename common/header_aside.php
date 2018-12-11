@@ -8,12 +8,12 @@ if (!isset($station)){
 
 <!DOCTYPE html>
 <html lang="en-US">
-    <header>
-        <a href="main.php"><h2>Polícia Nacional</h2></a>
+    <header class="header">
+        <div class='title'> <a href="main.php"><h2>Polícia Nacional</h2></a></div>
+        <div class='log_out'> <a href="log_out.php">Terminar Sessão</a></div>
     </header>
-    <aside id="right_bar"> 
+    <aside class="right_bar"> 
             <ul>
-                <li><a href="log_out.php">Terminar Sessão</a></li> 
                 <li><a href="updates.php">Atualizações</a></li> 
                 <li><a href="notes.php">Notas</a></li>
                 <?php if ($user['position']!="Diretor Nacional"){?>

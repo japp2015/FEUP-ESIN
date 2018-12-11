@@ -17,7 +17,7 @@
     padding: 3em;
     padding-bottom: 3em;
     padding-top: 3em;
-    border-color: #6290C3;
+    border-color: #7A93AC;
 }
 
 .input_container {
@@ -32,7 +32,7 @@ input {
 }
 
 .btn {
-    background-color: #6290C3;
+    background-color: #7A93AC;
     border: none;
     color: white;
     padding: 12px 75px;
@@ -49,5 +49,5 @@ input {
 }
 
 .btn:hover {
-    background-color: #A6BED8;
+    background-color: #617073;
 }

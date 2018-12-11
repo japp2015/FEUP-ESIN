@@ -1,0 +1,27 @@
+.header { grid-area: header; }
+.right_bar { grid-area: right_bar; }
+.body{grid-area: body;}
+.footer{grid-area: footer;}
+
+
+.container{
+    display: grid;
+    grid-template-areas:
+    'header header header header'
+    'body body body right_bar'
+    'footer footer footer footer';
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.title { grid-area: title; }
+.log_out{ grid-area: log_out; }
+
+.header{
+    display: grid;
+    grid-template-areas:
+    'title log_out';
+    grid-gap: 10px;
+    padding: 10px;
+
+}
