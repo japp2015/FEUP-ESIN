@@ -80,14 +80,14 @@ function GetUpdatesByStation($station) {
 
 function GetOccurrencesByUsernameAndMinorOccurrences($username,$station) {
   global $db;
-  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN occ_type ON type = occ_type.id JOIN works ON occurrences.id = id_occurrence WHERE (username_personnel=? OR (station=? AND relevance=1)) ');
-  $query->execute([$username,$station]);
+  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN occ_type ON type = occ_type.id LEFT JOIN works ON occurrences.id = id_occurrence WHERE (username_personnel=? OR (station=? AND relevance=1)) OR chief_detective=?');
+  $query->execute([$username,$station,$username]);
   return $query->fetchAll();
 }
 
 function GetUpdatesByUsernameAndMinorOccurrences($username,$station) {
   global $db;
-  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN occ_type ON occurrences.type = occ_type.id JOIN works ON occurrences.id = works.id_occurrence WHERE (works.username_personnel=? OR (station=? AND relevance=1)) ');
+  $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN occ_type ON occurrences.type = occ_type.id JOIN works ON occurrences.id = works.id_occurrence WHERE (works.username_personnel=? OR (station=? AND relevance=1)) OR chief_detective=? ');
   $query->execute([$username, $station]);
   return $query->fetchAll();
 }
@@ -267,10 +267,10 @@ function getMissingPeople() {
   return $query->fetchAll();
 }
 
-function getOccByMissingPerson($missing) {
+function getOccByMissingPerson($nif) {
   global $db;
-  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN referenced ON occurrences.id=id_occurrence JOIN person ON nif_person=person.nif WHERE occurrences.state=? AND occurrences.type=? AND referenced.type=?');
-  $query->execute(array('Aberto', 12, 'Vítima'));
+  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN referenced ON occurrences.id=id_occurrence JOIN person ON nif_person=person.nif WHERE occurrences.state=? AND occurrences.type=? AND referenced.type=? AND person.nif=?');
+  $query->execute(array('Aberto', 12, 'Vítima', $nif));
   return $query->fetch();
 }
 
@@ -502,4 +502,25 @@ function GeneralSearchStation($search){
   OR city LIKE '%$search%' ");
   $stmt->execute();
   return $stmt->fetchAll();
+}
+
+function GetVictimsByOccurrence($id) {
+  global $db;
+  $stmt = $db->prepare("SELECT person.* FROM person JOIN referenced ON nif_person=person.nif JOIN occurrences ON occurrences.id=id_occurrence WHERE referenced.type='Vítima' AND occurrences.id=?");
+  $stmt->execute([$id]);
+  return $stmt->fetchAll();
+}
+
+function GetGuiltysByOccurrence($id) {
+  global $db;
+  $stmt = $db->prepare("SELECT person.* FROM person LEFT JOIN referenced ON nif_person=person.nif LEFT JOIN occurrences ON occurrences.id=id_occurrence WHERE referenced.type='Culpado' AND occurrences.id=?");
+  $stmt->execute([$id]);
+  return $stmt->fetchAll();
+}
+
+function GetPersonByNif($nif) {
+  global $db;
+  $stmt = $db->prepare("SELECT * FROM person WHERE nif=?");
+  $stmt->execute([$nif]);
+  return $stmt->fetch();
 }

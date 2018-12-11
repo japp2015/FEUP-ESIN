@@ -50,7 +50,9 @@ if ($validation==false){
 $occurrence = getOccurrenceById($id);
 $occurrence_type=getOcc_TypeById($occurrence['type']);
 $updates= getUpdatesByOccurrenceId($id);
-$chief=getUserByUsername($occurrence['chief_detective'])
+$chief=getUserByUsername($occurrence['chief_detective']);
+$victims=GetVictimsByOccurrence($id);
+$guiltys=GetGuiltysByOccurrence($id);
 ?>
 
 <!DOCTYPE html>
@@ -94,6 +96,45 @@ $chief=getUserByUsername($occurrence['chief_detective'])
         <?php } ?>
     </div>
 
+    <div id="guilty">
+        <?php if(isset($guiltys)) {?>
+            <p>Culpados:</p>
+            <?php foreach ($guiltys as $guilty) {?>
+                <a href="person.php?nif=<?=$guilty['nif']?>"><?echo $guilty['name'];?></a>
+            <?}
+        }?>
+    </div>
+
+    <div id="new_guilty">
+        <?php if ($username==$occurrence['chief_detective']){?>
+            <button type="button" onclick="location.href='single_occurrence.php?id=<?=$id?>&guilty=1'"> Atribuir culpado </button>
+        <?php }
+        if(isset($_GET['guilty'])){?>
+            <h3>Adicionar culpado:</h3>
+            <h4>Pessoa no sistema:</h4>
+            <form action="guilty.php?id=<?=$id?>&known=1" method="post">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                NIF:<input type="number" name="nif"><br>
+            </form>
+            <h4>Pessoa nova:</h4>
+            <form action="guilty.php?id=<?=$id?>" method="post">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                NIF:<input type="number" name="nif"><br>
+                Nome:<input type="text" name="name"><br>
+                <label>Sexo:</label>
+                <label><input type="radio" name="gender" value="Masculino">Masculino</label>
+                <label><input type="radio" name="gender" value="Feminino">Feminino</label><br>
+                Data de nascimento:<input type="date" name="birthdate"><br>
+                Naturalidade:<input type="text" name="naturality"><br>
+                Morada:<input type="text" name="adress"><br>
+                <textarea rows="4" cols="50" name="description"  placeholder="Descrição física"></textarea><br>
+                Altura(cm):<input type="number" name="victim_height"><br>
+                Peso(kg):<input type="number" name="victim_weight"><br>
+                <input type="submit" value="Atribuir">
+            </form>
+        <? } ?>
+    </div>
+
     <div id='location'> <p> Localização: <?php echo $occurrence['location'] ?></p></div>
     
     <?php $personnels=GetOccurrencePersonnel($occurrence['id'])?>
@@ -131,6 +172,13 @@ $chief=getUserByUsername($occurrence['chief_detective'])
             <?php }
         }?>
     </div>
+
+    <?php if(isset($victims)) {?>
+        <div id="victims"> Vítimas:
+        <?php foreach ($victims as $victim) {?>
+            <a href="person.php?nif=<?=$victim['nif']?>"><?echo $victim['name'];?></a>
+        <?}
+    }?>
 
     <div id="updates">
         <p> Atualizações: </p>

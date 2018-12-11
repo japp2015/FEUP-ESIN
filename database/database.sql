@@ -160,7 +160,7 @@ INSERT INTO stations (id, name, city, adress, chief) VALUES (3, 'Espinho', 'Port
 INSERT INTO stations (id, name, city, adress, chief) VALUES (4, 'Valongo', 'Porto', 'Rua da Estufa', 'carlos');
 
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (1, 1, 'Homicídio em Salgueiros' ,'patricia', 'Aberto', '2017-02-11','Salgueiros','Ontem morreu um homem em Salgueiros', 1);
-INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (2, 12, 'Desaparecimento na Maia' ,'amilcar', 'Aberto', '2017-02-20','Maia','Mulher desaparecida na Maia', 1);
+INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (2, 12, 'Desaparecimento em Espinho' ,'patricia', 'Aberto', '2017-02-20','Espinho','Mulher desaparecida em Espinho', 1);
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (3, 1, 'Homicídio em Matosinhos' ,'gaspar', 'Fechado', '2017-02-11','Matosinhos','Ontem morreu um homem em Matosinhos', 2);
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (4, 1, 'Homicídio em Gaia' ,'gaspar', 'Arquivado', '2017-02-11','Gaia','Ontem morreu um homem em Gaia', 2);
 
@@ -176,5 +176,3 @@ INSERT INTO referenced (nif_person, id_occurrence, type) VALUES (245769142, 2, '
 INSERT INTO news (id, title, text, date) VALUES (1, 'Homicídio em Matosinhos resolvido', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis diam ipsum, varius luctus metus quis, ornare faucibus tellus. Praesent at tellus quis felis tincidunt viverra. Cras egestas vitae elit in posuere. Etiam sed tellus ipsum. Proin sagittis ligula sed velit venenatis feugiat. Nunc placerat laoreet arcu, a volutpat odio tincidunt in. Aenean finibus, tortor id aliquet auctor, magna metus consectetur augue, gravida elementum nisl augue luctus mauris. Sed et odio vitae est sollicitudin fringilla. Suspendisse ante tortor, condimentum at placerat nec, vestibulum vel nibh.
 
 Curabitur in iaculis nibh. Curabitur vitae urna purus. Suspendisse nec ipsum et ex finibus sodales in id nisi. Praesent diam nulla, mattis non accumsan id, tristique at libero. Praesent tempor porta risus, sit amet iaculis nibh tristique sit amet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras egestas elit et odio rutrum viverra. Morbi faucibus at mauris eget sollicitudin.', '2018-09-13');
-
-INSERT INTO missing_person (id, gender, name, adress, description, local, date, id_station) VALUES (1, 'male', 'João Meneses', 'Rua X', 'Óculos', 'Porto', 2018-12-04, 1);

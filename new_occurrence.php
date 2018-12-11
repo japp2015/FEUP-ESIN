@@ -91,6 +91,7 @@ $station = (int) GetStationByUsername($username);
 
       <div id="victim">
            <h3>Adicionar vítima:</h3>
+           <h4>Pessoa nova:</h4>
            NIF:<input type="number" name="victim_nif"><br>
            <?php if (!isset($_GET['id'])) { ?>
                 Nome:<input type="text" name="victim_name"><br>

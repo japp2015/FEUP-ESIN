@@ -17,14 +17,17 @@ $news = GetNews();
 
 <aside id=missing>
     <h4>Pessoas desaparecidas</h4>
+    <?php if (isset($missings)) { ?>
     <ul>
         <?php foreach($missings as $missing) {
-            $occurrence = getOccByMissingPerson($missing);
+            $nif=$missing['nif'];
+            $occurrence = getOccByMissingPerson($nif);
             echo '<li><h5>' . $missing['name'] . '</h5><p>' . $missing['birthdate'] . ' - ' . $missing['physical_description'] . '</p><p>' . $occurrence['location'] . '</p>';
         } ?>
     </ul>
     <p>Tem alguma pista? <a href="contact.php">Contacte-nos!</a></p>
     <p>Reporte um desaparecimento <a href="missing_person_submition.php">aqui</a>.</p>
+    <?}?>
 </aside>
 
 <body id="header_body">
