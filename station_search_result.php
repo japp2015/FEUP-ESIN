@@ -6,23 +6,16 @@
     }
     $username = $_SESSION['username'];
     
-    $gender=$name=$adress=$physical_description=""; 
-    if(!empty($_POST["gender"])){
-        $gender = $_POST["gender"];
-    }   
-    
+    $name=$city=""; 
     if(!empty($_POST["name"])){
         $name = $_POST["name"];
     } 
 
-    if(!empty($_POST["adress"])){
-        $adress = $_POST["adress"];  
+    if(!empty($_POST["city"])){
+        $city = $_POST["city"];  
     }
 
-    if(!empty($_POST["physical_description"])){
-        $physical_description = $_POST["physical_description"];  
-    }
-    $person = SearchPerson($gender, $name, $adress,$physical_description);   
+    $stations = SearchStation($name, $city);   
     
 ?>
 <!DOCTYPE html>
@@ -35,12 +28,12 @@
 <body>
     <div class="search_results">
 
-        <?php if (empty($person) ) {
+        <?php if (empty($stations) ) {
             echo  "Não foram encontrados resultados para a sua pesquisa.";
         } else{
-            foreach($person as $person) { ?>
+            foreach($stations as $station) { ?>
             <section>
-                    <?php echo "<p>" . $person['name'] . "</p>"; #remeter para a pagina da pessoa quando estiver funcional ?>
+            <a href="station.php?station=<?=$station['id']?>"> <?=$station['name']?> </a> 
             </section>
             <? }
         } ?>

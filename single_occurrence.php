@@ -29,7 +29,7 @@ elseif($user['position']=='Chefe de Esquadra'){
         }
     }
 }elseif ($user['position']=='Detetive'){
-    $user_occurrences=GetOccurrencesByUsernameAndMinorOccurrences($username,$station['id']);
+    $user_occurrences=GetOccurrencesByUsernameAndMinorOccurrences($username,$user['station']);
     foreach ($user_occurrences as $user_occurrence){
         if ($id==$user_occurrence['id']){
             $validation=true;

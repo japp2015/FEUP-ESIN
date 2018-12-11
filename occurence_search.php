@@ -8,6 +8,7 @@ session_start();
 if (!isset($_SESSION['username'])){
     die("Página Privada");
 }
+$username=$_SESSION['username'];
 ?>
 </head>
 
@@ -18,15 +19,25 @@ if (!isset($_SESSION['username'])){
 
 <form action="occurence_search_result.php" method="post">
     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-    <label>Nome:<input type="text" name="name"></label><br>
-    <label>Data de publicação/abertura:<input type="date" name="start_date"></label><br>
-    <label>Pessoal envolvido:<input type="text" name="personnel_involved"></label><br>
+    <label>Título:<input type="text" name="title"></label><br>
+    <label>Tipo: <select name="type">
+        <?php $occ_types=GetAllOcc_type();?>
+        <option value=""> </option>
+        <?php foreach ($occ_types as $occ_type){?>
+            <option value=<?=$occ_type['name']?>> <?= $occ_type['name'] ?> </option>
+        <?php } ?> 
+    </select></label><br>
     <label>Localização:<input type="text" name="location"></label><br>
-    <label>Estado:<input type="text" name="state"></label><br>
+    <label>Estado: <select name="state">
+        <?php $states=GetStates();?>
+        <option value=""> </option>
+        <?php foreach ($states as $state){?>
+            <option value=<?=$state['name']?>> <?= $state['name'] ?> </option>
+        <?php } ?>        
+    </select></label><br>
     <label>Descrição:</label><br>
-    <textarea name="case_description" cols="40" rows="5"></textarea>
-    <p>Dica: Use palavras ou frases chave separadas por ponto e vírgula.</p>
-    <input type="submit" value="Search">
+    <textarea name="case_description" cols="40" rows="5"></textarea><br>
+    <input type="submit" value="Pesquisar">
 </form>
 </body>
 

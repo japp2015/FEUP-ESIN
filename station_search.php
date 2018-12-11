@@ -7,6 +7,7 @@ session_start();
 if (!isset($_SESSION['username'])){
     die("Página Privada");
 }
+$username=$_SESSION['username'];
 ?>
 </head>
 
@@ -14,10 +15,10 @@ if (!isset($_SESSION['username'])){
 <body>
 <h1>Pesquisa de Esquadra</h1>
 
-<form action="occurence_search_result.php" method="post">
+<form action="station_search_result.php" method="post">
     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
     <label>Nome:<input type="text" name="name"></label><br>
-    <label>Cidade:<input type="text" name="age"></label><br>
+    <label>Cidade:<input type="text" name="city"></label><br>
     <input type="submit" value="Pesquisar">
 </form>
 </body>

@@ -6,7 +6,7 @@ if (!isset($_SESSION['username'])){
 }
 $username=$_SESSION['username'];
 $user = getUserByUsername($username);
-if (!isset($_GET['station']) || ($user['position']!='Diretor Nacional' && $user['station']!=$_GET['station']) ){
+if (!isset($_GET['station'])){
     die("Não Autorizado");
 }
 $station = GetStationByID($_GET['station']);

@@ -99,18 +99,19 @@ function GetOccurrencesByUsername($username) {
   return $query->fetchAll();
 }
 
-function getOcc_TypeById($occurrence) {
-  global $db;
-  $query = $db->prepare('SELECT * FROM occ_type WHERE id=? ');
-  $query->execute(array($occurrence));
-  return $query->fetch();
-}
 
 function GetUpdatesByUsername($username) {
   global $db;
   $query = $db->prepare('SELECT updates.* FROM updates JOIN occurrences ON updates.id_occurrence=occurrences.id JOIN works ON occurrences.id = works.id_occurrence WHERE works.username_personnel=? ');
   $query->execute(array($username));
   return $query->fetchAll();
+}
+
+function getOcc_TypeById($occurrence) {
+  global $db;
+  $query = $db->prepare('SELECT * FROM occ_type WHERE id=? ');
+  $query->execute(array($occurrence));
+  return $query->fetch();
 }
 
 function GetOccurrencePersonnel($id){
@@ -131,6 +132,13 @@ function getUpdatesByOccurrenceId($id){
   global $db;
   $query = $db->prepare('SELECT * FROM updates WHERE id_occurrence = ?');
   $query->execute([$id]);
+  return $query->fetchAll();
+}
+
+function GetAllOcc_type(){
+  global $db;
+  $query = $db->prepare('SELECT * FROM occ_type');
+  $query->execute();
   return $query->fetchAll();
 }
 
@@ -333,15 +341,6 @@ function DeleteMissingPersonById($missing) {
   return $stmt->execute([$missing]);
 }
 
-function FindPerson($gender,$name,$adress) {
-  global $db;
-  $stmt = $db->prepare("SELECT * FROM person WHERE gender  LIKE '%$gender%' UNION 
-  SELECT * FROM person WHERE name LIKE '%$name%' UNION
-  SELECT * FROM person WHERE adress LIKE '%$adress%' ORDER BY id DESc");
-  $stmt->execute();
-  return $stmt->fetchAll();
-}
-
 function AddPerson($victim_nif, $victim_name, $victim_gender, $victim_birthdate, $victim_naturality, $victim_adress, $victim_description, $victim_weight, $victim_height) {
   global $db;
   $stmt = $db->prepare('INSERT INTO person (nif, name, gender, birthdate, naturality, adress, physical_description, weight, height) VALUES (?,?,?,?,?,?,?,?,?)');
@@ -353,3 +352,80 @@ function AddReference($victim_nif, $occurrence_id, $type) {
   $stmt = $db->prepare('INSERT INTO referenced (nif_person, id_occurrence, type) VALUES (?,?,?)');
   return $stmt->execute([$victim_nif, $occurrence_id, $type]);
 }
+
+function SearchPerson($gender,$name,$adress,$physical_description) {
+  global $db;
+  $stmt = $db->prepare("SELECT * FROM person WHERE gender LIKE '%$gender%' 
+  AND name LIKE '%$name%' 
+  AND adress LIKE '%$adress%' 
+  AND physical_description LIKE '%$physical_description%' ORDER BY nif DESC");
+  $stmt->execute();
+  return $stmt->fetchAll();
+}
+
+function SearchPersonnel($gender, $name, $position, $station) {
+  global $db;
+  $stmt = $db->prepare("SELECT personnel.* FROM personnel JOIN stations ON station=stations.id WHERE gender LIKE '%$gender%' 
+  AND fullname LIKE '%$name%'
+  AND position LIKE '%$position%' 
+  AND stations.name LIKE '%$station%' ");
+  $stmt->execute();
+  return $stmt->fetchAll();
+}
+
+function SearchOccurrences($title, $type, $location, $state, $case_description){
+  global $db;
+  $stmt = $db->prepare("SELECT occurrences.* FROM occurrences JOIN occ_type ON type=occ_type.id  
+  WHERE title LIKE '%$title%' 
+  AND occ_type.name LIKE '%$type%'
+  AND description LIKE '%$case_description%'
+  AND state LIKE '%$state%' 
+  AND location LIKE '%$location%'");
+  $stmt->execute();
+  return $stmt->fetchAll();
+}
+
+function SearchOccurrencesByStation($station, $title, $type, $location, $state, $case_description){
+  global $db;
+  $stmt = $db->prepare("SELECT occurrences.* FROM occurrences JOIN occ_type ON type=occ_type.id WHERE occurrences.station = '$station'
+  AND title LIKE '%$title%' 
+  AND occ_type.name LIKE '%$type%'
+  AND description LIKE '%$case_description%'
+  AND state LIKE '%$state%' 
+  AND location LIKE '%$location%' ");
+  $stmt->execute();
+  return $stmt->fetchAll();
+}
+
+function SearchOccurrencesByUsernameAndMinorOccurrences($username,$station,$title, $type, $location, $state, $case_description){
+  global $db;
+  $stmt = $db->prepare("SELECT occurrences.* FROM occurrences JOIN occ_type ON type = occ_type.id JOIN works ON occurrences.id = id_occurrence WHERE (username_personnel='$username' OR (station='$station' AND relevance=1))
+  AND title LIKE '%$title%' 
+  AND occ_type.name LIKE '%$type%'
+  AND description LIKE '%$case_description%'
+  AND state LIKE '%$state%' 
+  AND location LIKE '%$location%' ");
+  $stmt->execute();
+  return $stmt->fetchAll();
+}
+
+function SearchOccurrencesByUsername($username,$title, $type, $location, $state, $case_description ){
+  global $db;
+  $stmt = $db->prepare("SELECT occurrences.* FROM occurrences jOIN occ_type ON type = occ_type.id JOIN works ON occurrences.id = id_occurrence WHERE username_personnel='$username'
+  AND title LIKE '%$title%' 
+  AND occ_type.name LIKE '%$type%'
+  AND description LIKE '%$case_description%'
+  AND state LIKE '%$state%' 
+  AND location LIKE '%$location%' ");
+  $stmt->execute();
+  return $stmt->fetchAll();
+}
+
+function SearchStation($name, $city){
+  global $db;
+  $stmt = $db->prepare("SELECT * FROM stations  WHERE name LIKE '%$name%'
+  AND city LIKE '%$city%' ");
+  $stmt->execute();
+  return $stmt->fetchAll();
+}
+
