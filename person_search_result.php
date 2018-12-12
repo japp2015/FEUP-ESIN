@@ -39,7 +39,7 @@
         } else{
             foreach($person as $person) { ?>
             <section>
-                    <?php echo "<p>" . $person['name'] . "</p>"; #remeter para a pagina da pessoa quando estiver funcional ?>
+            <a href="person.php?nif=<?=$person['nif']?>"><?echo $person['name'];?></a>
             </section>
             <? }
         } ?>

@@ -23,6 +23,9 @@ $news = GetNews();
             $nif=$missing['nif'];
             $occurrence = getOccByMissingPerson($nif);
             echo '<li><h5>' . $missing['name'] . '</h5><p>' . $missing['birthdate'] . ' - ' . $missing['physical_description'] . '</p><p>' . $occurrence['location'] . '</p>';
+            if (isset($missing['profile_pic'])) { ?>
+                <img src="person_pic/<?=$missing['profile_pic']?>.jpg">
+            <?php }
         } ?>
     </ul>
     <p>Tem alguma pista? <a href="contact.php">Contacte-nos!</a></p>

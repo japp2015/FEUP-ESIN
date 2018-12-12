@@ -28,7 +28,7 @@ $station = (int) GetStationByUsername($username);
 
 <body>
    <h1> Registo de uma Nova Ocorrência </h1>
-   <form action="action_occurence.php?relevance=<?=$relevance?>&missing=<?=$missing?>" method=post>
+   <form action="action_occurence.php?relevance=<?=$relevance?>&missing=<?=$missing?>" method=post enctype="multipart/form-data">
        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
        <div id="occ_type">
          <h3> Tipo de ocorrência: </h3>
@@ -93,6 +93,7 @@ $station = (int) GetStationByUsername($username);
            <h3>Adicionar vítima:</h3>
            <h4>Pessoa nova:</h4>
            NIF:<input type="number" name="victim_nif"><br>
+           Foto:<input type="file" name="image"> <br>
            <?php if (!isset($_GET['id'])) { ?>
                 Nome:<input type="text" name="victim_name"><br>
            <?}

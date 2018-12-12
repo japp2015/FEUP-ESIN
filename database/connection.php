@@ -31,6 +31,18 @@ function UploadProfilePicture($pic, $username) {
   return $stmt->execute([$pic, $username]);
 }
 
+function UploadPersonPicture($pic, $nif) {
+  global $db;
+  $stmt = $db->prepare('UPDATE person SET profile_pic = ? WHERE nif = ?  ');
+  return $stmt->execute([$pic, $nif]);
+}
+function UploadNewsPicture($pic, $id) {
+  global $db;
+  $stmt = $db->prepare('UPDATE news SET pic = ? WHERE id= ?  ');
+  return $stmt->execute([$pic, $id]);
+}
+
+
 function getUserByUsername($username) {
   global $db;
   $query = $db->prepare('SELECT * FROM personnel WHERE username = ?');

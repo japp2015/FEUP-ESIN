@@ -65,7 +65,9 @@ $guiltys=GetGuiltysByOccurrence($id);
 <div id="occurence">
     <div id='id'> <h1> <?php echo $occurrence['title'] ?></h1></div>
     
-    <button type="button" onclick="location.href='news_release.php?id=<?=$id?>'"> Libertar notícia </button>
+    <?php if ($user['position']=="Chefe de Esquadra"){?>
+        <button type="button" onclick="location.href='news_release.php?id=<?=$id?>'"> Libertar notícia </button>
+    <? } ?>
     
     <div id='title'> <h3> Tipo de Ocorrência: <?php echo $occurrence_type['name'] ?></h3></div>
     
@@ -174,7 +176,7 @@ $guiltys=GetGuiltysByOccurrence($id);
     </div>
 
     <?php if(isset($victims)) {?>
-        <div id="victims"> Vítimas:
+        <div id="victims"> Vítima:
         <?php foreach ($victims as $victim) {?>
             <a href="person.php?nif=<?=$victim['nif']?>"><?echo $victim['name'];?></a>
         <?}

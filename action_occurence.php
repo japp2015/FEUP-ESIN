@@ -39,6 +39,10 @@
     $type="Vítima";
 
     AddPerson($victim_nif, $victim_name, $victim_gender, $victim_birthdate, $victim_naturality, $victim_adress, $victim_description, $victim_height, $victim_weight);
+    UploadPersonPicture($victim_nif, $victim_nif);
+    $FileName = "person_pic/$victim_nif.jpg";
+    // Move the uploaded file to its final destination
+    move_uploaded_file($_FILES['image']['tmp_name'], $FileName);
 
     if ($relevance==1){
         AddOccurrence1($occ_type, $title, $state, $date, $location, $description, $station);

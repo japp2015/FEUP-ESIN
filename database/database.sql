@@ -21,6 +21,7 @@ CREATE TABLE person (
     naturality VARCHAR NOT NULL,
     adress VARCHAR,
     physical_description VARCHAR,
+    profile_pic VARCHAR,
     weight INTEGER,
     height INTEGER
 );
@@ -101,7 +102,8 @@ CREATE TABLE news (
     id INTEGER PRIMARY KEY,
     title VARCHAR NOT NULL,
     text VARCHAR NOT NULL,
-    date DATE NOT NULL
+    date DATE NOT NULL,
+    pic VARCHAR
 );
 
 CREATE TABLE missing_person (
@@ -142,8 +144,8 @@ INSERT INTO schools VALUES ('Escola Prática de Polícia');
 INSERT INTO referenced_type VALUES ('Vítima');
 INSERT INTO referenced_type VALUES ('Culpado');
 
-INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position) VALUES ('japp', '$2y$10$FsFF32jKd0dUvlCLVCICM.ZhMtOOeCXArg3FSt1WfY2sqRR9AccHW', 'joao@gmail.com', 'João Afonso Pereira', 'Masculino', '1997-12-06', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Diretor Nacional');
-INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, station) VALUES ('maria', '$2y$10$LJpkGpC/Eldt6UjQyPJv3uXxvHyosNyOvKzFram7IJgA1lFFmbs2W', 'maria@gmail.com', 'Maria João Ribeiro', 'Feminino', '1997-11-02', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Chefe de Esquadra',1);
+INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, profile_pic) VALUES ('japp', '$2y$10$FsFF32jKd0dUvlCLVCICM.ZhMtOOeCXArg3FSt1WfY2sqRR9AccHW', 'joao@gmail.com', 'João Afonso Pereira', 'Masculino', '1997-12-06', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Diretor Nacional','japp');
+INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, station, profile_pic) VALUES ('maria', '$2y$10$LJpkGpC/Eldt6UjQyPJv3uXxvHyosNyOvKzFram7IJgA1lFFmbs2W', 'maria@gmail.com', 'Maria João Ribeiro', 'Feminino', '1997-11-02', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Chefe de Esquadra',1,'maria');
 INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, station) VALUES ('patricia', '$2y$10$z.mBGZwzzNpRfriPwRMa.OgywtSkBm72w3gP0fiJHiyWePTo79w8e', 'patricia@gmail.com', 'Patricia Rocha', 'Feminino', '1997-08-20', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Detetive', 1);
 INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, station) VALUES ('paulo', '$2y$10$laMLc7OBT46Xn1WwDs6KDeYPJJaxvNuL.Nq5TiZxo2Es/tVFxy/96', 'joao@gmail.com', 'Paulo Afonso Pereira', 'Masculino', '1997-12-06', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Polícia', 1);
 INSERT INTO personnel (username, password, email, fullname, gender, birthdate, naturality, start_service, school, position, station) VALUES ('pedro', '$2y$10$FLqnb3r3x2jL1xgq4G2AteNRBIiIpvTET3mFPDtAUA05N3OP4pJZS', 'maria@gmail.com', 'Pedro Almeida Ribeiro', 'Masculino', '1997-11-02', 'Portuguesa','2016-02-11', 'Escola Prática de Polícia', 'Chefe de Esquadra',2);
@@ -169,10 +171,10 @@ INSERT INTO works (username_personnel, id_occurrence) VALUES ('amilcar',2);
 INSERT INTO works (username_personnel, id_occurrence) VALUES ('gaspar',3);
 INSERT INTO works (username_personnel, id_occurrence) VALUES ('gaspar',4);
 
-INSERT INTO person (nif, name, gender, birthdate, naturality, adress, physical_description, weight, height) VALUES (245769142, 'Rita Hugo', 'Feminino', '1987-05-23', 'Porto', 'Rua Costa Cabral','Cabelo loiro, pele clara, olhos azuis', '55', '165');
+INSERT INTO person (nif, name, gender, birthdate, naturality, adress, physical_description, profile_pic, weight, height) VALUES (245769142, 'Rita Hugo', 'Feminino', '1987-05-23', 'Porto', 'Rua Costa Cabral','Cabelo loiro, pele clara, olhos azuis',245769142, '55', '165');
 
 INSERT INTO referenced (nif_person, id_occurrence, type) VALUES (245769142, 2, 'Vítima');
 
-INSERT INTO news (id, title, text, date) VALUES (1, 'Homicídio em Matosinhos resolvido', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis diam ipsum, varius luctus metus quis, ornare faucibus tellus. Praesent at tellus quis felis tincidunt viverra. Cras egestas vitae elit in posuere. Etiam sed tellus ipsum. Proin sagittis ligula sed velit venenatis feugiat. Nunc placerat laoreet arcu, a volutpat odio tincidunt in. Aenean finibus, tortor id aliquet auctor, magna metus consectetur augue, gravida elementum nisl augue luctus mauris. Sed et odio vitae est sollicitudin fringilla. Suspendisse ante tortor, condimentum at placerat nec, vestibulum vel nibh.
+INSERT INTO news (id, title, text, date, pic) VALUES (1, 'Homicídio em Matosinhos resolvido', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis diam ipsum, varius luctus metus quis, ornare faucibus tellus. Praesent at tellus quis felis tincidunt viverra. Cras egestas vitae elit in posuere. Etiam sed tellus ipsum. Proin sagittis ligula sed velit venenatis feugiat. Nunc placerat laoreet arcu, a volutpat odio tincidunt in. Aenean finibus, tortor id aliquet auctor, magna metus consectetur augue, gravida elementum nisl augue luctus mauris. Sed et odio vitae est sollicitudin fringilla. Suspendisse ante tortor, condimentum at placerat nec, vestibulum vel nibh.
 
-Curabitur in iaculis nibh. Curabitur vitae urna purus. Suspendisse nec ipsum et ex finibus sodales in id nisi. Praesent diam nulla, mattis non accumsan id, tristique at libero. Praesent tempor porta risus, sit amet iaculis nibh tristique sit amet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras egestas elit et odio rutrum viverra. Morbi faucibus at mauris eget sollicitudin.', '2018-09-13');
+Curabitur in iaculis nibh. Curabitur vitae urna purus. Suspendisse nec ipsum et ex finibus sodales in id nisi. Praesent diam nulla, mattis non accumsan id, tristique at libero. Praesent tempor porta risus, sit amet iaculis nibh tristique sit amet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras egestas elit et odio rutrum viverra. Morbi faucibus at mauris eget sollicitudin.', '2018-09-13',1);

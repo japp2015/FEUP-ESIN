@@ -14,18 +14,6 @@
     <button type="log_in" onclick="location.href='log_in.php'">Entrar</button>
 <header>
 
-<aside id=missing>
-    <h4>Pessoas desaparecidas</h4>
-    <ul>
-        <?php foreach($missings as $missing) {
-            $occurrence = getOccByMissingPerson($missing);
-            echo '<li><h5>' . $missing['name'] . '</h5><p>' . $missing['birthdate'] . ' - ' . $missing['physical_description'] . '</p><p>' . $occurrence['location'] . '</p>';
-        } ?>
-    </ul>
-    <p>Tem alguma pista? <a href="contact.php">Contacte-nos!</a></p>
-    <p>Reporte um desaparecimento <a href="missing_person_submition.php">aqui</a>.</p>
-</aside>
-
 <body>
     <div id="news_title">
         <?php echo "<h1>" . $new['title'] . "</h1>";
@@ -34,7 +22,9 @@
     <div id="news_text">
         <?php echo "<p>" . $new['text'] . "</p>"; ?>
     </div>
-
+    <?php if (isset($new['pic'])) { ?>
+        <img src="news_pic/<?=$new['pic']?>.jpg">
+    <?php }?>
 </body>
 
 <?php include_once('common/footer.php'); ?>
