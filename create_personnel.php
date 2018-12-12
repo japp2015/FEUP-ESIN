@@ -20,14 +20,21 @@ if ($user['position']=='Polícia' || $user['position']=='Detetive' || ($position
 
 <!DOCTYPE html> 
 <html>
-<title> Criar <?=$position?></title>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Criar <?=$position?></title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+</head>
+
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
     <section class="new_personnel"> 
-        <p> Criar Novo <?=$position?>: </p>
         <form class="signup_content" action="action_personnel.php?position=<?=$position?>" method="post">
+            <h1> Criar Novo <?=$position?>: </h1>
             <div> <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>"></div>
             <div> Username: <input type="text" placeholder="Username" name="username" required> </div>
             <div> Password: <input type="password" placeholder="Password" name="password" pattern=".{6,}" title="Pelo menos 8 caracteres" required> </div>
@@ -70,4 +77,5 @@ if ($user['position']=='Polícia' || $user['position']=='Detetive' || ($position
 </body>
 
 <?php include_once('common/footer.php'); ?>
+</div>
 </html>

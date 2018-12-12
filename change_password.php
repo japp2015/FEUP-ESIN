@@ -8,8 +8,15 @@ $username = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
-<title> Mudar Password</title>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Mudar Password</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+</head>
+
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
@@ -46,6 +53,6 @@ $username = $_SESSION['username'];
     </div>
     
 </body>
-
 <?php include_once('common/footer.php'); ?>
+</div>
 </html>

@@ -22,15 +22,22 @@ $station = (int) GetStationByUsername($username);
 
 <!DOCTYPE html>
 <html>
-<title> Nova Ocorrência </title>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Nova Ocorrência </title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+</head>
+
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
-   <h1> Registo de uma Nova Ocorrência </h1>
    <form action="action_occurence.php?relevance=<?=$relevance?>&missing=<?=$missing?>" method=post enctype="multipart/form-data">
-       <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-       <div id="occ_type">
+      <h1> Registo de uma Nova Ocorrência </h1>    
+      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+      <div id="occ_type">
          <h3> Tipo de ocorrência: </h3>
          <?if(isset($_GET['id'])) {?>
             <p><select name="occ_type">
@@ -137,4 +144,5 @@ $station = (int) GetStationByUsername($username);
 </body>
 
 <?php include_once('common/footer.php'); ?>
+</div>
 </html>

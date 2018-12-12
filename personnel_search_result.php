@@ -27,13 +27,19 @@
 <!DOCTYPE html>
 <html>
 
-<title> Pesquisa de Pessoal </title>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pessoal Encontrado</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+</head>
 
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
     <div class="search_results"> 
-
+    <h3> Pessoal Encontrado: </h3>
         <?php if (empty($personnel) ) {
             echo  "Não foram encontrados resultados para a sua pesquisa.";
         } else{
@@ -49,4 +55,5 @@
 </body>
 
 <?php include_once('common/footer.php'); ?>
+    </div>
 </html>

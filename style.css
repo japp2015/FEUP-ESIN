@@ -2,9 +2,10 @@ html {
     background-color:#EEF4ED;
 }
 
-.body {
-    margin: 1;
+.body { 
+    margin: 0;
     padding: 0;
+    text-align: left;
 }
 
 /* ----- HEADER ----- */ 
@@ -23,7 +24,9 @@ header a {
     color: #EEF4ED;
     text-decoration: none;
     font-family: Helvetica; 
+    text-align: left;
 }
+
 
 
 /* ----- FOOTER ----- */
@@ -38,6 +41,7 @@ footer {
 
 footer p {
     margin: 0;
+    text-align: right;
     font-size: small;
     font-family: Helvetica;
     color: #4C4C47;
@@ -45,8 +49,54 @@ footer p {
 }
 
 img {
-    border: 1px solid #ddd;
+    border: 1px solid #7A93AC;
     border-radius: 4px;
     padding: 5px;
     width: 150px;
 }
+
+.right_bar {
+    margin: 0;
+    padding: 0;
+        
+  }
+
+.right_bar ul {
+    margin:0;
+    padding: 0;
+    border-left: 1px solid #7A93AC;
+   
+}
+
+li{
+    list-style-type: none;
+}
+
+  
+.right_bar li {
+    text-align: center;
+    font-size: 15px;
+    padding: 0.3em 0;
+    border-bottom: 2px solid #7A93AC;  
+  }
+
+
+a {
+    color: black;
+}
+
+
+#sub_list{
+    text-indent: 5px;
+    font-size:12px;
+  
+}
+
+.body h3{
+    text-align: center;
+}
+
+#personnel_info{
+    text-align:center;
+}
+

@@ -7,7 +7,8 @@
 
 <!DOCTYPE html>
 <html>
-<title>Polícia Nacional</title>
+
+<title>Notícias</title>
 
 <header id="header_public">
     <a href="public.php"><h2>Polícia Nacional</h2></a>

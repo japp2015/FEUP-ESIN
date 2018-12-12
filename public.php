@@ -8,7 +8,9 @@ $news = GetNews();
 
 <!DOCTYPE html>
 <html>
+
 <title>Polícia Nacional</title>
+  
 
 <header id="header_public">
     <h2>Polícia Nacional</h2>

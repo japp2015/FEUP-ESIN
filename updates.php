@@ -20,8 +20,15 @@ if ($user['position']=='Diretor Nacional'){
 
 <!DOCTYPE html>
 <html>
-<title><?php echo 'Atualizações' ?></title>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo 'Atualizações' ?></title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+</head>
+
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
@@ -38,4 +45,5 @@ if ($user['position']=='Diretor Nacional'){
 </body>
 
 <?php include_once('common/header_aside.php'); ?>
+    </div>
 </html>

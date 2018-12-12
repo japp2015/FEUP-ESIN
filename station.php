@@ -14,8 +14,15 @@ $station = GetStationByID($_GET['station']);
 
 <!DOCTYPE html>
 <html>
-<title><?php echo "Esquadra " . $station['name'] ?></title>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo "Esquadra " . $station['name'] ?></title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+</head>
+
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
@@ -51,4 +58,5 @@ $station = GetStationByID($_GET['station']);
 </body>
 
 <?php include_once('common/footer.php'); ?>
+</div>
 </html>

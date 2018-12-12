@@ -10,8 +10,15 @@ $user = getUserByUsername($username);
 
 <!DOCTYPE html>
 <html>
-<title> Atualizar Foto Pessoal </title>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Atualizar Foto Pessoal </title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+</head>
+
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
@@ -28,4 +35,5 @@ $user = getUserByUsername($username);
 </body>
 
 <?php include_once('common/footer.php'); ?>
+</div>
 </html>

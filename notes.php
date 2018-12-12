@@ -11,8 +11,15 @@ $notes = getNotesByUsername($username);
 
 <!DOCTYPE html>
 <html>
-<title><?php echo 'Notas ' . ' | ' . $user['fullname'] ?></title>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo 'Notas ' . ' | ' . $user['fullname'] ?></title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+</head>
+
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
@@ -39,4 +46,5 @@ $notes = getNotesByUsername($username);
     </div>
 </body>
 <?php include_once('common/footer.php'); ?>
+</div>
 </html>

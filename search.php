@@ -1,8 +1,3 @@
-
-<!DOCTYPE html>
-<html>
-
-<head>
 <?php session_start(); 
 if (!isset($_SESSION['username'])){
     die("Página Privada");
@@ -10,11 +5,22 @@ if (!isset($_SESSION['username'])){
 $username = $_SESSION['username'];
 ?>
 
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pesquisa Geral</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
 </head>
 
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
+    <div id="special_search">
     <h1>Pesquisa</h1>
     <h3>Pesquisa Orientada</h3>
     <ul>
@@ -23,6 +29,7 @@ $username = $_SESSION['username'];
         <li><a href="occurence_search.php">Ocorrência</a></li>
         <li><a href="station_search.php">Esquadra</a></li>
     </ul>
+</div>
     <form action="general_search_result.php" method="post">
         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <fieldset>
@@ -34,6 +41,7 @@ $username = $_SESSION['username'];
 </body>
 
 <?php include_once('common/footer.php'); ?>
+</div>
 </html>
 
 

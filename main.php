@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])){
 $username = $_SESSION['username'];
 $user = getUserByUsername($username);
 ?>
-
+ 
 <!DOCTYPE html>
 <html>
 
@@ -22,7 +22,7 @@ $user = getUserByUsername($username);
 <?php include_once('common/header_aside.php'); ?>
 
 <body class="body">
-    <div id="personal_info">
+    <div id="personnel_info">
         <h1><?php echo $user['fullname']?></h1>
         <p> <?php if (isset($user['profile_pic'])) { ?>
             <img src="profile_pic/<?=$username?>.jpg">

@@ -57,8 +57,15 @@ $guiltys=GetGuiltysByOccurrence($id);
 
 <!DOCTYPE html>
 <html>
-<title><?php echo $occurrence['id'] . ' | ' . $occurrence['title'] ?></title>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo $occurrence['id'] . ' | ' . $occurrence['title'] ?></title>
+    <link href="style.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+</head>
+
+<div class="container">
 <?php include_once('common/header_aside.php'); ?>
 
 <body>
@@ -210,4 +217,5 @@ $guiltys=GetGuiltysByOccurrence($id);
 </body>
 
 <?php include_once('common/footer.php'); ?>
+</div>
 </html>
