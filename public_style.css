@@ -1,0 +1,91 @@
+html {
+    background-color:#EEF4ED;
+    width:80%;
+    text-align:center;
+    margin:auto;
+}
+
+.container {
+    background-color:white;
+}
+
+.header {
+    background-color: rgb(62, 107, 153); 
+    padding: 0.5em;
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header h2 {
+    margin-left: 1em;
+    color: #EEF4ED;
+}
+
+.header button {
+    padding: 0%;
+    height: 30px;
+    width: 100px;
+    margin-top: 1em;
+    margin-right: 1em;
+    background-color: #EEF4ED;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+body>header button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.log_in {
+    text-align: right;
+}
+
+.log_in button {
+    background-color: #EEF4ED;
+    display: inline-block;
+}
+
+img {
+    border: 1px solid rgb(16, 79, 141);
+    border-radius: 4px;
+    padding: 5px;
+    width: 80px;
+}
+
+h1, h2, h3, h4, h5, p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h3 {
+    color: rgb(16, 79, 141);
+}
+
+body>footer {
+    background-color: white;
+    color: #4C4C47;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1em;
+    height: 1em;
+}
+
+body>footer p {
+    margin: 0;
+    font-size: small;
+}
+
+.missing {
+    font-size: small;
+    text-align: center;
+}
+
+.missing ul{
+    list-style-type: none;
+    padding: 0em;
+    margin: 0em;
+}

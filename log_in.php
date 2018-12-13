@@ -9,7 +9,7 @@
 
 <header> 
     <div class="title_container">
-        <a href="public.php"><h1 class="login-form-title">Polícia Nacional</h1></a>
+        <a href="public.php"><h1>Polícia Nacional</h1></a>
     </div>
 </header>
 

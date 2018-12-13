@@ -9,22 +9,29 @@ $news = GetNews();
 <!DOCTYPE html>
 <html>
 
-<title>Polícia Nacional</title>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Polícia Nacional</title>
+    <link href="public_style.css" rel="stylesheet">
+    <link href="public_layout.css" rel="stylesheet">
+</head>
   
-
-<header id="header_public">
+<div class="container">
+<header class="header">
     <h2>Polícia Nacional</h2>
-    <button type="log_in" onclick="location.href='log_in.php'">Entrar</button>
-<header>
+    <div class=log_in>
+        <button id="log_in_button" type="log_in" onclick="location.href='log_in.php'">Entrar</button>
+    </div>
+</header>
 
-<aside id=missing>
-    <h4>Pessoas desaparecidas</h4>
+<aside class="missing">
+    <h3>Pessoas desaparecidas</h3>
     <?php if (isset($missings)) { ?>
     <ul>
         <?php foreach($missings as $missing) {
             $nif=$missing['nif'];
             $occurrence = getOccByMissingPerson($nif);
-            echo '<li><h5>' . $missing['name'] . '</h5><p>' . $missing['birthdate'] . ' - ' . $missing['physical_description'] . '</p><p>' . $occurrence['location'] . '</p>';
+            echo '<li><h4>' . $missing['name'] . '</h4><p>' . $missing['birthdate'] . ' - ' . $missing['physical_description'] . '</p><p>' . $occurrence['location'] . '</p>';
             if (isset($missing['profile_pic'])) { ?>
                 <img src="person_pic/<?=$missing['profile_pic']?>.jpg">
             <?php }
@@ -35,10 +42,13 @@ $news = GetNews();
     <?}?>
 </aside>
 
-<body id="header_body">
-    <div id=stat_form>
+<body id="public_body">
+    <div class="stats">
+    <div id="stats_title">
+        <h3> Estatísticas</h3>
+    <div class="stats_title">
+    <div id="stat_form">
         <form class="stats" action="stats.php" method="post">
-            <h3> Estatísticas: </h3>
             <p><select name="station">
                     <option value="geral">Geral</option>
                     <?php $personnel="Detetive";
@@ -65,7 +75,8 @@ $news = GetNews();
             echo '<p>Casos arquivados - ' . CountOccurrencesByState('Arquivado')[0] . '</p>';
         } ?>
     </div>
-    <div id="news">
+    </div>
+    <div class="news">
         <h3>Notícias</h3>
         <?php
         $i = 0;
@@ -77,6 +88,6 @@ $news = GetNews();
         ?>
     </div>
 </body>
-
+</div>
 <?php include_once('common/footer.php'); ?>
 </html>

@@ -1,9 +1,18 @@
+html {
+    background-color: #EEF4ED;
+}
+
 .title_container {
     position: fixed;
     left: 50%;
     transform: translate(-50%, -50%);
     margin-top: 5em; 
     font-size: 28px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(16, 79, 141);
 }
 
 
@@ -17,7 +26,7 @@
     padding: 3em;
     padding-bottom: 3em;
     padding-top: 3em;
-    border-color: #7A93AC;
+    border-color: rgb(16, 79, 141);
 }
 
 .input_container {
@@ -32,7 +41,7 @@ input {
 }
 
 .btn {
-    background-color: #7A93AC;
+    background-color: rgb(16, 79, 141);
     border: none;
     color: white;
     padding: 12px 75px;
@@ -49,5 +58,5 @@ input {
 }
 
 .btn:hover {
-    background-color: #617073;
+    background-color: rgb(138, 169, 201);
 }

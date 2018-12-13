@@ -1,0 +1,40 @@
+
+
+.title { grid-area: title; }
+.log_out{ grid-area: log_in; }
+
+.header{
+    display: grid;
+    grid-template-areas:
+    'title log_in';
+    grid-gap: 10px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto 150px ;
+    grid-template-areas:
+    'header header'
+    'title aside'
+    'form aside'
+    'stats aside'
+    'news aside'
+    'footer footer';
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.header { grid-area: header; }
+.public_body{ grid-area: body; }
+.missing{ grid-area: aside; }
+.stats{ grid-area: stats; }
+.news{ grid-area: news; }
+.footer{ grid-area: footer; }
+
+#stats_title { grid-area: title; }
+#stats_form { grid-area: form; }
+#stats { grid-area: stats; }
+
+
