@@ -1,4 +1,4 @@
-<?php $db = new PDO('sqlite:database/database.db'); 
+<?php $db = new PDO('sqlite:../database/database.db'); 
 
 function generate_random_token() {
   return bin2hex(openssl_random_pseudo_bytes(32));
@@ -92,7 +92,7 @@ function GetUpdatesByStation($station) {
 
 function GetOccurrencesByUsernameAndMinorOccurrences($username,$station) {
   global $db;
-  $query = $db->prepare('SELECT occurrences.* FROM occurrences JOIN occ_type ON type = occ_type.id LEFT JOIN works ON occurrences.id = id_occurrence WHERE (username_personnel=? OR (station=? AND relevance=1)) OR chief_detective=?');
+  $query = $db->prepare('SELECT distinct occurrences.* FROM occurrences JOIN occ_type ON occurrences.type = occ_type.id LEFT JOIN works ON occurrences.id = works.id_occurrence WHERE (username_personnel=? OR (station=? AND relevance=1)) OR chief_detective=?');
   $query->execute([$username,$station,$username]);
   return $query->fetchAll();
 }
@@ -170,7 +170,7 @@ function GetPersonnelStation($positions, $station){
 
 function GetPersonnelAvailable($position,$station,$id){
   global $db;
-  $query = $db->prepare('SELECT * FROM personnel WHERE position = ? AND station= ? AND personnel.username NOT IN (SELECT username FROM personnel JOIN works ON username=username_personnel AND id_occurrence=?)');
+  $query = $db->prepare('SELECT * FROM personnel WHERE position = ? AND station= ? AND personnel.username NOT IN (SELECT username FROM personnel JOIN occurrences ON username=chief_detective LEFT JOIN works ON username=username_personnel AND id_occurrence=?)');
   $query->execute([$position,$station,$id]);
   return $query->fetchAll();
 }

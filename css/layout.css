@@ -1,0 +1,43 @@
+.header { grid-area: header; }
+.right_bar { grid-area: right_bar; }
+.body{ grid-area: body;}
+.footer{grid-area: footer;}
+
+
+.container{
+    display: grid;
+    background-color:white;
+    grid-template-columns: 38% 42% 20% ;
+    grid-template-areas:
+    'header header header'
+    'body body right_bar'
+    'footer footer footer';
+
+}
+
+.title { 
+    grid-area: title; 
+}
+
+.log_out{ 
+    grid-area: log_out; 
+}
+
+.header{
+    display: grid;
+    grid-template-areas:
+    'title log_out';
+}
+
+
+#tab {
+   
+    display: flex;
+    flex-direction: row;
+}
+#tab li {
+    display: block;
+    flex: 1;
+}
+
+

@@ -1,0 +1,183 @@
+html {
+    background-color:#EEF4ED;
+    margin:auto;
+    width: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+ 
+}
+
+
+img {
+    border: 1px solid #7A93AC;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+}
+
+/* ----- HEADER ----- */ 
+
+header {
+    background-color: rgb(62, 107, 153);
+    padding: 2em;
+    margin-bottom: 2em;
+}
+
+header a {
+    color: #EEF4ED;
+    text-decoration: none;
+}
+
+.title a h2 {
+    padding:0;
+    margin:0;
+}
+
+.log_out {
+    text-align:right;
+}
+
+.log_out button {
+    padding:10px;
+    display: inline-block;
+    border-radius: 8px;
+    border: none;
+}
+
+
+/* ----- FOOTER ----- */
+
+footer {
+    background-color:rgb(171, 191, 211);
+    padding: 0.5em;
+    height: 1em;
+    margin-top:2em;
+    position: relative;
+}
+
+footer p {
+    margin: 0;
+    text-align: right;
+    font-size: small;
+    font-family: Helvetica;
+    color: #4C4C47;
+   
+}
+
+
+/* ----- Right Bar ----- */
+
+.right_bar{
+    margin:1em;
+}
+
+.right_bar ul {
+    margin:0;
+    padding: 0;
+}
+
+li{
+    list-style-type: none;
+    
+}
+  
+.right_bar li {
+    background-color: rgb(62, 107, 153);
+    text-align: center;
+    font-size: 15px;
+    padding: 5px 0;
+    border-bottom: 5px solid white;
+    border-radius: 1em;
+    border-left: 1px solid white;
+  }
+
+#sub_list{
+    margin-left: 2em;
+    margin-right:2em;
+}
+
+
+.right_bar {
+    color: white;
+}
+.right_bar a{
+    color: white;
+}
+
+.right_bar a:hover {
+    border-bottom-style: solid;
+    border-color:rgb(171, 191, 211);
+}
+
+
+#sub_list{
+    text-indent: 5px;
+    font-size:10px;
+  
+}
+
+
+/* ----- Main ----- */
+
+a {
+    color: black;
+    text-decoration: none;
+} 
+
+#personnel_info{
+    text-align:center;
+
+}
+
+#work{
+    padding-left:3em;
+    padding-right:3em;
+}
+
+h1{
+    margin:0;
+    font-size: medium;
+}
+
+
+p{
+    font-size: small;
+}
+
+
+#tab{
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0.5em;
+    padding-left: 0;
+    margin-right: 2em;
+    margin-left: 2em;
+    border-bottom-style: solid;
+    border-width: 0.5px;
+    border-color:#7A93AC;
+    text-align: center;
+}
+
+#tab li a:hover {
+    border-bottom-style: solid;
+    border-color:  rgb(62, 107, 153);
+}
+
+
+#work li a {
+    text-decoration: none;
+    color: #4C4C47;
+    font-weight: bold;
+    padding-bottom: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+#current_work{
+    margin:2em;
+}
+
+#past_work {
+    margin:2em;
+}
+
+
