@@ -26,6 +26,7 @@ if ($user['position']=='Polícia' || $user['position']=='Detetive' || ($position
     <title> Criar <?=$position?></title>
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/form.css" rel="stylesheet">
 </head>
 
 <div class="container">

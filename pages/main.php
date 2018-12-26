@@ -30,7 +30,7 @@ if (isset($_GET['work'])) {
 <?php include_once('../common/header_aside.php'); ?>
 
 <body>
-    <div id="personnel_info">
+    <div id="left">
         <h1><?php echo $user['fullname']?></h1>
         <p> <?php if (isset($user['profile_pic'])) { ?>
             <img src="../profile_pic/<?=$username?>.jpg">
@@ -47,7 +47,7 @@ if (isset($_GET['work'])) {
             <p> <i> Esquadra: </i> <?php echo $station['name'] ?></a></p>
         <?php } ?>
             
-        </div>
+    </div>
     
     <?php if ($user['position']=='Diretor Nacional'){
         $occurrences=GetAllOccurrences();
@@ -60,31 +60,31 @@ if (isset($_GET['work'])) {
     }
     
     if (!empty($occurrences)) { ?>
-       <div id="work">
-            <ul id="tab">
-                <li><a href="main.php">Casos Atuais</a></li>
-                <li><a href="main.php?work=past">Últimos Casos</a></li>
-            </ul>
-        <?php if (isset($work)) { ?>
-            <div id="past_work">
-                <ul>
-                    <?php foreach($occurrences as $occurrence) { ?>
-                        <?php if ($occurrence['state']=='Fechado' or $occurrence['state']=='Arquivado') { ?> 
-                            <?php echo "<li><a href='single_occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . " | " . $occurrence['title'] . "</a></li>" ; ?>                             <? } ?> 
+       <div id="right">
+                <ul id="tab">
+                    <li><a href="main.php">Casos Atuais</a></li>
+                    <li><a href="main.php?work=past">Últimos Casos</a></li>
+                </ul>
+            <?php if (isset($work)) { ?>
+                <div id="past_work">
+                    <ul>
+                        <?php foreach($occurrences as $occurrence) { ?>
+                            <?php if ($occurrence['state']=='Fechado' or $occurrence['state']=='Arquivado') { ?> 
+                                <?php echo "<div id='each'> <li> <a href='single_occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . " | " . $occurrence['title'] . "</a></li> </div>" ; ?>                             <? } ?> 
+                            <? } ?>
+                    </ul>
+                </div>
+            <?php } else { ?>
+                <div id="current_work">
+                    <ul>
+                        <?php foreach($occurrences as $occurrence) { ?>
+                            <?php if ($occurrence['state']=='Aberto') {?> 
+                                <?php echo "<div id='each'> <li><a href='single_occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . " | " . $occurrence['title'] . "</a></li> </div>" ; ?> 
+                            <? } ?> 
                         <? } ?>
-                </ul>
-            </div>
-        <?php } else { ?>
-            <div id="current_work">
-                <ul>
-                    <?php foreach($occurrences as $occurrence) { ?>
-                        <?php if ($occurrence['state']=='Aberto') {?> 
-                            <?php echo "<li><a href='single_occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . " | " . $occurrence['title'] . "</a></li>" ; ?> 
-                        <? } ?> 
-                    <? } ?>
-                </ul>
-            </div>
-        <? } ?>
+                    </ul>
+                </div>
+            <? } ?>
         </div>
     <? } ?>
 </body>

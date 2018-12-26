@@ -35,29 +35,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Ocurrências Encontradas </title>
     <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/layout_one.css" rel="stylesheet">
 </head>
 
 <div class="container">
-<?php include_once('../common/header_aside.php'); ?>
+    <?php include_once('../common/header_aside.php'); ?>
 
-<body>
-    <div class="search_results">
-    <h1> Ocurrências Encontradas: </h1>
-        <?php if (empty($occurrences) ) {
-            echo  "Não foram encontrados resultados para a sua pesquisa.";
-        } else{
-            foreach($occurrences as $occurrence) { ?>
-            <section>
-            <?php echo "<li><a href='single_occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . " | " . $occurrence['title'] . "</a></li>" ; ?> 
-            </section>
-            <? }
-        } ?>
-        
-    </div> 
+    <body>
+        <div id="left">
+            <h1> Ocurrências Encontradas: </h1>
+                <?php if (empty($occurrences) ) {
+                    echo  "Não foram encontrados resultados para a sua pesquisa.";
+                } else{
+                    foreach($occurrences as $occurrence) { ?>
+                    <section>
+                    <?php echo "<li><a href='single_occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . " | " . $occurrence['title'] . "</a></li>" ; ?> 
+                    </section>
+                    <? }
+                } ?>
+                
+        </div> 
 
-</body>
+    </body>
 
-<?php include_once('../common/footer.php'); ?>
+    <?php include_once('../common/footer.php'); ?>
 </div>
 </html>

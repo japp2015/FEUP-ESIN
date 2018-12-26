@@ -31,29 +31,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pessoal Encontrado</title>
     <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/layout_one.css" rel="stylesheet">
 </head>
 
 <div class="container">
-<?php include_once('../common/header_aside.php'); ?>
+    <?php include_once('../common/header_aside.php'); ?>
 
-<body>
-    <div class="search_results"> 
-    <h1> Pessoal Encontrado: </h1>
-        <?php if (empty($personnel) ) {
-            echo  "Não foram encontrados resultados para a sua pesquisa.";
-        } else{
-            foreach($personnel as $personnel) { ?>
-            <section>
-                    <?php echo "<p>" . $personnel['position'] . " " .$personnel['fullname'] . "</p>"; ?>
-            </section>
-            <? }
-        } ?>
-        
-    </div>
+    <body>
+        <div id="left"> 
+        <h1> Pessoal Encontrado: </h1>
+            <?php if (empty($personnel) ) {
+                echo  "Não foram encontrados resultados para a sua pesquisa.";
+            } else{
+                foreach($personnel as $personnel) { ?>
+                <section>
+                        <?php echo "<p>" . $personnel['position'] . " " .$personnel['fullname'] . "</p>"; ?>
+                </section>
+                <? }
+            } ?>
+            
+        </div>
 
-</body>
+    </body>
 
-<?php include_once('../common/footer.php'); ?>
-    </div>
+    <?php include_once('../common/footer.php'); ?>
+</div>
 </html>

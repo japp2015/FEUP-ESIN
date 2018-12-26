@@ -62,7 +62,8 @@ $guiltys=GetGuiltysByOccurrence($id);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $occurrence['id'] . ' | ' . $occurrence['title'] ?></title>
     <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/layout.css" rel="stylesheet">~
+    <link href="../css/form.css" rel="stylesheet">
 </head>
 
 <div class="container">

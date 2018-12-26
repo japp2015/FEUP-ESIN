@@ -31,14 +31,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Pessoas Encontradas </title>
     <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/layout_one.css" rel="stylesheet">
 </head>
 
 <div class="container">
 <?php include_once('../common/header_aside.php'); ?>
 
 <body>
-    <div class="search_results"> 
+    <div id="left"> 
     <h1> Pessoas Encontradas: </h1>
         <?php if (empty($person) ) {
             echo  "Não foram encontrados resultados para a sua pesquisa.";

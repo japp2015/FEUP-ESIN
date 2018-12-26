@@ -536,3 +536,10 @@ function GetPersonByNif($nif) {
   $stmt->execute([$nif]);
   return $stmt->fetch();
 }
+
+function CountNumberOfStations() {
+  global $db;
+  $stmt = $db->prepare("SELECT count(id) FROM stations");
+  $stmt->execute();
+  return $stmt->fetch();
+}

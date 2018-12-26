@@ -23,29 +23,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Esquadras Encontradas </title>
     <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/layout_one.css" rel="stylesheet">
 </head>
 
 <div class="container">
-<?php include_once('../common/header_aside.php'); ?>
+    <?php include_once('../common/header_aside.php'); ?>
 
-<body>
-    <div class="search_results">
-    <h1> Esquadras Encontradas: </h1>
-        <?php if (empty($stations) ) {
-            echo  "Não foram encontrados resultados para a sua pesquisa.";
-        } else{
-            foreach($stations as $station) { ?>
-            <section>
-            <a href="station.php?station=<?=$station['id']?>"> <?=$station['name']?> </a> 
-            </section>
-            <? }
-        } ?>
-        
-    </div> 
+    <body>
+        <div id="left">
+        <h1> Esquadras Encontradas: </h1>
+            <?php if (empty($stations) ) {
+                echo  "Não foram encontrados resultados para a sua pesquisa.";
+            } else{
+                foreach($stations as $station) { ?>
+                <section>
+                <a href="station.php?station=<?=$station['id']?>"> <?=$station['name']?> </a> 
+                </section>
+                <? }
+            } ?>
+            
+        </div> 
 
-</body>
+    </body>
 
-<?php include_once('../common/footer.php'); ?>
-    </div>
+    <?php include_once('../common/footer.php'); ?>
+</div>
 </html>

@@ -12,7 +12,7 @@
         }
         header('Location: ../pages/main.php');
     } else {
-        $error = "Username or password are incorrect.";
+        $error = "Utilizador ou palavra-chave incorretos";
         header('Location: ../pages/log_in.php?error=' . $error);
     }
 ?>

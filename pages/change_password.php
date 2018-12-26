@@ -14,6 +14,7 @@ $username = $_SESSION['username'];
     <title> Mudar Password</title>
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/form.css" rel="stylesheet">
 </head>
 
 <div class="container">

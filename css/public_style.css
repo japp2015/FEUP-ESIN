@@ -1,8 +1,11 @@
+/*MAIN PUBLIC*/
+
 html {
     background-color:#EEF4ED;
     width:80%;
     text-align:center;
     margin:auto;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
@@ -13,12 +16,12 @@ html {
     background-color: rgb(62, 107, 153); 
     padding: 0.5em;
     margin:0;
-    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 0.5em;
 }
 
 .header h2 {
     margin-left: 1em;
-    color: #EEF4ED;
+    color: white;
 }
 
 .header button {
@@ -51,6 +54,11 @@ body>header button:hover {
     display: inline-block;
 }
 
+.log_in button:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
 img {
     border: 1px solid rgb(16, 79, 141);
     border-radius: 4px;
@@ -62,20 +70,22 @@ h1, h2, h3, h4, h5, p {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-h3 {
+h3, h2 {
     color: rgb(16, 79, 141);
 }
 
 body>footer {
-    background-color: white;
     color: #4C4C47;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 1em;
+    background-color:rgb(171, 191, 211);
+    padding: 0.5em;
     height: 1em;
+    position: relative;
 }
 
 body>footer p {
     margin: 0;
+    text-align: right;
     font-size: small;
 }
 
@@ -88,4 +98,55 @@ body>footer p {
     list-style-type: none;
     padding: 0em;
     margin: 0em;
+}
+
+#line {
+    color: red;
+}
+
+.news hr {
+    color: rgba(238, 244, 237, 0.897);
+}
+
+/*NEWS PUBLIC*/
+
+.news_container {
+    background-color:white;
+    margin-bottom: 1em;
+}
+
+#news_header {
+    margin: 1em;
+    margin-top: 1em;
+}
+
+#news_header a {
+    text-decoration: none;
+}
+
+/*MISSING PERSON FORM*/
+
+.missing_container {
+    background-color: white;
+}
+
+.missing_container h3 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+input[type="number"] {
+    margin-bottom: 3em;
+}
+
+.missing_container footer {
+    font-size: small;
+}
+
+.missing_container header a {
+    text-decoration: none;
+}
+
+#error {
+    color: red;
 }

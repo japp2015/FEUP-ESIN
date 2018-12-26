@@ -7,37 +7,43 @@
     <link href="../css/log_in_style.css" rel="stylesheet">
 </head>
 
-<header> 
-    <div class="title_container">
-        <a href="public.php"><h1>Polícia Nacional</h1></a>
-    </div>
-</header>
+<div class="container">
 
-<body>
-    <div class="logIn">
-        <form class="login_content" action="../actions/action_log_in.php" method="post">
-            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-
-            <div class="input_container">
-                <input type="text" placeholder="Utilizador" name="username" required>
-            </div>
-
-            <div class="input_container">
-                <input type="password" placeholder="Senha" name="password" required>
-            </div>
-
-            <div class="input_container_btn">
-                <button type="submit" class="btn">Entrar</button>
-            </div>
-        </form>
-        <div class="error">
-            <?php if (isset($_GET['error'])) {
-                    echo "<p>" . $error = $_GET['error'] . "</p>";
-            } ?>
+    <header> 
+        <div class="title_container">
+            <a href="public.php"><h1>Polícia Nacional</h1></a>
         </div>
-    </div>
-    
-</body>
+    </header>
 
-<?php include_once('../common/footer.php'); ?>
+    <body>
+        <div class="logIn">
+            <form class="login_content" action="../actions/action_log_in.php" method="post">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
+                <div class="input_container">
+                    <input type="text" placeholder="Utilizador" name="username" required>
+                </div>
+
+                <div class="input_container">
+                    <input type="password" placeholder="Senha" name="password" required>
+                </div>
+
+                <div class="input_container_btn">
+                    <button type="submit" class="btn">Entrar</button>
+                </div>
+            </form>
+            <div class="error">
+                <?php if (isset($_GET['error'])) {
+                        echo "<p>" . $error = $_GET['error'] . "</p>";
+                } ?>
+            </div>
+        </div>
+        
+    </body>
+    
+    <div class="footer">
+       <?php include_once('../common/footer.php'); ?>
+    </div>
+
+</div>
 </html>

@@ -19,7 +19,6 @@ img {
 header {
     background-color: rgb(62, 107, 153);
     padding: 2em;
-    margin-bottom: 2em;
 }
 
 header a {
@@ -35,7 +34,7 @@ header a {
 .log_out {
     text-align:right;
 }
-
+ 
 .log_out button {
     padding:10px;
     display: inline-block;
@@ -50,7 +49,6 @@ footer {
     background-color:rgb(171, 191, 211);
     padding: 0.5em;
     height: 1em;
-    margin-top:2em;
     position: relative;
 }
 
@@ -67,7 +65,12 @@ footer p {
 /* ----- Right Bar ----- */
 
 .right_bar{
-    margin:1em;
+    margin-left:1em;
+    margin-right:1em;
+    padding-top:3em;
+    padding-bottom:3em;
+    position: relative;
+    color: white;
 }
 
 .right_bar ul {
@@ -95,10 +98,6 @@ li{
     margin-right:2em;
 }
 
-
-.right_bar {
-    color: white;
-}
 .right_bar a{
     color: white;
 }
@@ -116,33 +115,49 @@ li{
 }
 
 
-/* ----- Main ----- */
+/* ----- Body ----- */
 
 a {
     color: black;
     text-decoration: none;
+    font-size: small;
 } 
 
-#personnel_info{
-    text-align:center;
-
+a:hover {
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color:  rgb(62, 107, 153);
 }
 
-#work{
-    padding-left:3em;
-    padding-right:3em;
+
+#left{
+    padding:3em;
+    text-align:center;
+}
+
+
+#right{
+    padding:3em;
+}
+
+
+#right li a {
+    color: #4C4C47;
 }
 
 h1{
     margin:0;
-    font-size: medium;
+    margin-bottom:0.5em;
+    font-size: large;
+    color: rgb(16, 79, 141);
 }
-
 
 p{
     font-size: small;
 }
 
+
+/* ----- Main ----- */
 
 #tab{
     margin: 0;
@@ -155,21 +170,14 @@ p{
     border-width: 0.5px;
     border-color:#7A93AC;
     text-align: center;
+    font-weight: bold;
 }
 
 #tab li a:hover {
-    border-bottom-style: solid;
-    border-color:  rgb(62, 107, 153);
-}
-
-
-#work li a {
-    text-decoration: none;
-    color: #4C4C47;
-    font-weight: bold;
     padding-bottom: 0.5em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    border-bottom-style: solid;
+    border-width: 3px;
+    border-color:  rgb(62, 107, 153);
 }
 
 #current_work{
@@ -180,4 +188,20 @@ p{
     margin:2em;
 }
 
+#each{
+    padding: 0;
+    margin:2px;
+}
+
+
+
+/* ----- Search ----- */
+
+#left ul{
+    padding:0;
+}
+
+#left li{
+    margin: 2px;
+}
 
