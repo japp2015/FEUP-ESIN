@@ -1,0 +1,33 @@
+.header { grid-area: header; }
+.right_bar { grid-area: right_bar; }
+#left{ grid-area: left;}
+#right{ grid-area: right;}
+#occ_updates{ grid-area: bottom;}
+.footer{grid-area: footer;}
+
+
+.container{
+    display: grid;
+    background-color:white;
+    grid-template-columns: 38% 42% 20% ;
+    grid-template-areas:
+    'header header header'
+    'left right right_bar'
+    'bottom bottom right_bar'
+    'footer footer footer';
+
+}
+
+.title { 
+    grid-area: title; 
+}
+
+.log_out{ 
+    grid-area: log_out; 
+}
+
+.header{
+    display: grid;
+    grid-template-areas:
+    'title log_out';
+}

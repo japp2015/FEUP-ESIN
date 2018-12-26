@@ -162,7 +162,7 @@ INSERT INTO stations (id, name, city, adress, chief) VALUES (3, 'Espinho', 'Port
 INSERT INTO stations (id, name, city, adress, chief) VALUES (4, 'Valongo', 'Porto', 'Rua da Estufa', 'carlos');
 
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (1, 1, 'Homicídio em Salgueiros' ,'patricia', 'Aberto', '2017-02-11','Salgueiros','Ontem morreu um homem em Salgueiros', 1);
-INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (2, 12, 'Desaparecimento em Espinho' ,'patricia', 'Aberto', '2017-02-20','Espinho','Mulher desaparecida em Espinho', 1);
+INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (2, 12, 'Desaparecimento em Espinho' ,'amilcar', 'Aberto', '2017-02-20','Espinho','Mulher desaparecida em Espinho', 1);
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (3, 1, 'Homicídio em Matosinhos' ,'gaspar', 'Fechado', '2017-02-11','Matosinhos','Ontem morreu um homem em Matosinhos', 2);
 INSERT INTO occurrences (id, type, title, chief_detective, state, oppening_date, location, description, station) VALUES (4, 1, 'Homicídio em Gaia' ,'gaspar', 'Arquivado', '2017-02-11','Gaia','Ontem morreu um homem em Gaia', 2);
 

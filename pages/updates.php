@@ -25,23 +25,23 @@ if ($user['position']=='Diretor Nacional'){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo 'Atualizações' ?></title>
     <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/layout_one.css" rel="stylesheet">
 </head>
 
 <div class="container">
 <?php include_once('../common/header_aside.php'); ?>
 
 <body>
-    <div id="Updates">
+    <div id="left">
     <?php foreach ($updates as $update) { 
         $occurrence=getOccurrenceById($update['id_occurrence'])?>
-        <h1> Atualização à ocorrência: <?php echo $update['id_occurrence'] . ' | '. $occurrence['title'] ?> </h2>
+        <h1> Atualização à ocorrência: <?php echo "<a href='single_occurrence.php?id=" . $occurrence['id'] . "'>" . $occurrence['id'] . " | " . $occurrence['title'] . "</a>" ?> </h1>
             <h3 class="title"> <?=$update['title']?> </h3>
             <p class="text"> <?=$update['text']?> </p>
             <?php $author=getUserByUsername($update['username_personnel']);?>
                 <p class="author"><?=$author['position']." ".$author['fullname']?> </p>
     <?php } ?>
-    </div>
+    </div> 
 </body>
 
 <?php include_once('../common/footer.php'); ?>

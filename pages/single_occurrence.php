@@ -62,7 +62,7 @@ $guiltys=GetGuiltysByOccurrence($id);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $occurrence['id'] . ' | ' . $occurrence['title'] ?></title>
     <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/layout.css" rel="stylesheet">~
+    <link href="../css/layout_occ.css" rel="stylesheet">
     <link href="../css/form.css" rel="stylesheet">
 </head>
 
@@ -70,25 +70,25 @@ $guiltys=GetGuiltysByOccurrence($id);
 <?php include_once('../common/header_aside.php'); ?>
 
 <body>
-    <div id="occurence">
-        <div id='id'> <h1> <?php echo $occurrence['title'] ?></h1></div>
+    <div id="left">
+        <div id='title'> <h1> <?php echo $occurrence['title'] ?></h1></div>
         
         <?php if ($user['position']=="Chefe de Esquadra"){?>
-            <button type="button" onclick="location.href='news_release.php?id=<?=$id?>'"> Libertar notícia </button>
+            <button id= "occ_button" type="button" onclick="location.href='news_release.php?id=<?=$id?>'"> Libertar notícia </button>
         <? } ?>
         
-        <div id='title'> <h3> Tipo de Ocorrência: <?php echo $occurrence_type['name'] ?></h3></div>
+        <div id='type'> <p> <i> Tipo de Ocorrência: </i> <?php echo $occurrence_type['name'] ?></p></div>
         
-        <div id='description'> Descrição da Ocurrência: <p> <?php echo $occurrence['description'] ?></p></div>
+        <div id='description'> <p> <i>  Descrição da Ocorrência </i>  <br> <?php echo $occurrence['description'] ?></p></div>
         
         <?php if (isset($occurrence['chief_detective'])){
         $chief=getUserByUsername($occurrence['chief_detective'])?>
-        <div id='chief'> <p> Detetive Chefe: <?php echo $chief['fullname'] ?></p></div>
+        <div id='chief'> <p> <i> Detetive Chefe:</i> <?php echo $chief['fullname'] ?></p></div>
         <?php } ?>
 
-        <div id='state'> <p> Estado: <?php echo $occurrence['state'] ?></p>
+        <div id='state'> <p> <i> Estado:</i> <?php echo $occurrence['state'] ?></p>
             <?php if ($username==$occurrence['chief_detective']){?>
-                <button type="button" onclick="location.href='single_occurrence.php?id=<?=$id?>&change=<?=$occurrence['state']?>'"> Mudar o Estado da Ocorrencia </button>
+                <button id= "occ_button" type="button" onclick="location.href='single_occurrence.php?id=<?=$id?>&change=<?=$occurrence['state']?>'"> Mudar o Estado da Ocorrencia </button>
             <?php }
             if(isset($_GET['change'])){?>
                 <form action="../actions/action_change_state.php?id=<?=$id?>" method=post>
@@ -107,8 +107,8 @@ $guiltys=GetGuiltysByOccurrence($id);
         </div>
 
         <div id="guilty">
-            <?php if(isset($guiltys)) {?>
-                <p>Culpados:</p>
+            <?php if(!empty($guiltys)) {?>
+                <p><i>Culpado(s):</i></p>
                 <?php foreach ($guiltys as $guilty) {?>
                     <a href="person.php?nif=<?=$guilty['nif']?>"><?echo $guilty['name'];?></a>
                 <?}
@@ -116,97 +116,83 @@ $guiltys=GetGuiltysByOccurrence($id);
         </div>
 
         <div id="new_guilty">
-            <?php if ($username==$occurrence['chief_detective']){?>
-                <button type="button" onclick="location.href='single_occurrence.php?id=<?=$id?>&guilty=1'"> Atribuir culpado </button>
-            <?php }
-            if(isset($_GET['guilty'])){?>
-                <h3>Adicionar culpado:</h3>
-                <h4>Pessoa no sistema:</h4>
-                <form action="../actions/action_guilty.php?id=<?=$id?>&known=1" method="post">
-                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-                    NIF:<input type="number" name="nif"><br>
-                </form>
-                <h4>Pessoa nova:</h4>
-                <form action="../actions/action_guilty.php?id=<?=$id?>" method="post">
-                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-                    NIF:<input type="number" name="nif"><br>
-                    Nome:<input type="text" name="name"><br>
-                    <label>Sexo:</label>
-                    <label><input type="radio" name="gender" value="Masculino">Masculino</label>
-                    <label><input type="radio" name="gender" value="Feminino">Feminino</label><br>
-                    Data de nascimento:<input type="date" name="birthdate"><br>
-                    Naturalidade:<input type="text" name="naturality"><br>
-                    Morada:<input type="text" name="adress"><br>
-                    <textarea rows="4" cols="50" name="description"  placeholder="Descrição física"></textarea><br>
-                    Altura(cm):<input type="number" name="victim_height"><br>
-                    Peso(kg):<input type="number" name="victim_weight"><br>
-                    <input type="submit" value="Atribuir">
-                </form>
-            <? } ?>
+                <?php if  ($occurrence['state'] =="Aberto"){
+                    if ($username==$occurrence['chief_detective']){?>
+                        <button id= "occ_button" type="button" onclick="location.href='add_guilty.php?occurrence_id=<?=$id?>'"> Atribuir culpado </button>
+                    <?php }
+                }?>
         </div>
 
-        <div id='location'> <p> Localização: <?php echo $occurrence['location'] ?></p></div>
-        
-        <?php $personnels=GetOccurrencePersonnel($occurrence['id'])?>
-
-        <?php if ($occurrence_type['relevance']==2){?>
-            <div id='detectives'> Detetives Alocados:
-            <?php $position="Detetive"?>
-            <ul>
-            <?php foreach ($personnels as $personnel){
-                if ($personnel['position']==$position){
-                    echo "<li> " . $personnel['fullname'] . "</li>";
-                }
-            }?>
-            </ul>
-            <?php if  ($occurrence['state'] =="Aberto"){
-                if ($user['position']!="Polícia"){?>
-                    <button type="button" onclick="location.href='add_personnel.php?occurrence_id=<?=$occurrence['id']?>&type=<?=$position?>'"> Alocar detetive à Investigação </button>
-                <?php }
-            }?> </div>
-        <?}?>
-
-
-        <div id='polices'> Polícias Alocados:
-            <?php $position="Polícia"?>
-            <ul>
-            <?php foreach ($personnels as $personnel){
-                if ($personnel['position']=="Polícia"){
-                    echo "<li> " . $personnel['fullname'] . "</li>";
-                }
-            }?>
-            </ul>
-            <?php if  ($occurrence['state'] =="Aberto"){
-                if ($user['position']!="Polícia" || $occurrence_type['relevance']==1){?>
-                    <button type="button" onclick="location.href='add_personnel.php?occurrence_id=<?=$occurrence['id']?>&type=<?=$position?>'"> Alocar polícia à Investigação </button>
-                <?php }
-            }?>
-        </div>
-
-        <?php if(isset($victims)) {?>
-            <div id="victims"> Vítima:
+        <?php if(!empty($victims)) {?>
+            <div id="victims"><p> <i> Vítima(s):</i> 
             <?php foreach ($victims as $victim) {?>
                 <a href="person.php?nif=<?=$victim['nif']?>"><?echo $victim['name'];?></a>
             <?}?>
-            </div>
+            <p> </div>
         <?}?>
 
+        <div id='location'> <p> <i> Localização: </i> <?php echo $occurrence['location'] ?></p></div>
+    </div>
+
+    <div id="right">
+        <h1> Pessoal Alocado </h1>
+        <div id="all_personnel">
+            <?php $personnels=GetOccurrencePersonnel($occurrence['id'])?>
+
+            <?php if ($occurrence_type['relevance']==2){?>
+                <div id='detectives'> <p> <i>Detetives Alocados:</i> </p>
+                <?php $position="Detetive"?>
+                <ul>
+                <?php foreach ($personnels as $personnel){
+                    if ($personnel['position']==$position){
+                        echo "<li> <p> " . $personnel['fullname'] . " </p> </li>";
+                    }
+                }?>
+                </ul>
+                <?php if  ($occurrence['state'] =="Aberto"){
+                    if ($user['position']!="Polícia"){?>
+                        <button id= "occ_button" type="button" onclick="location.href='add_personnel.php?occurrence_id=<?=$occurrence['id']?>&type=<?=$position?>'"> Alocar detetive à Investigação </button>
+                    <?php }
+                }?> </div>
+            <?}?>
+
+
+            <div id='polices'> <p> <i>Polícias Alocados:</i> </p>
+                <?php $position="Polícia"?>
+                <ul>
+                <?php foreach ($personnels as $personnel){
+                    if ($personnel['position']=="Polícia"){
+                        echo "<li> <p>" . $personnel['fullname'] . " </p> </li>";
+                    }
+                }?>
+                </ul>
+                <?php if  ($occurrence['state'] =="Aberto"){
+                    if ($user['position']!="Polícia" || $occurrence_type['relevance']==1){?>
+                        <button id= "occ_button" type="button" onclick="location.href='add_personnel.php?occurrence_id=<?=$occurrence['id']?>&type=<?=$position?>'"> Alocar polícia à Investigação </button>
+                    <?php }
+                }?>
+            </div>
+        </div>
+    </div>
+
+    <div id=occ_updates>
         <div id="updates">
-            <p> Atualizações: </p>
+            <h1> Atualizações: </h1>
             <?php foreach ($updates as $update) { ?>
-                <span class="user"><?=getUserByUsername($update['username_personnel'])['position']." ". getUserByUsername($update['username_personnel'])['fullname']?></span>
-                <p class="title"> <?=$update['title']?> </p>
-                <p class="text"> <?=$update['text']?> </p>
-                <p class="date_hour"> <?=$update['date_hour']?> </p>
-                <?php if ($update['username_personnel']==$username){?>
-                    <button type="button" class="delete" onclick="location.href='../actions/delete_update.php?id=<?=$id?>&id_update=<?=$update['id']?>';">Eliminar Atualização</button>
-                <?php } 
-            }?>
+                <div id="single_update">
+                    <p class="update_title"> <?=$update['title']?> </p>
+                    <p class="update_text"> <?=$update['text']?> </p>
+                    <p class="update_date_hour_user">  <span ><?=getUserByUsername($update['username_personnel'])['position']." ". getUserByUsername($update['username_personnel'])['fullname']?></span> <?=$update['date_hour']?></p>
+                    <?php if ($update['username_personnel']==$username){?>
+                        <button id= "occ_button" type="button" class="delete" onclick="location.href='../actions/delete_update.php?id=<?=$id?>&id_update=<?=$update['id']?>';">Eliminar Atualização</button>
+                    <?php } ?>
+                </div>
+            <?}?>
         </div>
 
         <?php if ($user['position']!="Diretor Nacional" && $user['position']!="Chefe de Esquadra" ){?>
         <div id = "add_update">
-            <p> Nova Atualização: </p>
+            <h1> Nova Atualização: </h1>
             <form action="../actions/action_update.php?id_occurrence=<?=$id?>" method="post">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <div><input type="text" placeholder="Título" name="title"></div>
@@ -215,7 +201,6 @@ $guiltys=GetGuiltysByOccurrence($id);
             </form>
         </div>
         <?php } ?>
-
     </div>
 </body>
 

@@ -23,40 +23,41 @@ $station = GetStationByID($_GET['station']);
 </head>
 
 <div class="container">
-<?php include_once('../common/header_aside.php'); ?>
+    <?php include_once('../common/header_aside.php'); ?>
 
-<body>
-    <div id="station_info">
-        <h1> <?php echo $station['name']?> </h1>
-        <p> Morada: <?php echo $station['adress'] ?> </p>
-        <p> Cidade: <?php echo $station['city'] ?> </p>
-        <?php $chief=getUserByUsername($station['chief']) ?>
-        <p> Chefe de Esquadra: <?php echo $chief['fullname'] ?> </p>
-    </div>
-  
-    <div id="personnel">
-        <h2>Equipa: </h2>
-        
-        <?php $position="Detetive";
-        $detectives=GetPersonnelStation($position,$station["id"])?>
-        <p> Detetives: </p>
-             <ul>
-             <?php foreach($detectives as $detective) { ?>
-                    <li> <?php echo $detective['fullname'] ?> </li> 
-            <?php } ?>
-            </ul>
+    <body>
+        <div id="left">
+            <h1> <?php echo $station['name']?> </h1>
+            <p> <i> Morada: </i> <?php echo $station['adress'] ?> </p>
+            <p> <i> Cidade: </i> <?php echo $station['city'] ?> </p>
+            <?php $chief=getUserByUsername($station['chief']) ?>
+            <p> <i> Chefe de Esquadra:</i> <?php echo $chief['fullname'] ?> </p>
+        </div>
+    
+        <div id="right_station">
+            <section id="station_tab">
+                <h1>Equipa </h1>
+                <?php $position="Detetive";
+                $detectives=GetPersonnelStation($position,$station["id"])?>
+                <h4><i> Detetives: </i></h4>
+                    <ul>
+                    <?php foreach($detectives as $detective) { ?>
+                            <li> <?php echo $detective['fullname'] ?> </li> 
+                    <?php } ?>
+                    </ul>
 
-        <?php $position="Polícia";
-        $polices=GetPersonnelStation($position,$station["id"])?> 
-        <p> Polícias: </p>
-             <ul>
-             <?php foreach($polices as $police) { ?>
-                    <li> <?php echo $police['fullname'] ?> </li> 
-            <?php } ?>
-            </ul>
-    </div>
-</body>
+                <?php $position="Polícia";
+                $polices=GetPersonnelStation($position,$station["id"])?> 
+                <h4> <i> Polícias:</i> </h4>
+                    <ul>
+                    <?php foreach($polices as $police) { ?>
+                            <li> <?php echo $police['fullname'] ?> </li> 
+                    <?php } ?>
+                    </ul>
+            <section>
+        </div>
+    </body>
 
-<?php include_once('../common/footer.php'); ?>
+    <?php include_once('../common/footer.php'); ?>
 </div>
 </html>

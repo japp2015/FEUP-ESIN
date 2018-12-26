@@ -19,19 +19,21 @@ $stations = GetAllStations();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Esquadras Nacionais </title>
     <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/layout_one.css" rel="stylesheet">
 </head>
 
 <div class="container">
 <?php include_once('../common/header_aside.php'); ?>
 
 <body>
-    <h1> Esquadras já existentes a nivel Nacional: </h1>
-    <section class="view_stations">
-            <?php foreach ($stations as $station) { ?>
-                <h3 class="title"> <a href="station.php?station=<?=$station['id']?>"> <?=$station['name']?> </a> </h3>
-            <?php } ?>
-    </section>
+    <div id="left">
+        <h1> Esquadras já existentes a nivel Nacional </h1>
+        <section class="view_stations">
+                <?php foreach ($stations as $station) { ?>
+                    <p class="title"> <a href="station.php?station=<?=$station['id']?>"> <?=$station['name']?> </a> </p>
+                <?php } ?>
+        </section>
+    </div>
 </body>
 
 <?php include_once('../common/footer.php'); ?>
